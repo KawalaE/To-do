@@ -7,10 +7,17 @@ class UserInterface{
         const upperNav = document.createElement('div');
         upperNav.classList.add('upper-nav');
         page.appendChild(upperNav);
-        const hamburger = document.createElement('div');
-        hamburger.classList.add('hamburger');
-        upperNav.appendChild(hamburger);
+
+        const navigatorName = document.createElement('p');
+        navigatorName.classList.add('navigator-name');
+        navigatorName.textContent = 'To do';
+        upperNav.appendChild(navigatorName);
+
+        const logo = document.createElement('div');
+        logo.classList.add('logo');
+        upperNav.appendChild(logo);
     }
+
     
 }
 

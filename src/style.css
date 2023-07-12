@@ -2,15 +2,29 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'QuickSand', sans-serif;
+    font-size: 16px;
+}
+@font-face {
+    font-family: 'QuickSand';
+    src:  url('./assets/fonts/Quicksand-Light.woff2') format('woff2'),
+          url('./assets/fonts/Quicksand-Light.woff') format('woff');
 }
 .upper-nav{
-    background-color:rgb(126, 197, 126);
+    background-color:#5ad4b8;
     height: 80px;
     display: flex;
     align-items: center;
+    gap: 20px;
 }
-.hamburger{
-    background: url('./assets/hamburger.png ') center no-repeat;
-    width: 100px;
-    height: inherit;
+.navigator-name{
+    color: #7A3E3E;
+    font-size: 2em;
+    margin-left: 20px;
+    font-weight: bolder;
+}
+.logo{
+    background: url('./assets/logo.png') no-repeat center;
+    width: 50px;
+    height: 50px;
 }
