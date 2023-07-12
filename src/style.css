@@ -1,0 +1,16 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.upper-nav{
+    background-color:rgb(126, 197, 126);
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+.hamburger{
+    background: url('./assets/hamburger.png ') center no-repeat;
+    width: 100px;
+    height: inherit;
+}
