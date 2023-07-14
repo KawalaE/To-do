@@ -39,8 +39,9 @@ class UserInterface{
         const projectsNav = document.createElement('div');
         projectsNav.classList.add('projects-nav');
         mainContent.appendChild(projectsNav);
-        
+
     }
+
     static taskDisplayArea(mainContent){
         const taskDisplay = document.createElement('div');
         taskDisplay.classList.add('task-display');
