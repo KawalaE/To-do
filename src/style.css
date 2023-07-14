@@ -23,7 +23,7 @@
 }
 
 .navigator-name{
-    color: #7A3E3E;
+    color:#482121;
     font-size: 2em;
     margin-left: 20px;
     font-weight: bolder;
@@ -66,6 +66,10 @@
 .projects-button:hover{
     background-color: #5ad4b8;
     cursor: pointer;
+}
+.projects-button:active{
+    transform: scale(90%);
+    transition: 0.3s;
 }
 .projects-add-section{
     padding: 30px;

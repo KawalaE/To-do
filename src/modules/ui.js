@@ -53,7 +53,6 @@ class UserInterface{
         projectAddBtn.classList.add('projects-button');
         projectAddBtn.innerHTML = '+';
         projectsAdditionSection.appendChild(projectAddBtn);
-        
     }
 
     static taskDisplayArea(mainContent){
