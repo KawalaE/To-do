@@ -40,6 +40,20 @@ class UserInterface{
         projectsNav.classList.add('projects-nav');
         mainContent.appendChild(projectsNav);
 
+        const projectsAdditionSection = document.createElement('div');
+        projectsAdditionSection.classList.add('projects-add-section');
+        projectsNav.appendChild(projectsAdditionSection)
+
+        const projectSectionTitle = document.createElement('div');
+        projectSectionTitle.textContent = 'Projects';
+        projectSectionTitle.classList.add('projects-title');
+        projectsAdditionSection.appendChild(projectSectionTitle);
+
+        const projectAddBtn = document.createElement('div');
+        projectAddBtn.classList.add('projects-button');
+        projectAddBtn.innerHTML = '+';
+        projectsAdditionSection.appendChild(projectAddBtn);
+        
     }
 
     static taskDisplayArea(mainContent){
