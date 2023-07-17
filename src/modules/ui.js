@@ -53,8 +53,21 @@ class UserInterface{
         projectAddBtn.classList.add('projects-button');
         projectAddBtn.innerHTML = '+';
         projectsAdditionSection.appendChild(projectAddBtn);
-    }
+        return projectAddBtn;
 
+    }
+    static createProjectModal(mainContent){
+        const projectDialogElement = document.createElement('dialog');
+        projectDialogElement.id = 'modal';
+        projectDialogElement.textContent = 'fsdfsdfsdf';
+        mainContent.appendChild(projectDialogElement);
+        return projectDialogElement;
+    }
+    static projectModalHandler(projectDialogElement, projectAddBtn){
+        projectAddBtn.addEventListener('click', () =>{
+            projectDialogElement.show();
+        })
+    }
     static taskDisplayArea(mainContent){
         const taskDisplay = document.createElement('div');
         taskDisplay.classList.add('task-display');
@@ -66,7 +79,9 @@ export function createUI(){
     UserInterface.horizontalNav();
     UserInterface.setFavicon();
     const myMainContent =  UserInterface.mainContentArea();
-    UserInterface.projectsNavArea(myMainContent);
+    const projectModal = UserInterface.createProjectModal(myMainContent);
+    const myProjectAddBtn = UserInterface.projectsNavArea(myMainContent);
+    UserInterface.projectModalHandler(projectModal,myProjectAddBtn);
     UserInterface.taskDisplayArea(myMainContent);
 }
 
