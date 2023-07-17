@@ -12,7 +12,6 @@ class UserInterface{
         favicon.setAttribute('rel', 'shortcut icon');
         favicon.setAttribute('href', myFavicon.src);
         head.appendChild(favicon);
-
     }
     static horizontalNav(){
         const upperNav = document.createElement('div');
@@ -34,32 +33,39 @@ class UserInterface{
         page.appendChild(mainContent);
         return mainContent;
     }
-
     static projectsNavArea(mainContent){
         const projectsNav = document.createElement('div');
         projectsNav.classList.add('projects-nav');
         mainContent.appendChild(projectsNav);
-
+        return projectsNav;
+    }
+    static projectsAdditionSection(projectsNav){
         const projectsAdditionSection = document.createElement('div');
         projectsAdditionSection.classList.add('projects-add-section');
         projectsNav.appendChild(projectsAdditionSection)
-
+        return projectsAdditionSection;
+    }
+    static sectionTitle(projectsAdditionSection){
         const projectSectionTitle = document.createElement('div');
         projectSectionTitle.textContent = 'Projects';
         projectSectionTitle.classList.add('projects-title');
         projectsAdditionSection.appendChild(projectSectionTitle);
-
-        const projectAddBtn = document.createElement('div');
+    }
+    static projectAddBtn(projectsAdditionSection){
+        const projectAddBtn = document.createElement('button');
         projectAddBtn.classList.add('projects-button');
         projectAddBtn.innerHTML = '+';
         projectsAdditionSection.appendChild(projectAddBtn);
         return projectAddBtn;
-
     }
-    static createProjectModal(mainContent){
+    static projectModal(mainContent){
         const projectDialogElement = document.createElement('dialog');
         projectDialogElement.id = 'modal';
-        projectDialogElement.textContent = 'fsdfsdfsdf';
+        const projectCloseButton = document.createElement('button');
+        projectDialogElement.appendChild(projectCloseButton);
+        projectDialogElement.addEventListener('click', ()=>{
+            projectDialogElement.close();
+        })
         mainContent.appendChild(projectDialogElement);
         return projectDialogElement;
     }
@@ -76,12 +82,15 @@ class UserInterface{
 }
  
 export function createUI(){
-    UserInterface.horizontalNav();
     UserInterface.setFavicon();
-    const myMainContent =  UserInterface.mainContentArea();
-    const projectModal = UserInterface.createProjectModal(myMainContent);
-    const myProjectAddBtn = UserInterface.projectsNavArea(myMainContent);
-    UserInterface.projectModalHandler(projectModal,myProjectAddBtn);
-    UserInterface.taskDisplayArea(myMainContent);
+    UserInterface.horizontalNav();
+    const mainContent = UserInterface.mainContentArea();
+    const projectNavigation = UserInterface.projectsNavArea(mainContent);
+    const projectsAddition = UserInterface.projectsAdditionSection(projectNavigation);
+    UserInterface.sectionTitle(projectsAddition);
+    const projectButton = UserInterface.projectAddBtn(projectsAddition);
+    const projectDialog = UserInterface.projectModal(mainContent);
+    UserInterface.projectModalHandler(projectDialog, projectButton);
+    UserInterface.taskDisplayArea(mainContent);
 }
-
+createUI();
