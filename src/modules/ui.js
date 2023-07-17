@@ -93,4 +93,4 @@ export function createUI(){
     UserInterface.projectModalHandler(projectDialog, projectButton);
     UserInterface.taskDisplayArea(mainContent);
 }
-createUI();
+
