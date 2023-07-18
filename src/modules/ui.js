@@ -1,14 +1,15 @@
 import '/home/Edyta/Desktop/repos/To-do/src/style.css'
-import Favicon from '/home/Edyta/Desktop/repos/To-do/src/assets/favicon.png';
+import Favicon from '/home/Edyta/Desktop/repos/To-do/src/assets/logo.svg';
 import { Project } from './project';
 import { projects } from './project';
 const page = document.getElementById('page');
+const myFavicon = new Image();
+myFavicon.src = Favicon;
 
 class UserInterface{
 
     static setFavicon(){
-        const myFavicon = new Image();
-        myFavicon.src = Favicon;
+        
         const head = document.querySelector('head');
         const favicon = document.createElement('link');
         favicon.setAttribute('rel', 'shortcut icon');
@@ -25,8 +26,9 @@ class UserInterface{
         navigatorName.textContent = 'To do';
         upperNav.appendChild(navigatorName);
 
-        const logo = document.createElement('div');
+        const logo = document.createElement('img');
         logo.classList.add('logo');
+        logo.src = myFavicon.src;
         upperNav.appendChild(logo);
     }
     static mainContentArea(){
@@ -83,11 +85,11 @@ class UserInterface{
         const projectCloseButton = document.createElement('button');
         document.querySelector('#project-modal').appendChild(projectCloseButton);
         projectCloseButton.addEventListener('click', ()=>{
-            console.log(inputField.value);
             const newProject = new Project(inputField.value);
             projects.push(newProject);
             inputField.value = '';
             document.querySelector('#project-modal').close();
+            console.log(projects)
         })
     }
     static projectModalHandler(projectDialogElement, projectAddBtn){
