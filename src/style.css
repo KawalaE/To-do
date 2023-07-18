@@ -77,7 +77,21 @@
     align-items: center;
     gap: 50px;
 }
-#modal{
-    width: 30ch;
-    margin: 0;
+#project-modal{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    min-height: 150px;
+    width: 300px;
+    border: 2px solid #5ad4b8;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding:10px;
+
+}
+/*does not work for some reason ⬇ */
+#project-modal::backdrop{
+    background: rgb(109, 109, 109);
+    opacity: .4;
 }

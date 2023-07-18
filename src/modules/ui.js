@@ -1,5 +1,7 @@
 import '/home/Edyta/Desktop/repos/To-do/src/style.css'
 import Favicon from '/home/Edyta/Desktop/repos/To-do/src/assets/favicon.png';
+import { Project } from './project';
+import { projects } from './project';
 const page = document.getElementById('page');
 
 class UserInterface{
@@ -60,14 +62,33 @@ class UserInterface{
     }
     static projectModal(mainContent){
         const projectDialogElement = document.createElement('dialog');
-        projectDialogElement.id = 'modal';
-        const projectCloseButton = document.createElement('button');
-        projectDialogElement.appendChild(projectCloseButton);
-        projectCloseButton.addEventListener('click', ()=>{
-            projectDialogElement.close();
-        })
+        projectDialogElement.id = 'project-modal';
         mainContent.appendChild(projectDialogElement);
         return projectDialogElement;
+    }
+    
+    static projectInputForm(){
+        const projectForm = document.createElement('form');
+        projectForm.method = 'dialog';
+        const projectName = document.createElement('input');
+        projectName.id = 'project-title';
+        projectName.type = 'text';
+        projectName.placeholder = 'Project title'
+        projectForm.appendChild(projectName);
+        document.querySelector('#project-modal').appendChild(projectForm);
+        
+    }
+    static projectModalCloseBtn(){
+        const inputField = document.querySelector('#project-title');
+        const projectCloseButton = document.createElement('button');
+        document.querySelector('#project-modal').appendChild(projectCloseButton);
+        projectCloseButton.addEventListener('click', ()=>{
+            console.log(inputField.value);
+            const newProject = new Project(inputField.value);
+            projects.push(newProject);
+            inputField.value = '';
+            document.querySelector('#project-modal').close();
+        })
     }
     static projectModalHandler(projectDialogElement, projectAddBtn){
         projectAddBtn.addEventListener('click', () =>{
@@ -90,7 +111,9 @@ export function createUI(){
     UserInterface.sectionTitle(projectsAddition);
     const projectButton = UserInterface.projectAddBtn(projectsAddition);
     const projectDialog = UserInterface.projectModal(mainContent);
-    UserInterface.projectModalHandler(projectDialog, projectButton);
+    const projectModal = UserInterface.projectModalHandler(projectDialog, projectButton);
+    UserInterface.projectInputForm();
+    UserInterface.projectModalCloseBtn();
     UserInterface.taskDisplayArea(mainContent);
 }
 

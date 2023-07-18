@@ -1,4 +1,4 @@
-const projects = [];
+export const projects = [];
 
 export class Project{
     constructor(name){
@@ -15,4 +15,4 @@ const ogrod = new Project('Ogrod');
 projects.push(dom);
 projects.push(ogrod);
 
-console.log(dom.tasks)
+console.log(projects)
