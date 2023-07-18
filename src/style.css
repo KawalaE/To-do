@@ -77,3 +77,7 @@
     align-items: center;
     gap: 50px;
 }
+#modal{
+    width: 30ch;
+    margin: 0;
+}

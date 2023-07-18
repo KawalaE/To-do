@@ -63,7 +63,7 @@ class UserInterface{
         projectDialogElement.id = 'modal';
         const projectCloseButton = document.createElement('button');
         projectDialogElement.appendChild(projectCloseButton);
-        projectDialogElement.addEventListener('click', ()=>{
+        projectCloseButton.addEventListener('click', ()=>{
             projectDialogElement.close();
         })
         mainContent.appendChild(projectDialogElement);
