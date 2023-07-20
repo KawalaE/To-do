@@ -1,10 +1,13 @@
 import '/home/Edyta/Desktop/repos/To-do/src/style.css'
 import Favicon from '/home/Edyta/Desktop/repos/To-do/src/assets/logo.svg';
+import Close from '/home/Edyta/Desktop/repos/To-do/src/assets/close.svg';
 import { Project } from './project';
 import { projects } from './project';
 const page = document.getElementById('page');
 const myFavicon = new Image();
 myFavicon.src = Favicon;
+const myClose = new Image();
+myClose.src = Close;
 
 class UserInterface{
 
@@ -80,7 +83,16 @@ class UserInterface{
         document.querySelector('#project-modal').appendChild(projectForm);
         
     }
-    static projectModalCloseBtn(){
+    static projectModalCloseBtn(modal){
+        const closeBtn = document.createElement('img');
+        closeBtn.classList.add('close-btn');
+        closeBtn.src = myClose.src;
+        modal.appendChild(closeBtn);
+        closeBtn.addEventListener('click', ()=>{
+            modal.close();
+        })
+    }
+    static projectModalAddBtn(){
         const inputField = document.querySelector('#project-title');
         const projectCloseButton = document.createElement('button');
         document.querySelector('#project-modal').appendChild(projectCloseButton);
@@ -118,8 +130,9 @@ export function createUI(){
     const projectButton = UserInterface.projectAddBtn(projectsAddition);
     const projectDialog = UserInterface.projectModal(mainContent);
     const projectModal = UserInterface.projectModalHandler(projectDialog, projectButton);
+    UserInterface.projectModalCloseBtn(projectDialog);
     UserInterface.projectInputForm();
-    UserInterface.projectModalCloseBtn();
+    UserInterface.projectModalAddBtn();
     UserInterface.taskDisplayArea(mainContent);
 }
 
