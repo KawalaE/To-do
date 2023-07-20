@@ -86,9 +86,13 @@ class UserInterface{
         document.querySelector('#project-modal').appendChild(projectCloseButton);
         projectCloseButton.addEventListener('click', ()=>{
             const newProject = new Project(inputField.value);
-            projects.push(newProject);
-            inputField.value = '';
-            document.querySelector('#project-modal').close();
+            if(!inputField.value){
+                alert('Project name cannot be empty!')
+            }else{
+                projects.push(newProject);
+                inputField.value = '';
+                document.querySelector('#project-modal').close();
+            }
             console.log(projects)
         })
     }
