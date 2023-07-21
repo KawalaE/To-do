@@ -12,7 +12,6 @@ myClose.src = Close;
 class UserInterface{
 
     static setFavicon(){
-        
         const head = document.querySelector('head');
         const favicon = document.createElement('link');
         favicon.setAttribute('rel', 'shortcut icon');
@@ -90,13 +89,16 @@ class UserInterface{
         modal.appendChild(closeBtn);
         closeBtn.addEventListener('click', ()=>{
             modal.close();
+            document.querySelector('#project-title').value = '';
         })
     }
     static projectModalAddBtn(){
         const inputField = document.querySelector('#project-title');
-        const projectCloseButton = document.createElement('button');
-        document.querySelector('#project-modal').appendChild(projectCloseButton);
-        projectCloseButton.addEventListener('click', ()=>{
+        const projectAddButton = document.createElement('button');
+        projectAddButton.classList.add('project-add-btn');
+        projectAddButton.innerHTML = 'Add project';
+        document.querySelector('#project-modal').appendChild(projectAddButton);
+        projectAddButton.addEventListener('click', ()=>{
             const newProject = new Project(inputField.value);
             if(!inputField.value){
                 alert('Project name cannot be empty!')
