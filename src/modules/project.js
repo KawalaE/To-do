@@ -10,9 +10,9 @@ export class Project{
     }
     
 }
-const dom = new Project('Dom');
-const ogrod = new Project('Ogrod');
-projects.push(dom);
-projects.push(ogrod);
+const home = new Project('Home');
+const garden = new Project('Garden');
+projects.push(home);
+projects.push(garden);
 
 console.log(projects)

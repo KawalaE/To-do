@@ -45,6 +45,12 @@ class UserInterface{
         mainContent.appendChild(projectsNav);
         return projectsNav;
     }
+    static displayCurrentProjects(projectsNav){
+        const projectsDisplay = document.createElement('div');
+        projectsDisplay.classList.add('projects-display')
+        projectsNav.appendChild(projectsDisplay);
+        return projectsDisplay;
+    }
     static projectsAdditionSection(projectsNav){
         const projectsAdditionSection = document.createElement('div');
         projectsAdditionSection.classList.add('projects-add-section');
@@ -100,6 +106,7 @@ class UserInterface{
         const projectAddButton = document.createElement('button');
         projectAddButton.classList.add('project-add-btn');
         projectAddButton.innerHTML = 'Add project';
+        
         document.querySelector('#project-modal').appendChild(projectAddButton);
         projectAddButton.addEventListener('click', ()=>{
             const newProject = new Project(inputField.value);
@@ -107,6 +114,10 @@ class UserInterface{
                 alert('Project name cannot be empty!')
             }else{
                 projects.push(newProject);
+                let project = document.createElement('div');
+                project.classList.add('project');
+                project.innerHTML = newProject.name;
+                document.querySelector('.projects-display').appendChild(project);
                 inputField.value = '';
                 document.querySelector('#project-modal').close();
             }
@@ -125,6 +136,14 @@ class UserInterface{
         taskDisplay.classList.add('task-display');
         mainContent.appendChild(taskDisplay);
     }
+    static displayInitialProjects(){
+        for(let i = 0; i< projects.length; i++){
+            let project = document.createElement('div');
+            project.classList.add('project');
+            project.innerHTML = projects[i].name;
+            document.querySelector('.projects-display').appendChild(project);
+        }
+    }
 }
  
 export function createUI(){
@@ -138,8 +157,11 @@ export function createUI(){
     const projectDialog = UserInterface.projectModal(mainContent);
     const projectModal = UserInterface.projectModalHandler(projectDialog, projectButton);
     UserInterface.projectModalCloseBtn(projectDialog);
+
     UserInterface.projectInputForm();
     UserInterface.projectModalAddBtn();
     UserInterface.taskDisplayArea(mainContent);
+    UserInterface.displayCurrentProjects(projectNavigation);
+    UserInterface.displayInitialProjects();
 }
 

@@ -150,3 +150,20 @@ input[type=text]:focus {
     gap:25px;
     align-items: center;
 }
+.projects-display{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    
+}
+.project{
+    color: #4e4e4e;
+    font-size: 1.8em;
+    font-weight: bold;
+    cursor: pointer;
+}
+.project:hover{
+    color: #5ad4b8;
+    transform: scale(110%);
+    transition: 0.3s;
+}
