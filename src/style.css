@@ -27,7 +27,7 @@ button {
 
 .upper-nav{
     background-color:#5ad4b8;
-    height: 80px;
+    height: 100px;
     display: flex;
     align-items: center;
     gap: 20px;
@@ -40,8 +40,8 @@ button {
     font-weight: bolder;
 }
 .logo{
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
 }
 .main-content{
     display: flex;
@@ -92,21 +92,24 @@ button {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    min-height: 150px;
-    width: 300px;
+    max-height: 200px;
+    max-width: 350px;
     border: 2px solid #5ad4b8;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    padding:10px;
+    padding:15px;
 }
 input[type=text]{
     border: 1px solid rgb(109, 109, 109);
     border-radius: 4px;
     font-size: 1.5em;
+    width: 200px;
+    text-align: center;
 }
 input[type=text]:focus {
-    outline: none;
-  }
+    outline:1px solid #5ad4b8;
+}
+
 .project-add-btn{
     font-size: 1em;
     padding: 5px;
@@ -115,6 +118,7 @@ input[type=text]:focus {
     color:#5ad4b8;
     background-color: transparent;
     cursor: pointer;
+    width: 120px;
 }
 .project-add-btn:hover{
     background-color: #5ad4b8;
@@ -124,11 +128,6 @@ input[type=text]:focus {
 .project-add-btn:active{
     transform: scale(95%);
     transition: 0.1s;
-}
-/*does not work for some reason ⬇ */
-#project-modal::backdrop{
-    background: rgb(109, 109, 109);
-    opacity: .4;
 }
 .close-btn{
     width: 25px;
@@ -142,4 +141,12 @@ input[type=text]:focus {
 .close-btn:active{
     transform: scale(90%);
     transition: 0.3s;
+}
+.modal-content{
+    display:flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    flex-direction: column;
+    gap:25px;
+    align-items: center;
 }

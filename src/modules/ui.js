@@ -74,13 +74,16 @@ class UserInterface{
     static projectInputForm(){
         const projectForm = document.createElement('form');
         projectForm.method = 'dialog';
+        const projectModalContent = document.createElement('div');
+        projectModalContent.classList.add('modal-content');
         const projectName = document.createElement('input');
         projectName.id = 'project-title';
         projectName.type = 'text';
         projectName.placeholder = 'Project title'
         projectForm.appendChild(projectName);
+        document.querySelector('#project-modal').appendChild(projectModalContent);
         document.querySelector('#project-modal').appendChild(projectForm);
-        
+        document.querySelector('.modal-content').appendChild(projectForm);
     }
     static projectModalCloseBtn(modal){
         const closeBtn = document.createElement('img');
@@ -109,6 +112,8 @@ class UserInterface{
             }
             console.log(projects)
         })
+        document.querySelector('.modal-content').appendChild(projectAddButton);
+
     }
     static projectModalHandler(projectDialogElement, projectAddBtn){
         projectAddBtn.addEventListener('click', () =>{
