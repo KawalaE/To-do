@@ -177,7 +177,7 @@ input[type=text]:focus {
 .remove-project{
     width: 45px;
     height: 45px;
-    font-size: 2em;
+    font-size: 1.2em;
     border-radius: 50%;
     text-align: center;
     border: none;

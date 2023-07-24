@@ -143,16 +143,23 @@ class UserInterface{
         taskDisplay.classList.add('task-display');
         mainContent.appendChild(taskDisplay);
     }
+    static removeProjectButtonHandler(button){
+        button.addEventListener('click', () => {
+            alert('Do you want to remove this project?');
+        })
+    }
     static addProject(project){
         const projectDiv = document.createElement('div');
         const removeProject = document.createElement('button');
         removeProject.classList.add('remove-project');
-        removeProject.innerHTML = '-';
+        removeProject.innerHTML = 'x';
+        this.removeProjectButtonHandler(removeProject)
         projectDiv.classList.add('project-div');
         document.querySelector('.projects-display').appendChild(projectDiv);
         projectDiv.appendChild(project);
         projectDiv.appendChild(removeProject);
     }
+    
     static displayInitialProjects(){
         for(let i = 0; i< projects.length; i++){
             let project = document.createElement('div');
@@ -161,6 +168,7 @@ class UserInterface{
             this.addProject(project);
         }
     }
+    
 }
  
 export function createUI(){
