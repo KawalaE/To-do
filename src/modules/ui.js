@@ -83,6 +83,7 @@ class UserInterface{
         const projectModalContent = document.createElement('div');
         projectModalContent.classList.add('modal-content');
         const projectName = document.createElement('input');
+        projectName.maxLength = 12;
         projectName.id = 'project-title';
         projectName.type = 'text';
         projectName.placeholder = 'Project title'
@@ -117,11 +118,17 @@ class UserInterface{
                 let project = document.createElement('div');
                 project.classList.add('project');
                 project.innerHTML = newProject.name;
-                document.querySelector('.projects-display').appendChild(project);
                 inputField.value = '';
                 document.querySelector('#project-modal').close();
+                this.addProject(project);
             }
             console.log(projects)
+        })
+        document.addEventListener('keypress',(event)=>{
+            if(event.key === "Enter"){
+                projectAddButton.click();
+                
+            }
         })
         document.querySelector('.modal-content').appendChild(projectAddButton);
 
@@ -136,12 +143,22 @@ class UserInterface{
         taskDisplay.classList.add('task-display');
         mainContent.appendChild(taskDisplay);
     }
+    static addProject(project){
+        const projectDiv = document.createElement('div');
+        const removeProject = document.createElement('button');
+        removeProject.classList.add('remove-project');
+        removeProject.innerHTML = '-';
+        projectDiv.classList.add('project-div');
+        document.querySelector('.projects-display').appendChild(projectDiv);
+        projectDiv.appendChild(project);
+        projectDiv.appendChild(removeProject);
+    }
     static displayInitialProjects(){
         for(let i = 0; i< projects.length; i++){
             let project = document.createElement('div');
             project.classList.add('project');
             project.innerHTML = projects[i].name;
-            document.querySelector('.projects-display').appendChild(project);
+            this.addProject(project);
         }
     }
 }

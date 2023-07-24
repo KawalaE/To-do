@@ -4,6 +4,8 @@
     box-sizing: border-box;
     font-family: 'QuickSand', sans-serif;
     font-size: 16px;
+    :focus { outline: none; }
+
 }
 input,
 textarea,
@@ -15,6 +17,9 @@ button {
   font-family: inherit;
   font-size: 100%;
   border: none;
+}
+body{
+    min-height: 100vh;
 }
 #page{
     height: 100vh;
@@ -45,7 +50,7 @@ button {
 }
 .main-content{
     display: flex;
-    height: calc(100% - 80px);
+    height: calc(100% - 100px);
 }
 .projects-nav{
     width: 280px;
@@ -126,8 +131,9 @@ input[type=text]:focus {
     transition: 0.3s;
 }
 .project-add-btn:active{
+    background-color: #5ad4b8;
+    color: white;
     transform: scale(95%);
-    transition: 0.1s;
 }
 .close-btn{
     width: 25px;
@@ -154,16 +160,40 @@ input[type=text]:focus {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    
 }
 .project{
     color: #4e4e4e;
     font-size: 1.8em;
     font-weight: bold;
     cursor: pointer;
+    text-align: center;
+    width: 12ch;
 }
 .project:hover{
     color: #5ad4b8;
     transform: scale(110%);
     transition: 0.3s;
+}
+.remove-project{
+    width: 45px;
+    height: 45px;
+    font-size: 2em;
+    border-radius: 50%;
+    text-align: center;
+    border: none;
+    padding: 0px 15px;
+    transition: 0.3s;
+    font-weight: bolder;
+}
+.remove-project:hover{
+    background-color: #f0c0d2;
+    cursor: pointer;
+}
+.remove-project:active{
+    transform: scale(90%);
+    transition: 0.3s;
+}
+.project-div{
+    display: flex;
+    align-items: center;
 }
