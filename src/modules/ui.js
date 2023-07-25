@@ -144,8 +144,13 @@ class UserInterface{
         mainContent.appendChild(taskDisplay);
     }
     static removeProjectButtonHandler(button){
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (e) => {
             alert('Do you want to remove this project?');
+            const parent = e.target.parentNode;
+            const element = parent.firstChild.textContent;
+            parent.remove();
+            projects.splice(projects.indexOf(element), 1);
+            console.log(projects)
         })
     }
     static addProject(project){
@@ -153,7 +158,7 @@ class UserInterface{
         const removeProject = document.createElement('button');
         removeProject.classList.add('remove-project');
         removeProject.innerHTML = 'x';
-        this.removeProjectButtonHandler(removeProject)
+        this.removeProjectButtonHandler(removeProject);
         projectDiv.classList.add('project-div');
         document.querySelector('.projects-display').appendChild(projectDiv);
         projectDiv.appendChild(project);
