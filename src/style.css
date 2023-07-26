@@ -199,3 +199,9 @@ input[type=text]:focus {
     display: flex;
     align-items: center;
 }
+.project-active{
+    color: #5ad4b8;
+}
+.task-modal{
+    
+}

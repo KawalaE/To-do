@@ -7,5 +7,5 @@ export class Task{
         this.status = status;
     }
 }
-const myTask = new Task('cleaning', 'sddd', '12.9.2023', 1, 0);
+const myTask = new Task('cleaning', 'sddd', '12.9.2023', 'low', 0);
 console.log(myTask)

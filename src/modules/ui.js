@@ -3,6 +3,7 @@ import Favicon from '/home/Edyta/Desktop/repos/To-do/src/assets/logo.svg';
 import Close from '/home/Edyta/Desktop/repos/To-do/src/assets/close.svg';
 import { Project } from './project';
 import { projects } from './project';
+import { Task } from './task';
 const page = document.getElementById('page');
 const myFavicon = new Image();
 myFavicon.src = Favicon;
@@ -83,7 +84,7 @@ class UserInterface{
         const projectModalContent = document.createElement('div');
         projectModalContent.classList.add('modal-content');
         const projectName = document.createElement('input');
-        projectName.maxLength = 12;
+        projectName.maxLength = 11;
         projectName.id = 'project-title';
         projectName.type = 'text';
         projectName.placeholder = 'Project title'
@@ -127,7 +128,6 @@ class UserInterface{
         document.addEventListener('keypress',(event)=>{
             if(event.key === "Enter"){
                 projectAddButton.click();
-                
             }
         })
         document.querySelector('.modal-content').appendChild(projectAddButton);
@@ -163,6 +163,20 @@ class UserInterface{
         document.querySelector('.projects-display').appendChild(projectDiv);
         projectDiv.appendChild(project);
         projectDiv.appendChild(removeProject);
+        this.taskModal();
+    }
+    static taskModal(){
+        const projects = document.querySelectorAll('.project');
+        const projectModal = document.createElement('dialog');
+        projectModal.classList.add('task-modal')
+        document.querySelector('.task-display').appendChild(projectModal);
+        projects.forEach((e)=>{
+            e.addEventListener('click', () =>{
+                console.log('clicked');
+                e.classList.add('project-active');
+            })
+
+        })
     }
     
     static displayInitialProjects(){
@@ -171,11 +185,11 @@ class UserInterface{
             project.classList.add('project');
             project.innerHTML = projects[i].name;
             this.addProject(project);
+            
         }
     }
-    
 }
- 
+ console.log(projects)
 export function createUI(){
     UserInterface.setFavicon();
     UserInterface.horizontalNav();
@@ -187,7 +201,6 @@ export function createUI(){
     const projectDialog = UserInterface.projectModal(mainContent);
     const projectModal = UserInterface.projectModalHandler(projectDialog, projectButton);
     UserInterface.projectModalCloseBtn(projectDialog);
-
     UserInterface.projectInputForm();
     UserInterface.projectModalAddBtn();
     UserInterface.taskDisplayArea(mainContent);
