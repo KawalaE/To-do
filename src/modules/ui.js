@@ -170,10 +170,15 @@ class UserInterface{
         const projectModal = document.createElement('dialog');
         projectModal.classList.add('task-modal')
         document.querySelector('.task-display').appendChild(projectModal);
-        projects.forEach((e)=>{
-            e.addEventListener('click', () =>{
+        projects.forEach((project) => {
+            project.addEventListener('click', () =>{
+                projects.forEach((siblingProject)=>{
+                    if(siblingProject !== project){
+                        siblingProject.classList.remove('project-active');
+                    }
+                })
                 console.log('clicked');
-                e.classList.add('project-active');
+                project.classList.add('project-active');
             })
 
         })
