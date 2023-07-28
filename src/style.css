@@ -203,5 +203,10 @@ input[type=text]:focus {
     color: #5ad4b8;
 }
 .task-modal{
-    
+
+}
+.task-button{
+    width: 10px;
+    height: 10px;
+    color:red;
 }

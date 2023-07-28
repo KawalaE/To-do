@@ -163,13 +163,16 @@ class UserInterface{
         document.querySelector('.projects-display').appendChild(projectDiv);
         projectDiv.appendChild(project);
         projectDiv.appendChild(removeProject);
-        this.taskModal();
+        this.taskModalHandler();
     }
-    static taskModal(){
+    static createTaskModal(){
+        const taskModal = document.createElement('dialog');
+        taskModal.classList.add('task-modal');
+        document.querySelector('.task-display').appendChild(taskModal);
+        return taskModal;
+    }
+    static taskModalHandler(){
         const projects = document.querySelectorAll('.project');
-        const projectModal = document.createElement('dialog');
-        projectModal.classList.add('task-modal')
-        document.querySelector('.task-display').appendChild(projectModal);
         projects.forEach((project) => {
             project.addEventListener('click', () =>{
                 projects.forEach((siblingProject)=>{
@@ -180,10 +183,13 @@ class UserInterface{
                 console.log('clicked');
                 project.classList.add('project-active');
             })
-
         })
     }
-    
+    static addTaskButton(){
+        const taskButton = document.createElement('button');
+        document.querySelector('.task-display').appendChild(taskButton);
+        taskButton.classList.add('task-button');
+    }
     static displayInitialProjects(){
         for(let i = 0; i< projects.length; i++){
             let project = document.createElement('div');
@@ -211,5 +217,6 @@ export function createUI(){
     UserInterface.taskDisplayArea(mainContent);
     UserInterface.displayCurrentProjects(projectNavigation);
     UserInterface.displayInitialProjects();
+
 }
 
