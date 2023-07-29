@@ -11,7 +11,7 @@ const myClose = new Image();
 myClose.src = Close;
 
 class UserInterface{
-
+    
     static setFavicon(){
         const head = document.querySelector('head');
         const favicon = document.createElement('link');
@@ -146,10 +146,21 @@ class UserInterface{
     static removeProjectButtonHandler(button){
         button.addEventListener('click', (e) => {
             alert('Do you want to remove this project?');
+            let projectNumber = 0;
             const parent = e.target.parentNode;
             const element = parent.firstChild.textContent;
+            console.log(projectNumber);
             parent.remove();
+            const allProjects = document.querySelectorAll('.project');
+            allProjects.forEach((element) => {
+                if(!element.classList.contains('project-active')){
+                    projectNumber++;
+                }
+            })
             projects.splice(projects.indexOf(element), 1);
+            if(projectNumber === projects.length){
+                document.querySelector('.task-button').style.visibility= 'hidden';
+            }
             console.log(projects)
         })
     }
@@ -171,6 +182,7 @@ class UserInterface{
         document.querySelector('.task-display').appendChild(taskModal);
         return taskModal;
     }
+    
     static taskModalHandler(){
         const projects = document.querySelectorAll('.project');
         projects.forEach((project) => {
@@ -182,13 +194,16 @@ class UserInterface{
                 })
                 console.log('clicked');
                 project.classList.add('project-active');
+                document.querySelector('.task-button').style.visibility= 'visible';
             })
         })
     }
     static addTaskButton(){
         const taskButton = document.createElement('button');
         document.querySelector('.task-display').appendChild(taskButton);
+        taskButton.innerHTML = 'Add tasks'
         taskButton.classList.add('task-button');
+        taskButton.style.visibility='hidden';
     }
     static displayInitialProjects(){
         for(let i = 0; i< projects.length; i++){
@@ -217,6 +232,7 @@ export function createUI(){
     UserInterface.taskDisplayArea(mainContent);
     UserInterface.displayCurrentProjects(projectNavigation);
     UserInterface.displayInitialProjects();
+    UserInterface.addTaskButton();
 
 }
 
