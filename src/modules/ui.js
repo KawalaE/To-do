@@ -180,11 +180,52 @@ class UserInterface{
         const taskModal = document.createElement('dialog');
         taskModal.classList.add('task-modal');
         document.querySelector('.task-display').appendChild(taskModal);
-        return taskModal;
+        const taskForm = document.createElement('form');
+        taskForm.classList.add('task-form');
+        const closeTaskModal = document.createElement('img');
+        closeTaskModal.classList.add('close-btn');
+        closeTaskModal.src = myClose.src;
+        taskModal.appendChild(closeTaskModal);
+
+        const taskName = document.createElement('input');
+        taskName.type = 'text';
+        taskName.placeholder = 'Task name';
+
+        const taskDesc = document.createElement('input');
+        taskDesc.type = 'text';
+        taskDesc.placeholder = 'Task description';
+
+        const taskDate = document.createElement('input');
+        taskDate.type = 'date';
+
+        const taskPriotity = document.createElement('select');
+        let lowOption = document.createElement('option');
+        lowOption.value = 'low';
+        lowOption.innerHTML = 'low';
+        taskPriotity.appendChild(lowOption);
+        let medOption = document.createElement('option');
+        medOption.value = 'medium';
+        medOption.innerHTML = 'medium';
+        taskPriotity.appendChild(medOption);
+        let highOption = document.createElement('option');
+        highOption.value = 'high';
+        highOption.innerHTML = 'high';
+        taskPriotity.appendChild(highOption);
+
+        const taskStatus = document.createElement('input');
+        taskStatus.type = 'checkbox';
+        
+        taskForm.appendChild(taskName);
+        taskForm.appendChild(taskDesc);
+        taskForm.appendChild(taskDate);
+        taskForm.appendChild(taskPriotity);
+        taskForm.appendChild(taskStatus);
+        taskModal.appendChild(taskForm);
     }
     
     static taskModalHandler(){
         const projects = document.querySelectorAll('.project');
+
         projects.forEach((project) => {
             project.addEventListener('click', () =>{
                 projects.forEach((siblingProject)=>{
@@ -195,8 +236,18 @@ class UserInterface{
                 console.log('clicked');
                 project.classList.add('project-active');
                 document.querySelector('.task-button').style.visibility= 'visible';
+    
+                document.querySelector('.task-button').addEventListener('click', () =>{
+                    console.log('clicked task btn')
+                    document.querySelector('.task-modal').show();
+
+
+                })
             })
+            
+               
         })
+        
     }
     static addTaskButton(){
         const taskButton = document.createElement('button');
@@ -233,6 +284,7 @@ export function createUI(){
     UserInterface.displayCurrentProjects(projectNavigation);
     UserInterface.displayInitialProjects();
     UserInterface.addTaskButton();
+    UserInterface.createTaskModal();
 
 }
 
