@@ -191,14 +191,23 @@ class UserInterface{
         taskName.type = 'text';
         taskName.placeholder = 'Task name';
 
-        const taskDesc = document.createElement('input');
-        taskDesc.type = 'text';
+        const taskDesc = document.createElement('textarea');
+        taskDesc.classList.add('text-area');
+        taskDesc.maxLength = "55";
         taskDesc.placeholder = 'Task description';
 
         const taskDate = document.createElement('input');
         taskDate.type = 'date';
+        taskDate.classList.add('task-date');
 
         const taskPriotity = document.createElement('select');
+        taskPriotity.classList.add('task-priority');
+        const selectPlaceholder = document.createElement('option');
+        selectPlaceholder.value =' ';
+        selectPlaceholder.disabled = true;
+        selectPlaceholder.selected = true;
+        selectPlaceholder.innerHTML = 'Select priority';
+        taskPriotity.appendChild(selectPlaceholder);
         let lowOption = document.createElement('option');
         lowOption.value = 'low';
         lowOption.innerHTML = 'low';
@@ -211,15 +220,24 @@ class UserInterface{
         highOption.value = 'high';
         highOption.innerHTML = 'high';
         taskPriotity.appendChild(highOption);
-
+        
         const taskStatus = document.createElement('input');
         taskStatus.type = 'checkbox';
+        const customCheck = document.createElement('span');
+        customCheck.classList.add('custom-check');
+
+        const checkboxLabel = document.createElement('label');
+        checkboxLabel.classList.add('status-info-label');
+        checkboxLabel.innerHTML = 'Finished';
+        checkboxLabel.appendChild(customCheck);
+        checkboxLabel.appendChild(taskStatus);
+        
         
         taskForm.appendChild(taskName);
         taskForm.appendChild(taskDesc);
         taskForm.appendChild(taskDate);
         taskForm.appendChild(taskPriotity);
-        taskForm.appendChild(taskStatus);
+        taskForm.appendChild(checkboxLabel);
         taskModal.appendChild(taskForm);
     }
     
