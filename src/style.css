@@ -76,6 +76,10 @@ body{
     padding: 0px 15px;
     transition: 0.3s;
 }
+.projects-button[disabled]:hover{
+    background-color: transparent;
+    cursor: default;
+}
 .projects-button:hover{
     background-color: #5ad4b8;
     cursor: pointer;

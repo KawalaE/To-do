@@ -182,10 +182,16 @@ class UserInterface{
         document.querySelector('.task-display').appendChild(taskModal);
         const taskForm = document.createElement('form');
         taskForm.classList.add('task-form');
+
         const closeTaskModal = document.createElement('img');
         closeTaskModal.classList.add('close-btn');
         closeTaskModal.src = myClose.src;
         taskModal.appendChild(closeTaskModal);
+
+        closeTaskModal.addEventListener('click', () => {
+            taskModal.close();
+            document.querySelector('.projects-button').disabled = false;
+        })
 
         const taskName = document.createElement('input');
         taskName.type = 'text';
