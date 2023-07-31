@@ -100,7 +100,9 @@ class UserInterface{
         modal.appendChild(closeBtn);
         closeBtn.addEventListener('click', ()=>{
             modal.close();
+            document.querySelector('.projects-button').disabled = false;
             document.querySelector('#project-title').value = '';
+            document.querySelector('.task-button').disabled = false;
         })
     }
     static projectModalAddBtn(){
@@ -117,11 +119,14 @@ class UserInterface{
             }else{
                 projects.push(newProject);
                 let project = document.createElement('div');
-                project.classList.add('project');
+                project.classList.add('pro-instance');
                 project.innerHTML = newProject.name;
                 inputField.value = '';
                 document.querySelector('#project-modal').close();
                 this.addProject(project);
+                document.querySelector('.projects-button').disabled  = false;
+                document.querySelector('.task-button').disabled = false;
+
             }
             console.log(projects)
         })
@@ -136,6 +141,8 @@ class UserInterface{
     static projectModalHandler(projectDialogElement, projectAddBtn){
         projectAddBtn.addEventListener('click', () =>{
             projectDialogElement.show();
+            document.querySelector('.task-button').disabled = true;
+            document.querySelector('.projects-button').disabled = true;
         })
     }
     static taskDisplayArea(mainContent){
@@ -151,7 +158,7 @@ class UserInterface{
             const element = parent.firstChild.textContent;
             console.log(projectNumber);
             parent.remove();
-            const allProjects = document.querySelectorAll('.project');
+            const allProjects = document.querySelectorAll('.pro');
             allProjects.forEach((element) => {
                 if(!element.classList.contains('project-active')){
                     projectNumber++;
@@ -190,7 +197,15 @@ class UserInterface{
 
         closeTaskModal.addEventListener('click', () => {
             taskModal.close();
+
             document.querySelector('.projects-button').disabled = false;
+            document.querySelector('.task-button').disabled = false;
+            document.querySelectorAll('.remove-project').forEach((element)=>{
+                element.disabled = false;
+            })
+            document.querySelectorAll('.pro-instance').forEach((element) => {
+                element.disabled = false;
+            })
         })
 
         const taskName = document.createElement('input');
@@ -251,11 +266,11 @@ class UserInterface{
     }
     
     static taskModalHandler(){
-        const projects = document.querySelectorAll('.project');
+        const projectsDOM = document.querySelectorAll('.pro-instance');
 
-        projects.forEach((project) => {
+        projectsDOM.forEach((project) => {
             project.addEventListener('click', () =>{
-                projects.forEach((siblingProject)=>{
+                projectsDOM.forEach((siblingProject)=>{
                     if(siblingProject !== project){
                         siblingProject.classList.remove('project-active');
                     }
@@ -267,7 +282,15 @@ class UserInterface{
                 document.querySelector('.task-button').addEventListener('click', () =>{
                     console.log('clicked task btn')
                     document.querySelector('.task-modal').show();
+
+                    projectsDOM.forEach((element) => {
+                        element.disabled = true;
+                    })
+                    document.querySelectorAll('.remove-project').forEach((element)=>{
+                        element.disabled = true;
+                    })
                     document.querySelector('.projects-button').disabled = true;
+                    document.querySelector('.task-button').disabled = true;
                 })
             })
             
@@ -284,11 +307,10 @@ class UserInterface{
     }
     static displayInitialProjects(){
         for(let i = 0; i< projects.length; i++){
-            let project = document.createElement('div');
-            project.classList.add('project');
+            let project = document.createElement('button');
+            project.classList.add('pro-instance');
             project.innerHTML = projects[i].name;
-            this.addProject(project);
-            
+            this.addProject(project);   
         }
     }
 }
