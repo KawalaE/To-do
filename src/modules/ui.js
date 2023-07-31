@@ -229,15 +229,18 @@ class UserInterface{
         const checkboxLabel = document.createElement('label');
         checkboxLabel.classList.add('status-info-label');
         checkboxLabel.innerHTML = 'Finished';
-        checkboxLabel.appendChild(customCheck);
         checkboxLabel.appendChild(taskStatus);
         
-        
+        const submitTask = document.createElement('submit-task');
+        submitTask.innerHTML = 'Add task';
+        submitTask.classList.add('submit-task');
+
         taskForm.appendChild(taskName);
         taskForm.appendChild(taskDesc);
         taskForm.appendChild(taskDate);
         taskForm.appendChild(taskPriotity);
         taskForm.appendChild(checkboxLabel);
+        taskForm.appendChild(submitTask);
         taskModal.appendChild(taskForm);
     }
     
@@ -258,8 +261,7 @@ class UserInterface{
                 document.querySelector('.task-button').addEventListener('click', () =>{
                     console.log('clicked task btn')
                     document.querySelector('.task-modal').show();
-
-
+                    document.querySelector('.projects-button').disabled = true;
                 })
             })
             
