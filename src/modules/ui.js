@@ -219,7 +219,7 @@ class UserInterface{
         const taskPriotity = document.createElement('select');
         taskPriotity.classList.add('task-priority');
         const selectPlaceholder = document.createElement('option');
-        selectPlaceholder.value =' ';
+        selectPlaceholder.value ='';
         selectPlaceholder.disabled = true;
         selectPlaceholder.selected = true;
         selectPlaceholder.innerHTML = 'Select priority';
@@ -269,7 +269,7 @@ class UserInterface{
 
                 taskDesc.value = '';
                 taskDate.value = '';
-                selectPlaceholder.setAttribute('selected','selected');
+                taskPriotity.value = '';
                 taskStatus.checked = false;
             }
             
