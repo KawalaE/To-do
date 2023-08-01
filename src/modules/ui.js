@@ -156,7 +156,6 @@ class UserInterface{
             let projectNumber = 0;
             const parent = e.target.parentNode;
             const element = parent.firstChild.textContent;
-            console.log(projectNumber);
             parent.remove();
             const allProjects = document.querySelectorAll('.pro');
             allProjects.forEach((element) => {
@@ -208,10 +207,6 @@ class UserInterface{
             })
         })
 
-        const taskName = document.createElement('input');
-        taskName.type = 'text';
-        taskName.placeholder = 'Task name';
-
         const taskDesc = document.createElement('textarea');
         taskDesc.classList.add('text-area');
         taskDesc.maxLength = "55";
@@ -256,7 +251,31 @@ class UserInterface{
         submitTask.innerHTML = 'Add task';
         submitTask.classList.add('submit-task');
 
-        taskForm.appendChild(taskName);
+
+        submitTask.addEventListener('click', () =>{
+            if(!taskDesc.value){alert('Please, fill task description')};
+            if(!taskDate.value){alert('Please, fill end date')};
+            if(!taskPriotity.value){alert('Please, select priority.')}
+            else{
+                console.log('task added');
+                let newTask = new Task(taskDesc.value, taskDate.value, taskPriotity.value, taskStatus.value);
+                let currentProject = document.querySelector('.project-active').innerHTML;
+        
+                projects.forEach((project) => {
+                    if(project.name === currentProject){
+                        project.tasks.push(newTask);
+                    }
+                })
+
+                taskDesc.value = '';
+                taskDate.value = '';
+                selectPlaceholder.setAttribute('selected','selected');
+                taskStatus.checked = false;
+            }
+            
+
+        })
+
         taskForm.appendChild(taskDesc);
         taskForm.appendChild(taskDate);
         taskForm.appendChild(taskPriotity);
@@ -264,7 +283,7 @@ class UserInterface{
         taskForm.appendChild(submitTask);
         taskModal.appendChild(taskForm);
     }
-    
+
     static taskModalHandler(){
         const projectsDOM = document.querySelectorAll('.pro-instance');
 
@@ -275,12 +294,10 @@ class UserInterface{
                         siblingProject.classList.remove('project-active');
                     }
                 })
-                console.log('clicked');
                 project.classList.add('project-active');
                 document.querySelector('.task-button').style.visibility= 'visible';
     
                 document.querySelector('.task-button').addEventListener('click', () =>{
-                    console.log('clicked task btn')
                     document.querySelector('.task-modal').show();
 
                     projectsDOM.forEach((element) => {
@@ -314,7 +331,7 @@ class UserInterface{
         }
     }
 }
- console.log(projects)
+
 export function createUI(){
     UserInterface.setFavicon();
     UserInterface.horizontalNav();
