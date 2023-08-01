@@ -165,7 +165,6 @@ input[type=text]:focus, .text-area:focus {
     color: #4e4e4e;
     font-size: 1.8em;
     font-weight: bold;
-    cursor: pointer;
     text-align: center;
     width: 12ch;
 }
@@ -173,6 +172,7 @@ input[type=text]:focus, .text-area:focus {
     color: #5ad4b8;
     transform: scale(110%);
     transition: 0.3s;
+    cursor: pointer;
 }
 .remove-project{
     width: 45px;

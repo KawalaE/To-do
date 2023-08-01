@@ -100,9 +100,8 @@ class UserInterface{
         modal.appendChild(closeBtn);
         closeBtn.addEventListener('click', ()=>{
             modal.close();
-            document.querySelector('.projects-button').disabled = false;
             document.querySelector('#project-title').value = '';
-            document.querySelector('.task-button').disabled = false;
+            this.disableOrEnableButtons(false);
         })
     }
     static projectModalAddBtn(){
@@ -124,8 +123,7 @@ class UserInterface{
                 inputField.value = '';
                 document.querySelector('#project-modal').close();
                 this.addProject(project);
-                document.querySelector('.projects-button').disabled  = false;
-                document.querySelector('.task-button').disabled = false;
+                this.disableOrEnableButtons(false);
 
             }
             console.log(projects)
@@ -138,11 +136,14 @@ class UserInterface{
         document.querySelector('.modal-content').appendChild(projectAddButton);
 
     }
+    static disableOrEnableButtons(state){
+        document.querySelector('.projects-button').disabled  = state;
+        document.querySelector('.task-button').disabled = state;
+    }
     static projectModalHandler(projectDialogElement, projectAddBtn){
         projectAddBtn.addEventListener('click', () =>{
             projectDialogElement.show();
-            document.querySelector('.task-button').disabled = true;
-            document.querySelector('.projects-button').disabled = true;
+            this.disableOrEnableButtons(true);
         })
     }
     static taskDisplayArea(mainContent){
@@ -197,8 +198,7 @@ class UserInterface{
         closeTaskModal.addEventListener('click', () => {
             taskModal.close();
 
-            document.querySelector('.projects-button').disabled = false;
-            document.querySelector('.task-button').disabled = false;
+            this.disableOrEnableButtons(false);
             document.querySelectorAll('.remove-project').forEach((element)=>{
                 element.disabled = false;
             })
@@ -258,24 +258,36 @@ class UserInterface{
             if(!taskPriotity.value){alert('Please, select priority.')}
             else{
                 console.log('task added');
+                if(taskStatus.checked){
+                    taskStatus.value = 1;
+                }else{
+                    taskStatus.value = 0;
+                };
                 let newTask = new Task(taskDesc.value, taskDate.value, taskPriotity.value, taskStatus.value);
                 let currentProject = document.querySelector('.project-active').innerHTML;
         
                 projects.forEach((project) => {
                     if(project.name === currentProject){
                         project.tasks.push(newTask);
+                        this.taskDisplay()
                     }
-                })
+                });
 
                 taskDesc.value = '';
                 taskDate.value = '';
                 taskPriotity.value = '';
-                taskStatus.checked = false;
+                taskStatus.checked = 0;
+                taskModal.close();
+                this.disableOrEnableButtons(false);
+                document.querySelectorAll('.remove-project').forEach((element)=>{
+                    element.disabled = false;
+                })
+                document.querySelectorAll('.pro-instance').forEach((element) => {
+                    element.disabled = false;
+                })
+
             }
-            
-
         })
-
         taskForm.appendChild(taskDesc);
         taskForm.appendChild(taskDate);
         taskForm.appendChild(taskPriotity);
@@ -283,20 +295,38 @@ class UserInterface{
         taskForm.appendChild(submitTask);
         taskModal.appendChild(taskForm);
     }
+    static taskDisplay(){
+        const taskDOM = document.createElement('div');
+        document.querySelector('.task-display').appendChild(taskDOM);
+        document.querySelectorAll('.pro-instance').forEach((element) => {
+            if(element.classList.contains('project-active')){
+                projects.forEach((project)=>{
+                    if(project.name === element.innerHTML){
+                        if(project.tasks.length !== 0){
+                            console.log(project.tasks)
+                        }
+                        
+                    }
+                })
+            }  
+        })
 
+    }
     static taskModalHandler(){
         const projectsDOM = document.querySelectorAll('.pro-instance');
 
         projectsDOM.forEach((project) => {
             project.addEventListener('click', () =>{
                 projectsDOM.forEach((siblingProject)=>{
+                    
                     if(siblingProject !== project){
                         siblingProject.classList.remove('project-active');
                     }
                 })
                 project.classList.add('project-active');
+                this.taskDisplay()
                 document.querySelector('.task-button').style.visibility= 'visible';
-    
+                
                 document.querySelector('.task-button').addEventListener('click', () =>{
                     document.querySelector('.task-modal').show();
 
@@ -306,8 +336,7 @@ class UserInterface{
                     document.querySelectorAll('.remove-project').forEach((element)=>{
                         element.disabled = true;
                     })
-                    document.querySelector('.projects-button').disabled = true;
-                    document.querySelector('.task-button').disabled = true;
+                    this.disableOrEnableButtons(true);
                 })
             })
             
@@ -320,7 +349,7 @@ class UserInterface{
         document.querySelector('.task-display').appendChild(taskButton);
         taskButton.innerHTML = 'Add tasks'
         taskButton.classList.add('task-button');
-        taskButton.style.visibility='hidden';
+        taskButton.style.visibility ='hidden';
     }
     static displayInitialProjects(){
         for(let i = 0; i< projects.length; i++){
@@ -350,6 +379,5 @@ export function createUI(){
     UserInterface.displayInitialProjects();
     UserInterface.addTaskButton();
     UserInterface.createTaskModal();
-
 }
 
