@@ -297,9 +297,10 @@ class UserInterface{
     }
     static taskDisplay(){
         const taskDOM = document.createElement('div');
-        while (taskDOM.firstChild){
-            taskDOM.removeChild(taskDOM.lastChild);
-        }
+        const previousTasks = document.querySelectorAll('.task-item');
+        previousTasks.forEach((previous) => {
+            previous.remove();
+        })
         document.querySelector('.task-display').appendChild(taskDOM);
         taskDOM.classList.add('task-item');
         document.querySelectorAll('.pro-instance').forEach((element) => {
