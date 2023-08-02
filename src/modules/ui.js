@@ -297,13 +297,33 @@ class UserInterface{
     }
     static taskDisplay(){
         const taskDOM = document.createElement('div');
+        while (taskDOM.firstChild){
+            taskDOM.removeChild(taskDOM.lastChild);
+        }
         document.querySelector('.task-display').appendChild(taskDOM);
+        taskDOM.classList.add('task-item');
         document.querySelectorAll('.pro-instance').forEach((element) => {
             if(element.classList.contains('project-active')){
                 projects.forEach((project)=>{
                     if(project.name === element.innerHTML){
                         if(project.tasks.length !== 0){
-                            console.log(project.tasks)
+                            console.log(project.tasks);
+                            for(let i = 0; i < project.tasks.length; i++){
+                                let taskName = document.createElement('div');
+                                taskName.innerHTML = project.tasks[i].description;
+                                taskDOM.appendChild(taskName)
+
+                                let taskDate = document.createElement('div');
+                                taskDate.innerHTML = project.tasks[i].dueDate;
+                                taskDOM.appendChild(taskDate)
+
+                                let taskPriotity = document.createElement('div');
+                                taskPriotity.innerHTML = project.tasks[i].priority;
+                                taskDOM.appendChild(taskPriotity);
+                                
+                                console.log(project.tasks[i].description);
+                            }
+                            
                         }
                         
                     }
