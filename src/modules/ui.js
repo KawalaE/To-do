@@ -237,16 +237,6 @@ class UserInterface{
         highOption.innerHTML = 'high';
         taskPriotity.appendChild(highOption);
         
-        const taskStatus = document.createElement('input');
-        taskStatus.type = 'checkbox';
-        const customCheck = document.createElement('span');
-        customCheck.classList.add('custom-check');
-
-        const checkboxLabel = document.createElement('label');
-        checkboxLabel.classList.add('status-info-label');
-        checkboxLabel.innerHTML = 'Finished';
-        checkboxLabel.appendChild(taskStatus);
-        
         const submitTask = document.createElement('submit-task');
         submitTask.innerHTML = 'Add task';
         submitTask.classList.add('submit-task');
@@ -258,12 +248,7 @@ class UserInterface{
             if(!taskPriotity.value){alert('Please, select priority.')}
             else{
                 console.log('task added');
-                if(taskStatus.checked){
-                    taskStatus.value = 1;
-                }else{
-                    taskStatus.value = 0;
-                };
-                let newTask = new Task(taskDesc.value, taskDate.value, taskPriotity.value, taskStatus.value);
+                let newTask = new Task(taskDesc.value, taskDate.value, taskPriotity.value, '0');
                 let currentProject = document.querySelector('.project-active').innerHTML;
         
                 projects.forEach((project) => {
@@ -276,8 +261,8 @@ class UserInterface{
                 taskDesc.value = '';
                 taskDate.value = '';
                 taskPriotity.value = '';
-                taskStatus.checked = 0;
                 taskModal.close();
+
                 this.disableOrEnableButtons(false);
                 document.querySelectorAll('.remove-project').forEach((element)=>{
                     element.disabled = false;
@@ -285,17 +270,20 @@ class UserInterface{
                 document.querySelectorAll('.pro-instance').forEach((element) => {
                     element.disabled = false;
                 })
-
+                
             }
         })
         taskForm.appendChild(taskDesc);
         taskForm.appendChild(taskDate);
         taskForm.appendChild(taskPriotity);
-        taskForm.appendChild(checkboxLabel);
         taskForm.appendChild(submitTask);
         taskModal.appendChild(taskForm);
     }
     static taskDisplay(){
+        const taskDOM = document.createElement('div');
+        while (taskDOM.firstChild){
+            taskDOM.removeChild(taskDOM.lastChild);
+        }
         const previousTasks = document.querySelectorAll('.task-item');
         previousTasks.forEach((previous) => {
             previous.remove();
@@ -305,39 +293,47 @@ class UserInterface{
             if(element.classList.contains('project-active')){
                 projects.forEach((project)=>{
                     if(project.name === element.innerHTML){
+                        if(projects.length !== 0){
+                            for(let i = 0; i < project.tasks.length; i++){
 
-                        for(let i = 0; i < project.tasks.length; i++){
-
-                            const taskDOM = document.createElement('div');
-                            document.querySelector('.task-display').appendChild(taskDOM);
-                            taskDOM.classList.add('task-item');
-                            console.log(project.tasks);
-
-                            let taskDesc = document.createElement('div');
-                            taskDesc.classList.add('task-disp-desc');
-                            taskDesc.innerHTML = project.tasks[i].description;
-                            taskDOM.appendChild(taskDesc)
-
-                            let taskDate = document.createElement('div');
-                            taskDate.classList.add('task-disp-date');
-                            taskDate.innerHTML = project.tasks[i].dueDate;
-                            taskDOM.appendChild(taskDate)
-
-                            let taskPriotity = document.createElement('div');
-                            taskPriotity.innerHTML = project.tasks[i].priority;
-                            if(taskPriotity.innerHTML === 'low'){
-                                taskPriotity.classList.add('task-disp-priority-low');
-                            }else if(taskPriotity.innerHTML === 'medium'){
-                                taskPriotity.classList.add('task-disp-priority-medium');
-                            }else if(taskPriotity.innerHTML ==='high'){
-                                taskPriotity.classList.add('task-disp-priority-high');
+                                const taskDOM = document.createElement('div');
+                                document.querySelector('.task-display').appendChild(taskDOM);
+                                taskDOM.classList.add('task-item');
+                                console.log(project.tasks);
+    
+                                let taskDesc = document.createElement('div');
+                                taskDesc.classList.add('task-disp-desc');
+                                taskDesc.innerHTML = project.tasks[i].description;
+                                taskDOM.appendChild(taskDesc)
+    
+                                let taskDate = document.createElement('div');
+                                taskDate.classList.add('task-disp-date');
+                                taskDate.innerHTML = project.tasks[i].dueDate;
+                                taskDOM.appendChild(taskDate);
+    
+                                
+                                let taskPriotity = document.createElement('div');
+                                taskPriotity.innerHTML = project.tasks[i].priority;
+                                if(taskPriotity.innerHTML === 'low'){
+                                    taskPriotity.classList.add('task-disp-priority-low');
+                                }else if(taskPriotity.innerHTML === 'medium'){
+                                    taskPriotity.classList.add('task-disp-priority-medium');
+                                }else if(taskPriotity.innerHTML ==='high'){
+                                    taskPriotity.classList.add('task-disp-priority-high');
+                                }
+    
+                                taskDOM.appendChild(taskPriotity);
+    
+                                let taskState = document.createElement('input');
+                                taskState.type = 'checkbox';
+                                taskState.classList.add('task-state');
+                                taskDOM.appendChild(taskState);
+                                
+                                console.log(project.tasks[i].description);
+                                console.log(projects)
                             }
-                            
-                            
-                            taskDOM.appendChild(taskPriotity);
-                            
-                            console.log(project.tasks[i].description);
                         }
+                        
                         
                     }
                 })
@@ -348,7 +344,7 @@ class UserInterface{
     static taskModalHandler(){
         const projectsDOM = document.querySelectorAll('.pro-instance');
 
-        projectsDOM.forEach((project) => {
+        projectsDOM.forEach((project) => { 
             project.addEventListener('click', () =>{
                 projectsDOM.forEach((siblingProject)=>{
                     
@@ -357,7 +353,7 @@ class UserInterface{
                     }
                 })
                 project.classList.add('project-active');
-                this.taskDisplay()
+                this.taskDisplay();
                 document.querySelector('.task-button').style.visibility= 'visible';
                 
                 document.querySelector('.task-button').addEventListener('click', () =>{
