@@ -263,5 +263,20 @@ input[type=checkbox]{
 .task-item{
     display: flex;
     gap: 30px;
-    font-size: 1em;
+}
+.task-item div{
+    font-size:  1.3em;
+    font-weight: bold;
+}
+.task-disp-desc{
+    color: #3a927e;
+}
+.task-disp-priority-low{
+    color: rgb(0, 182, 55);
+}
+.task-disp-priority-medium{
+    color: rgb(177, 130, 0);
+}
+.task-disp-priority-high{
+    color: rgb(236, 77, 77);
 }

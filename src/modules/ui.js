@@ -296,35 +296,47 @@ class UserInterface{
         taskModal.appendChild(taskForm);
     }
     static taskDisplay(){
-        const taskDOM = document.createElement('div');
         const previousTasks = document.querySelectorAll('.task-item');
         previousTasks.forEach((previous) => {
             previous.remove();
         })
-        document.querySelector('.task-display').appendChild(taskDOM);
-        taskDOM.classList.add('task-item');
+
         document.querySelectorAll('.pro-instance').forEach((element) => {
             if(element.classList.contains('project-active')){
                 projects.forEach((project)=>{
                     if(project.name === element.innerHTML){
-                        if(project.tasks.length !== 0){
+
+                        for(let i = 0; i < project.tasks.length; i++){
+
+                            const taskDOM = document.createElement('div');
+                            document.querySelector('.task-display').appendChild(taskDOM);
+                            taskDOM.classList.add('task-item');
                             console.log(project.tasks);
-                            for(let i = 0; i < project.tasks.length; i++){
-                                let taskName = document.createElement('div');
-                                taskName.innerHTML = project.tasks[i].description;
-                                taskDOM.appendChild(taskName)
 
-                                let taskDate = document.createElement('div');
-                                taskDate.innerHTML = project.tasks[i].dueDate;
-                                taskDOM.appendChild(taskDate)
+                            let taskDesc = document.createElement('div');
+                            taskDesc.classList.add('task-disp-desc');
+                            taskDesc.innerHTML = project.tasks[i].description;
+                            taskDOM.appendChild(taskDesc)
 
-                                let taskPriotity = document.createElement('div');
-                                taskPriotity.innerHTML = project.tasks[i].priority;
-                                taskDOM.appendChild(taskPriotity);
-                                
-                                console.log(project.tasks[i].description);
+                            let taskDate = document.createElement('div');
+                            taskDate.classList.add('task-disp-date');
+                            taskDate.innerHTML = project.tasks[i].dueDate;
+                            taskDOM.appendChild(taskDate)
+
+                            let taskPriotity = document.createElement('div');
+                            taskPriotity.innerHTML = project.tasks[i].priority;
+                            if(taskPriotity.innerHTML === 'low'){
+                                taskPriotity.classList.add('task-disp-priority-low');
+                            }else if(taskPriotity.innerHTML === 'medium'){
+                                taskPriotity.classList.add('task-disp-priority-medium');
+                            }else if(taskPriotity.innerHTML ==='high'){
+                                taskPriotity.classList.add('task-disp-priority-high');
                             }
                             
+                            
+                            taskDOM.appendChild(taskPriotity);
+                            
+                            console.log(project.tasks[i].description);
                         }
                         
                     }
