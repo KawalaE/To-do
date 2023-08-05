@@ -157,14 +157,15 @@ class UserInterface{
             let projectNumber = 0;
             const parent = e.target.parentNode;
             const element = parent.firstChild.textContent;
+            console.log(`parent element: ${element}`)
             parent.remove();
-            const allProjects = document.querySelectorAll('.pro');
+            const allProjects = document.querySelectorAll('.project-div');
             allProjects.forEach((element) => {
                 if(!element.classList.contains('project-active')){
                     projectNumber++;
                 }
             })
-            projects.splice(projects.indexOf(element), 1);
+            projects.splice(projects[projects.indexOf(element)], 1);
             if(projectNumber === projects.length){
                 document.querySelector('.task-button').style.visibility= 'hidden';
             }
