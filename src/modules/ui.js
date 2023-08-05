@@ -157,15 +157,25 @@ class UserInterface{
             let projectNumber = 0;
             const parent = e.target.parentNode;
             const element = parent.firstChild.textContent;
-            console.log(`parent element: ${element}`)
             parent.remove();
-            const allProjects = document.querySelectorAll('.project-div');
+            const allProjects = document.querySelectorAll('.pro-instance');
+            const allTasks = document.querySelectorAll('.task-item');
             allProjects.forEach((element) => {
                 if(!element.classList.contains('project-active')){
                     projectNumber++;
+                    allTasks.forEach((task) =>{
+                        task.remove();
+                    })
                 }
             })
-            projects.splice(projects[projects.indexOf(element)], 1);
+
+            for(let index in projects){
+                if(projects[index].name === element){
+                    projects.splice(index, 1);
+                }
+
+            }
+            
             if(projectNumber === projects.length){
                 document.querySelector('.task-button').style.visibility= 'hidden';
             }
