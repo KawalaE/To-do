@@ -266,6 +266,7 @@ class UserInterface{
                     if(project.name === currentProject){
                         project.tasks.push(newTask);
                         this.taskDisplay()
+                        
                     }
                 });
 
@@ -339,9 +340,10 @@ class UserInterface{
                                 taskState.type = 'checkbox';
                                 taskState.classList.add('task-state');
                                 taskDOM.appendChild(taskState);
-                                
+                                this.checkboxHandler();
                                 console.log(project.tasks[i].description);
                                 console.log(projects)
+                               
                             }
                         }
                         
@@ -398,6 +400,24 @@ class UserInterface{
             project.innerHTML = projects[i].name;
             this.addProject(project);   
         }
+    }
+    static checkboxHandler(){
+        const checkboxes = document.querySelectorAll('input[type=checkbox]');
+        console.log(`Checkboxes: ${checkboxes}`);
+        checkboxes.forEach((checkbox) => {
+            console.log(checkbox)
+            checkbox.addEventListener('click',()=>{
+                if(checkbox.value === "1"){
+                    checkbox.value = "0";
+                    console.log('unchecked!')
+                }else{
+                    checkbox.value = "1";
+                    console.log('checked!')
+                }
+            })
+        })
+        
+
     }
 }
 
