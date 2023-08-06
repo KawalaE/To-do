@@ -416,6 +416,22 @@ class UserInterface{
                     });
                     console.log('checked!');
                 }
+                let currentTaskName = checkbox.parentNode.firstChild.innerHTML;
+                let currentProject = document.querySelector('.project-active').innerHTML;
+                projects.forEach((project)=>{
+                    if(project.name === currentProject){
+                        project.tasks.forEach((task)=>{
+                            if(task.description === currentTaskName){
+                                if(checkbox.value === '1'){
+                                    task.status = '1';
+                                }else if(checkbox.value ==='0'){
+                                    task.status = '0';
+                                }
+                            }
+                        })
+                    }
+                })   
+                console.log(projects);   
             })
     }
 }
