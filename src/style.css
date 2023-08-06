@@ -293,4 +293,5 @@ input[type=checkbox]{
 }
 .grey-out{
     color: rgb(175, 175, 175);
+    text-decoration: line-through
 }

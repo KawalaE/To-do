@@ -340,9 +340,9 @@ class UserInterface{
                                 taskState.type = 'checkbox';
                                 taskState.classList.add('task-state');
                                 taskDOM.appendChild(taskState);
-                                this.checkboxHandler();
                                 console.log(project.tasks[i].description);
                                 console.log(projects)
+                                this.checkboxHandler(taskState);
                                
                             }
                         }
@@ -401,23 +401,22 @@ class UserInterface{
             this.addProject(project);   
         }
     }
-    static checkboxHandler(){
-        const checkboxes = document.querySelectorAll('input[type=checkbox]');
-        console.log(`Checkboxes: ${checkboxes}`);
-        checkboxes.forEach((checkbox) => {
-            console.log(checkbox)
+    static checkboxHandler(checkbox){
             checkbox.addEventListener('click',()=>{
-                if(checkbox.value === "1"){
+                if(checkbox.value === "1") {
                     checkbox.value = "0";
+                    checkbox.parentNode.childNodes.forEach((sibling)=>{
+                        sibling.classList.remove('grey-out');
+                    });
                     console.log('unchecked!')
                 }else{
                     checkbox.value = "1";
-                    console.log('checked!')
+                    checkbox.parentNode.childNodes.forEach((sibling)=>{
+                        sibling.classList.add('grey-out');
+                    });
+                    console.log('checked!');
                 }
             })
-        })
-        
-
     }
 }
 
