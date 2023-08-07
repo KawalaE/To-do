@@ -153,33 +153,34 @@ class UserInterface{
     }
     static removeProjectButtonHandler(button){
         button.addEventListener('click', (e) => {
-            alert('Do you want to remove this project?');
-            let projectNumber = 0;
-            const parent = e.target.parentNode;
-            const element = parent.firstChild.textContent;
-            parent.remove();
-            const allProjects = document.querySelectorAll('.pro-instance');
-            const allTasks = document.querySelectorAll('.task-item');
-            allProjects.forEach((element) => {
-                if(!element.classList.contains('project-active')){
-                    projectNumber++;
-                    allTasks.forEach((task) =>{
-                        task.remove();
-                    })
-                }
-            })
+            if(confirm('Do you want to remove this project?')){
+                let projectNumber = 0;
+                const parent = e.target.parentNode;
+                const element = parent.firstChild.textContent;
+                parent.remove();
+                const allProjects = document.querySelectorAll('.pro-instance');
+                const allTasks = document.querySelectorAll('.task-item');
+                allProjects.forEach((element) => {
+                    if(!element.classList.contains('project-active')){
+                        projectNumber++;
+                        allTasks.forEach((task) =>{
+                            task.remove();
+                        })
+                    }
+                })
 
-            for(let index in projects){
-                if(projects[index].name === element){
-                    projects.splice(index, 1);
-                }
+                for(let index in projects){
+                    if(projects[index].name === element){
+                        projects.splice(index, 1);
+                    }
 
-            }
-            
-            if(projectNumber === projects.length){
-                document.querySelector('.task-button').style.visibility= 'hidden';
-            }
-            console.log(projects)
+                }
+                
+                if(projectNumber === projects.length){
+                    document.querySelector('.task-button').style.visibility= 'hidden';
+                }
+                console.log(projects)
+                }
         })
     }
     static addProject(project){
@@ -358,7 +359,12 @@ class UserInterface{
                                     taskState.checked = false;
                                 }
                                 
-                               
+                               const deleteTaskBtn = document.createElement('button');
+                               taskDOM.appendChild(deleteTaskBtn);
+                               deleteTaskBtn.innerHTML = 'x';
+                               deleteTaskBtn.classList.add('remove-task');
+                               this.deleteTaskHandler(deleteTaskBtn, taskDOM, taskDesc);
+
                             }
                         }
                         
@@ -368,6 +374,25 @@ class UserInterface{
             }  
         })
 
+    }
+    static deleteTaskHandler(deleteButton, taskInfo, taskName){
+            deleteButton.addEventListener('click', (e) =>{
+                if(confirm('Do you want to remove this task?')){
+                    const currentProject = document.querySelector('.project-active').innerHTML;
+                    const currentTask = taskName.innerHTML;
+                    console.log(currentTask)
+                    projects.forEach((project)=>{
+                        if(project.name === currentProject){
+                            project.tasks.forEach((task) =>{
+                                if(task.description === currentTask){
+                                    delete project.tasks.splice(project.tasks.indexOf(task), 1);
+                                }
+                            })
+                        }
+                    })
+                    taskInfo.remove();
+                }
+            })
     }
     static taskModalHandler(){
         const projectsDOM = document.querySelectorAll('.pro-instance');
@@ -418,15 +443,17 @@ class UserInterface{
     }
     static checkboxHandler(checkbox){
             checkbox.addEventListener('click',()=>{
+                let siblings = Array.from(checkbox.parentNode.childNodes).slice(0, -1);
                 if(checkbox.value === "1") {
                     checkbox.value = "0";
-                    checkbox.parentNode.childNodes.forEach((sibling)=>{
+                    
+                    siblings.forEach((sibling)=>{
                         sibling.classList.remove('grey-out');
                     });
                     console.log('unchecked!')
-                }else{
+                } else{
                     checkbox.value = "1";
-                    checkbox.parentNode.childNodes.forEach((sibling)=>{
+                    siblings.forEach((sibling)=>{
                         sibling.classList.add('grey-out');
                     });
                     console.log('checked!');

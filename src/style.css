@@ -174,7 +174,7 @@ input[type=text]:focus, .text-area:focus {
     transition: 0.3s;
     cursor: pointer;
 }
-.remove-project{
+.remove-project, .remove-task{
     width: 45px;
     height: 45px;
     font-size: 1.2em;
@@ -184,12 +184,13 @@ input[type=text]:focus, .text-area:focus {
     padding: 0px 15px;
     transition: 0.3s;
     font-weight: bolder;
+    background-color: transparent;
 }
-.remove-project:hover:not([disabled]){
+.remove-project:hover:not([disabled]), .remove-task:hover:not([disabled]){
     background-color: #f0c0d2;
     cursor: pointer;
 }
-.remove-project:active{
+.remove-project:active, .remove-task:active{
     transform: scale(90%);
     transition: 0.3s;
 }
@@ -266,6 +267,7 @@ input[type=checkbox]{
     padding: 10px;
     margin-left: 20px;
     margin-right:20px;
+    align-items: center;
 }
 .task-item div{
     font-size:  1.3em;
