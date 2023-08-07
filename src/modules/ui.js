@@ -343,6 +343,21 @@ class UserInterface{
                                 console.log(project.tasks[i].description);
                                 console.log(projects)
                                 this.checkboxHandler(taskState);
+                            
+                                if(project.tasks[i].status === "1"){
+                                    taskDesc.classList.add('grey-out');
+                                    taskDate.classList.add('grey-out');
+                                    taskPriotity.classList.add('grey-out');
+                                    taskState.value = "1";
+                                    taskState.checked = true;
+                                }else{
+                                    taskDesc.classList.remove('grey-out');
+                                    taskDate.classList.remove('grey-out');
+                                    taskPriotity.classList.remove('grey-out');
+                                    taskState.value = "0";
+                                    taskState.checked = false;
+                                }
+                                
                                
                             }
                         }
