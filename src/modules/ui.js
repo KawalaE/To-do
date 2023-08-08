@@ -4,6 +4,7 @@ import Close from '/home/Edyta/Desktop/repos/To-do/src/assets/close.svg';
 import { Project } from './project';
 import { projects } from './project';
 import { Task } from './task';
+import format from 'date-fns/format';
 const page = document.getElementById('page');
 const myFavicon = new Image();
 myFavicon.src = Favicon;
@@ -321,7 +322,8 @@ class UserInterface{
     
                                 let taskDate = document.createElement('div');
                                 taskDate.classList.add('task-disp-date');
-                                taskDate.innerHTML = project.tasks[i].dueDate;
+                                let currentDate = Date.parse(project.tasks[i].dueDate);
+                                taskDate.innerHTML = format(currentDate,'dd/MM/yyyy');
                                 taskDOM.appendChild(taskDate);
     
                                 
