@@ -1,6 +1,7 @@
 import '/home/Edyta/Desktop/repos/To-do/src/style.css'
 import Favicon from '/home/Edyta/Desktop/repos/To-do/src/assets/logo.svg';
 import Close from '/home/Edyta/Desktop/repos/To-do/src/assets/close.svg';
+import Hamburger from '/home/Edyta/Desktop/repos/To-do/src/assets/menu-icon.svg'
 import { Project } from './project';
 import { projects } from './project';
 import { Task } from './task';
@@ -10,6 +11,8 @@ const myFavicon = new Image();
 myFavicon.src = Favicon;
 const myClose = new Image();
 myClose.src = Close;
+const myHamburger = new Image();
+myHamburger.src = Hamburger;
 
 class UserInterface{
     
@@ -25,15 +28,28 @@ class UserInterface{
         upperNav.classList.add('upper-nav');
         page.appendChild(upperNav);
 
+        const leftNavSide = document.createElement('div');
+        leftNavSide.classList.add('left-side')
+        upperNav.appendChild(leftNavSide);
+
         const navigatorName = document.createElement('p');
         navigatorName.classList.add('navigator-name');
         navigatorName.textContent = 'To do';
-        upperNav.appendChild(navigatorName);
+        leftNavSide.appendChild(navigatorName);
 
         const logo = document.createElement('img');
         logo.classList.add('logo');
         logo.src = myFavicon.src;
-        upperNav.appendChild(logo);
+        leftNavSide.appendChild(logo);
+
+        const hamburger = document.createElement('button');
+        const hamburgerImg = document.createElement('img');
+        hamburgerImg.classList.add('hamburger-img');
+        hamburger.appendChild(hamburgerImg);
+        hamburgerImg.classList.add('hamburger');
+        upperNav.appendChild(hamburger);
+        hamburgerImg.src = myHamburger.src;
+
     }
     static mainContentArea(){
         const mainContent = document.createElement('div');
@@ -423,7 +439,6 @@ class UserInterface{
                     this.disableOrEnableButtons(true);
                 })
             })
-            
                
         })
         

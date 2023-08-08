@@ -1,3 +1,4 @@
+import { projects } from "./project";
 export class Task{
     constructor(description, dueDate, priority, status){
         this.description = description;
@@ -6,5 +7,3 @@ export class Task{
         this.status = status;
     }
 }
-const myTask = new Task('cleaning', '12.9.2023', 'low', 0);
-console.log(myTask)

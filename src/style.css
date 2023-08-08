@@ -17,6 +17,7 @@ button {
   font-family: inherit;
   font-size: 100%;
   border: none;
+  background-color: transparent;
 }
 body{
     min-height: 100vh;
@@ -33,6 +34,7 @@ body{
     background-color:#5ad4b8;
     height: 100px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     gap: 20px;
 }
@@ -296,4 +298,29 @@ input[type=checkbox]{
 .grey-out{
     color: rgb(175, 175, 175);
     text-decoration: line-through
+}
+.hamburger{
+    width: 70px;
+    height: 60px;
+    visibility: hidden;
+}
+.left-side{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+@media all and (max-width: 943px){
+    .hamburger-img{
+        width:60px;
+        height: 60px;
+    }
+    .hamburger{
+        visibility: visible;
+    }
+    .projects-nav{
+        visibility: hidden;
+    }
+    .projects-nav >{
+        visibility: hidden;
+    }
 }
