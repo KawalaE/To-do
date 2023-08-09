@@ -270,7 +270,7 @@ class UserInterface{
         submitTask.innerHTML = 'Add task';
         submitTask.classList.add('submit-task');
 
-
+        
         submitTask.addEventListener('click', () =>{
             if(!taskDesc.value){alert('Please, fill task description')};
             if(!taskDate.value){alert('Please, fill end date')};
@@ -308,6 +308,23 @@ class UserInterface{
         taskForm.appendChild(taskPriotity);
         taskForm.appendChild(submitTask);
         taskModal.appendChild(taskForm);
+    }
+    static hamburgerMenuHandler(){
+        const hamburgerButton = document.querySelector('.hamburger');
+        let projectOpen = false;
+        hamburgerButton.addEventListener('click', ()=>{
+            console.log('hamburger click')
+            if(projectOpen === false){
+                document.querySelector('.projects-nav').style.display = 'flex' ;
+                document.querySelector('.task-display').style.display = 'none';
+                projectOpen = true;
+            }
+            else if(projectOpen === true){
+                document.querySelector('.projects-nav').style.display = 'none';
+                document.querySelector('.task-display').style.display = 'flex';
+                projectOpen = false;
+            }
+        })
     }
     static taskDisplay(){
         const taskDOM = document.createElement('div');
@@ -495,6 +512,7 @@ class UserInterface{
     }
 }
 
+
 export function createUI(){
     UserInterface.setFavicon();
     UserInterface.horizontalNav();
@@ -513,5 +531,7 @@ export function createUI(){
     UserInterface.displayInitialProjects();
     UserInterface.addTaskButton();
     UserInterface.createTaskModal();
+    UserInterface.hamburgerMenuHandler();
+    document.querySelector('.project-div').firstChild.click();
 }
 

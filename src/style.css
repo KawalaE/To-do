@@ -303,6 +303,7 @@ input[type=checkbox]{
     width: 70px;
     height: 60px;
     visibility: hidden;
+    margin-right:20px;
 }
 .left-side{
     display: flex;
@@ -317,10 +318,17 @@ input[type=checkbox]{
     .hamburger{
         visibility: visible;
     }
-    .projects-nav{
-        visibility: hidden;
+    .hamburger:hover{
+        transform: scale(110%);
+        transition: 0.3s;
+        cursor: pointer;
     }
-    .projects-nav >{
-        visibility: hidden;
+    .hamburger:active{
+        transform: scale(90%);
+        transition: 0.3;
+    }
+    .projects-nav{
+        display:none;
+        flex-grow: 1;
     }
 }
