@@ -309,22 +309,50 @@ class UserInterface{
         taskForm.appendChild(submitTask);
         taskModal.appendChild(taskForm);
     }
+    static switchingProjectTask(projectDisplay, taskDisplay){
+        document.querySelector('.projects-nav').style.display = projectDisplay;
+        document.querySelector('.task-display').style.display = taskDisplay;
+    }
     static hamburgerMenuHandler(){
         const hamburgerButton = document.querySelector('.hamburger');
-        let projectOpen = false;
-        hamburgerButton.addEventListener('click', ()=>{
-            console.log('hamburger click')
-            if(projectOpen === false){
-                document.querySelector('.projects-nav').style.display = 'flex' ;
-                document.querySelector('.task-display').style.display = 'none';
-                projectOpen = true;
-            }
-            else if(projectOpen === true){
-                document.querySelector('.projects-nav').style.display = 'none';
-                document.querySelector('.task-display').style.display = 'flex';
-                projectOpen = false;
+            let projectOpen = false;
+            hamburgerButton.addEventListener('click', ()=>{
+                if(projectOpen === false){
+                    this.switchingProjectTask('flex', 'none');
+                    projectOpen = true;
+                }
+                else if(projectOpen === true){
+                    this.switchingProjectTask('none', 'flex');
+                    projectOpen = false;
+                }
+                document.querySelectorAll('.pro-instance').forEach((project)=>{
+                    project.addEventListener('click', ()=>{
+                        if(window.innerWidth <= 943){
+                            this.switchingProjectTask('none', 'flex');
+                            projectOpen = false;
+                        }
+                        
+                    })
+                })
+            })
+            return projectOpen;
+    }
+    static windowHandler(){
+        window.addEventListener('resize', ()=>{
+            if(window.innerWidth <= 943){
+                this.switchingProjectTask('none','flex');
+                this.hamburgerMenuHandler();
+            } else if(window.innerWidth > 943){
+                this.switchingProjectTask('flex', 'flex');
             }
         })
+        if(window.innerWidth <= 943){
+            this.switchingProjectTask('none','flex');
+            this.hamburgerMenuHandler();
+        }else if(window.innerWidth > 943){
+            this.switchingProjectTask('flex', 'flex');
+        }
+
     }
     static taskDisplay(){
         const taskDOM = document.createElement('div');
@@ -533,5 +561,6 @@ export function createUI(){
     UserInterface.createTaskModal();
     UserInterface.hamburgerMenuHandler();
     document.querySelector('.project-div').firstChild.click();
+    UserInterface.windowHandler();
 }
 

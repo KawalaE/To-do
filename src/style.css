@@ -265,6 +265,7 @@ input[type=checkbox]{
 }
 .task-item{
     display: flex;
+    flex-wrap: wrap;
     gap: 30px;
     padding: 10px;
     margin-left: 20px;
@@ -328,7 +329,7 @@ input[type=checkbox]{
         transition: 0.3;
     }
     .projects-nav{
-        display:none;
+        display: none;
         flex-grow: 1;
     }
 }
