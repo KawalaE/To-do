@@ -14,8 +14,11 @@ myClose.src = Close;
 const myHamburger = new Image();
 myHamburger.src = Hamburger;
 
-class UserInterface{
-    
+class UI{
+
+    static projectOpen = false; 
+    static minWindowWidth = 943;
+
     static setFavicon(){
         const head = document.querySelector('head');
         const favicon = document.createElement('link');
@@ -140,6 +143,7 @@ class UserInterface{
                 inputField.value = '';
                 document.querySelector('#project-modal').close();
                 this.addProject(project);
+                this.addSwitchListener(project);  
                 this.disableOrEnableButtons(false);
 
             }
@@ -315,41 +319,31 @@ class UserInterface{
     }
     static hamburgerMenuHandler(){
         const hamburgerButton = document.querySelector('.hamburger');
-            let projectOpen = false;
             hamburgerButton.addEventListener('click', ()=>{
-                if(projectOpen === false){
+                console.log(UI.projectOpen);
+                if(UI.projectOpen === false){
                     this.switchingProjectTask('flex', 'none');
-                    projectOpen = true;
-                }
-                else if(projectOpen === true){
+                    UI.projectOpen = true;
+                    
+                } else if(UI.projectOpen === true){
                     this.switchingProjectTask('none', 'flex');
-                    projectOpen = false;
-                }
-                document.querySelectorAll('.pro-instance').forEach((project)=>{
-                    project.addEventListener('click', ()=>{
-                        if(window.innerWidth <= 943){
-                            this.switchingProjectTask('none', 'flex');
-                            projectOpen = false;
-                        }
-                        
-                    })
-                })
+                    UI.projectOpen = false;
+                    
+                }   
             })
-            return projectOpen;
+
     }
     static windowHandler(){
         window.addEventListener('resize', ()=>{
-            if(window.innerWidth <= 943){
+            if(window.innerWidth <= UI.minWindowWidth){
                 this.switchingProjectTask('none','flex');
-                this.hamburgerMenuHandler();
-            } else if(window.innerWidth > 943){
+            } else if(window.innerWidth > UI.minWindowWidth){
                 this.switchingProjectTask('flex', 'flex');
             }
         })
-        if(window.innerWidth <= 943){
+        if(window.innerWidth <= UI.minWindowWidth){
             this.switchingProjectTask('none','flex');
-            this.hamburgerMenuHandler();
-        }else if(window.innerWidth > 943){
+        }else if(window.innerWidth > UI.minWindowWidth){
             this.switchingProjectTask('flex', 'flex');
         }
 
@@ -488,6 +482,14 @@ class UserInterface{
         })
         
     }
+    static addSwitchListener(element){
+        element.addEventListener('click', ()=>{
+            if(window.innerWidth <= UI.minWindowWidth){
+                this.switchingProjectTask('none', 'flex');
+                UI.projectOpen = false;
+            }
+        })  
+    }
     static addTaskButton(){
         const taskButton = document.createElement('button');
         document.querySelector('.task-display').appendChild(taskButton);
@@ -500,8 +502,10 @@ class UserInterface{
             let project = document.createElement('button');
             project.classList.add('pro-instance');
             project.innerHTML = projects[i].name;
-            this.addProject(project);   
+            this.addProject(project);  
+            this.addSwitchListener(project);
         }
+       
     }
     static checkboxHandler(checkbox){
             checkbox.addEventListener('click',()=>{
@@ -542,25 +546,25 @@ class UserInterface{
 
 
 export function createUI(){
-    UserInterface.setFavicon();
-    UserInterface.horizontalNav();
-    const mainContent = UserInterface.mainContentArea();
-    const projectNavigation = UserInterface.projectsNavArea(mainContent);
-    const projectsAddition = UserInterface.projectsAdditionSection(projectNavigation);
-    UserInterface.sectionTitle(projectsAddition);
-    const projectButton = UserInterface.projectAddBtn(projectsAddition);
-    const projectDialog = UserInterface.projectModal(mainContent);
-    const projectModal = UserInterface.projectModalHandler(projectDialog, projectButton);
-    UserInterface.projectModalCloseBtn(projectDialog);
-    UserInterface.projectInputForm();
-    UserInterface.projectModalAddBtn();
-    UserInterface.taskDisplayArea(mainContent);
-    UserInterface.displayCurrentProjects(projectNavigation);
-    UserInterface.displayInitialProjects();
-    UserInterface.addTaskButton();
-    UserInterface.createTaskModal();
-    UserInterface.hamburgerMenuHandler();
-    document.querySelector('.project-div').firstChild.click();
-    UserInterface.windowHandler();
+    UI.setFavicon();
+    UI.horizontalNav();
+    const mainContent = UI.mainContentArea();
+    const projectNavigation = UI.projectsNavArea(mainContent);
+    const projectsAddition = UI.projectsAdditionSection(projectNavigation);
+    UI.sectionTitle(projectsAddition);
+    const projectButton = UI.projectAddBtn(projectsAddition);
+    const projectDialog = UI.projectModal(mainContent);
+    const projectModal = UI.projectModalHandler(projectDialog, projectButton);
+    UI.projectModalCloseBtn(projectDialog);
+    UI.projectInputForm();
+    UI.projectModalAddBtn();
+    UI.taskDisplayArea(mainContent);
+    UI.displayCurrentProjects(projectNavigation);
+    UI.displayInitialProjects();
+    UI.addTaskButton();
+    UI.createTaskModal();
+    UI.windowHandler();
+    document.querySelector('.project-div').firstChild.click(); 
+    UI.hamburgerMenuHandler();
 }
 
