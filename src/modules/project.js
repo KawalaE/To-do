@@ -5,7 +5,22 @@ export class Project{
     constructor(name){
         this.name = name;
         this.tasks = [];
-    }  
+    }
+
+    getName(){
+        return this.name;
+    }
+
+    getTasks(){
+        return this.tasks;
+    }
+    removeProject(){
+        projects.splice(projects.indexOf(this.getName()),1);
+    }
+    getTask(taskName){
+        return this.tasks.find((task) => task.getName() === taskName);
+    }
+
 }
 const home = new Project('Home');
 const taskHome = new Task("do the dishes", "2023-08-24", "medium", "0");

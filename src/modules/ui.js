@@ -139,7 +139,7 @@ class UI{
                 projects.push(newProject);
                 let project = document.createElement('div');
                 project.classList.add('pro-instance');
-                project.innerHTML = newProject.name;
+                project.innerHTML = newProject.getName();
                 inputField.value = '';
                 document.querySelector('#project-modal').close();
                 this.addProject(project);
@@ -190,12 +190,11 @@ class UI{
                     }
                 })
 
-                for(let index in projects){
-                    if(projects[index].name === element){
-                        projects.splice(index, 1);
+                projects.forEach((project) =>{
+                    if(project.getName() === element){
+                        project.removeProject();
                     }
-
-                }
+                })
                 
                 if(projectNumber === projects.length){
                     document.querySelector('.task-button').style.visibility= 'hidden';
@@ -285,7 +284,7 @@ class UI{
                 let currentProject = document.querySelector('.project-active').innerHTML;
         
                 projects.forEach((project) => {
-                    if(project.name === currentProject){
+                    if(project.getName() === currentProject){
                         project.tasks.push(newTask);
                         this.taskDisplay()
                         
@@ -361,71 +360,67 @@ class UI{
         document.querySelectorAll('.pro-instance').forEach((element) => {
             if(element.classList.contains('project-active')){
                 projects.forEach((project)=>{
-                    if(project.name === element.innerHTML){
-                        if(projects.length !== 0){
-                            for(let i = 0; i < project.tasks.length; i++){
+                    if(project.getName() === element.innerHTML && projects.length !==0) {
+                        
+                        for(let i = 0; i < project.tasks.length; i++){
 
-                                const taskDOM = document.createElement('div');
-                                document.querySelector('.task-display').appendChild(taskDOM);
-                                taskDOM.classList.add('task-item');
-                                console.log(project.tasks);
-    
-                                let taskDesc = document.createElement('div');
-                                taskDesc.classList.add('task-disp-desc');
-                                taskDesc.innerHTML = project.tasks[i].description;
-                                taskDOM.appendChild(taskDesc)
-    
-                                let taskDate = document.createElement('div');
-                                taskDate.classList.add('task-disp-date');
-                                let currentDate = Date.parse(project.tasks[i].dueDate);
-                                taskDate.innerHTML = format(currentDate,'dd/MM/yyyy');
-                                taskDOM.appendChild(taskDate);
-    
-                                
-                                let taskPriotity = document.createElement('div');
-                                taskPriotity.innerHTML = project.tasks[i].priority;
-                                if(taskPriotity.innerHTML === 'low'){
-                                    taskPriotity.classList.add('task-disp-priority-low');
-                                }else if(taskPriotity.innerHTML === 'medium'){
-                                    taskPriotity.classList.add('task-disp-priority-medium');
-                                }else if(taskPriotity.innerHTML ==='high'){
-                                    taskPriotity.classList.add('task-disp-priority-high');
-                                }
-    
-                                taskDOM.appendChild(taskPriotity);
-    
-                                let taskState = document.createElement('input');
-                                taskState.type = 'checkbox';
-                                taskState.classList.add('task-state');
-                                taskDOM.appendChild(taskState);
-                                console.log(project.tasks[i].description);
-                                console.log(projects)
-                                this.checkboxHandler(taskState);
+                            const taskDOM = document.createElement('div');
+                            document.querySelector('.task-display').appendChild(taskDOM);
+                            taskDOM.classList.add('task-item');
+                            console.log(project.tasks);
+
+                            let taskDesc = document.createElement('div');
+                            taskDesc.classList.add('task-disp-desc');
+                            taskDesc.innerHTML = project.tasks[i].getDescription();
+                            taskDOM.appendChild(taskDesc)
+
+                            let taskDate = document.createElement('div');
+                            taskDate.classList.add('task-disp-date');
+                            let currentDate = Date.parse(project.tasks[i].getDueDate());
+                            taskDate.innerHTML = format(currentDate,'dd/MM/yyyy');
+                            taskDOM.appendChild(taskDate);
+
                             
-                                if(project.tasks[i].status === "1"){
-                                    taskDesc.classList.add('grey-out');
-                                    taskDate.classList.add('grey-out');
-                                    taskPriotity.classList.add('grey-out');
-                                    taskState.value = "1";
-                                    taskState.checked = true;
-                                }else{
-                                    taskDesc.classList.remove('grey-out');
-                                    taskDate.classList.remove('grey-out');
-                                    taskPriotity.classList.remove('grey-out');
-                                    taskState.value = "0";
-                                    taskState.checked = false;
-                                }
-                                
-                               const deleteTaskBtn = document.createElement('button');
-                               taskDOM.appendChild(deleteTaskBtn);
-                               deleteTaskBtn.innerHTML = 'x';
-                               deleteTaskBtn.classList.add('remove-task');
-                               this.deleteTaskHandler(deleteTaskBtn, taskDOM, taskDesc);
-
+                            let taskPriotity = document.createElement('div');
+                            taskPriotity.innerHTML = project.tasks[i].getPriority();
+                            if(taskPriotity.innerHTML === 'low'){
+                                taskPriotity.classList.add('task-disp-priority-low');
+                            }else if(taskPriotity.innerHTML === 'medium'){
+                                taskPriotity.classList.add('task-disp-priority-medium');
+                            }else if(taskPriotity.innerHTML ==='high'){
+                                taskPriotity.classList.add('task-disp-priority-high');
                             }
-                        }
+
+                            taskDOM.appendChild(taskPriotity);
+
+                            let taskState = document.createElement('input');
+                            taskState.type = 'checkbox';
+                            taskState.classList.add('task-state');
+                            taskDOM.appendChild(taskState);
+                            console.log(projects)
+                            this.checkboxHandler(taskState);
                         
-                        
+                            if(project.tasks[i].getStatus() === "1"){
+                                taskDesc.classList.add('grey-out');
+                                taskDate.classList.add('grey-out');
+                                taskPriotity.classList.add('grey-out');
+                                taskState.value = "1";
+                                taskState.checked = true;
+                            }else{
+                                taskDesc.classList.remove('grey-out');
+                                taskDate.classList.remove('grey-out');
+                                taskPriotity.classList.remove('grey-out');
+                                taskState.value = "0";
+                                taskState.checked = false;
+                            }
+                            
+                            const deleteTaskBtn = document.createElement('button');
+                            taskDOM.appendChild(deleteTaskBtn);
+                            deleteTaskBtn.innerHTML = 'x';
+                            deleteTaskBtn.classList.add('remove-task');
+                            this.deleteTaskHandler(deleteTaskBtn, taskDOM, taskDesc);
+
+                        } 
                     }
                 })
             }  
@@ -439,9 +434,9 @@ class UI{
                     const currentTask = taskName.innerHTML;
                     console.log(currentTask)
                     projects.forEach((project)=>{
-                        if(project.name === currentProject){
-                            project.tasks.forEach((task) =>{
-                                if(task.description === currentTask){
+                        if(project.getName() === currentProject){
+                            project.getTasks().forEach((task) =>{
+                                if(task.getDescription() === currentTask){
                                     delete project.tasks.splice(project.tasks.indexOf(task), 1);
                                 }
                             })
