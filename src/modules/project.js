@@ -18,7 +18,10 @@ export class Project{
         projects.splice(projects.indexOf(this.getName()),1);
     }
     getTask(taskName){
-        return this.tasks.find((task) => task.getName() === taskName);
+        return this.tasks.find((task) => task.getDescription() === taskName);
+    }
+    deleteTask(taskName){
+        this.tasks = this.tasks.filter((task) => task.getDescription() !== taskName)
     }
 
 }
