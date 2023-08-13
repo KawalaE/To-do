@@ -6,11 +6,9 @@ export class Project{
         this.name = name;
         this.tasks = [];
     }
-
     getName(){
         return this.name;
     }
-
     getTasks(){
         return this.tasks;
     }
@@ -23,8 +21,12 @@ export class Project{
     deleteTask(taskName){
         this.tasks = this.tasks.filter((task) => task.getDescription() !== taskName)
     }
+    // ToDo: Function to delete task by its instance instead of name.
 
 }
+
+
+// To do get rid of this:
 const home = new Project('Home');
 const taskHome = new Task("do the dishes", "2023-08-24", "medium", "0");
 home.tasks[0] = taskHome;
