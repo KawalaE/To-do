@@ -1,7 +1,7 @@
 import '/home/Edyta/Desktop/repos/To-do/src/style.css'
 import { projects } from './project';
 import { Project } from './project';
-import {UI} from './ui';
+import {Logic} from './logic';
 import Favicon from '/home/Edyta/Desktop/repos/To-do/src/assets/logo.svg';
 const myFavicon = new Image();
 myFavicon.src = Favicon;
@@ -142,7 +142,7 @@ export class DOM{
         const projectAddButton = document.createElement('button');
         projectAddButton.classList.add('project-add-btn');
         projectAddButton.innerHTML = 'Add project';
-        UI.createDefaultProject()
+        Logic.createDefaultProject();
         document.querySelector('#project-modal').appendChild(projectAddButton);
         projectAddButton.addEventListener('click', ()=>{
             const newProject = new Project(inputField.value);
@@ -210,7 +210,7 @@ export class DOM{
                         })
                     }
                 })
-                UI.removeProject(projectInstance);
+                Logic.removeProject(projectInstance);
                 if(projectNumber === projects.length){
                     document.querySelector('.task-button').style.visibility= 'hidden';
                 }
@@ -435,7 +435,7 @@ export class DOM{
             if(!taskUrgnecy.value){alert('Please, select priority.')}
             else{
                 let currentProject = document.querySelector('.project-active').innerHTML;
-                UI.createAndAddNewTask(taskDesc, taskDueDate, taskUrgnecy, currentProject);
+                Logic.createAndAddNewTask(taskDesc, taskDueDate, taskUrgnecy, currentProject);
                 taskDesc.value = '';
                 taskDueDate.value = '';
                 taskUrgnecy.value = '';
@@ -478,7 +478,7 @@ export class DOM{
         deleteButton.addEventListener('click', (e) =>{
             if(confirm('Do you want to remove this task?')){
                 const currentTask = taskName.innerHTML;
-                UI.removeTask(project, currentTask);
+                Logic.removeTask(project, currentTask);
                 taskInfo.remove();
             }
         })
@@ -501,7 +501,7 @@ static checkboxHandler(project, checkbox){
                 console.log('checked!');
             }
             let currentTaskName = checkbox.parentNode.firstChild.innerHTML;
-            UI.taskStatusHandler(project, currentTaskName, checkbox);
+            Logic.taskStatusHandler(project, currentTaskName, checkbox);
         })
     }
 
@@ -524,6 +524,7 @@ export function createDOM(){
     DOM.addTaskButton();
     DOM.createTaskModal();
     DOM.displayInitialProjects();
+    document.querySelector('.project-div').firstChild.click();
     DOM.hamburgerMenuHandler();
     DOM.windowHandler();
     
