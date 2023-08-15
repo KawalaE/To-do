@@ -35,9 +35,19 @@ export class UI{
             task.setStatus('0');
         }      
     }
+    static createDefaultProject(){
+        const home = new Project('Home');
+        projects.push(home);
+        const taskHome = new Task("do the dishes", "2023-08-24", "medium", "0");
+        home.tasks.push(taskHome);
+        
+        const garden = new Project('Garden');
+        projects.push(garden);
+        const taskGarden = new Task("water the lawn", "2024-08-22", "high", "1");
+        garden.tasks.push(taskGarden);
+    }
 }
 export function createUI(){
     document.querySelector('.project-div').firstChild.click(); 
-
 }
 

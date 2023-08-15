@@ -1,6 +1,5 @@
 import '/home/Edyta/Desktop/repos/To-do/src/style.css'
 import { projects } from './project';
-import { Task } from './task';
 import { Project } from './project';
 import {UI} from './ui';
 import Favicon from '/home/Edyta/Desktop/repos/To-do/src/assets/logo.svg';
@@ -26,7 +25,6 @@ export class DOM{
         favicon.setAttribute('href', myFavicon.src);
         head.appendChild(favicon);
     }
-
     static horizontalNav(){
         const upperNav = document.createElement('div');
         upperNav.classList.add('upper-nav');
@@ -144,7 +142,7 @@ export class DOM{
         const projectAddButton = document.createElement('button');
         projectAddButton.classList.add('project-add-btn');
         projectAddButton.innerHTML = 'Add project';
-        
+        UI.createDefaultProject()
         document.querySelector('#project-modal').appendChild(projectAddButton);
         projectAddButton.addEventListener('click', ()=>{
             const newProject = new Project(inputField.value);
@@ -185,14 +183,13 @@ export class DOM{
         this.taskModalHandler();
     }
     static displayInitialProjects(){
-        for(let i = 0; i< projects.length; i++){
-            let project = document.createElement('button');
-            project.classList.add('pro-instance');
-            project.innerHTML = projects[i].name;
-            this.addProject(project);  
-            this.addSwitchListener(project);
-        }
-       
+        projects.forEach((project) => {
+            let projectBtn = document.createElement('button');
+            projectBtn.classList.add('pro-instance');
+            projectBtn.innerHTML = project.getName();
+            this.addProject(projectBtn);  
+            this.addSwitchListener(projectBtn);
+        })     
     }
     static removeProjectButtonHandler(button, projectInstance){
         console.log("Before button.addEvent", projectInstance);
@@ -239,8 +236,7 @@ export class DOM{
             if(element.classList.contains('project-active')){
                 projects.forEach((project)=>{
                     if(project.getName() === element.innerHTML && projects.length !==0) {
-                        //for each
-                        for(let i = 0; i < project.tasks.length; i++){
+                        project.tasks.forEach((task) => {
                             const taskDOM = document.createElement('div');
                             document.querySelector('.task-display').appendChild(taskDOM);
                             taskDOM.classList.add('task-item');
@@ -248,18 +244,18 @@ export class DOM{
     
                             let taskDesc = document.createElement('div');
                             taskDesc.classList.add('task-disp-desc');
-                            taskDesc.innerHTML = project.tasks[i].getDescription();
+                            taskDesc.innerHTML = task.getDescription();
                             taskDOM.appendChild(taskDesc)
     
                             let taskDate = document.createElement('div');
                             taskDate.classList.add('task-disp-date');
-                            let currentDate = project.tasks[i].getDueDate();
+                            let currentDate = task.getDueDate();
                             taskDate.innerHTML = currentDate;
                             taskDOM.appendChild(taskDate);
     
                             
                             let taskPriotity = document.createElement('div');
-                            taskPriotity.innerHTML = project.tasks[i].getPriority();
+                            taskPriotity.innerHTML = task.getPriority();
                             if(taskPriotity.innerHTML === 'low'){
                                 taskPriotity.classList.add('task-disp-priority-low');
                             } else if(taskPriotity.innerHTML === 'medium'){
@@ -277,7 +273,7 @@ export class DOM{
                             console.log(project);
                             this.checkboxHandler(project, taskState);
                         
-                            if(project.tasks[i].getStatus() === "1"){
+                            if(task.getStatus() === "1"){
                                 taskDesc.classList.add('grey-out');
                                 taskDate.classList.add('grey-out');
                                 taskPriotity.classList.add('grey-out');
@@ -296,7 +292,8 @@ export class DOM{
                             deleteTaskBtn.innerHTML = 'x';
                             deleteTaskBtn.classList.add('remove-task');
                             this.deleteTaskHandler(deleteTaskBtn, taskDOM, taskDesc, project);
-                        } 
+                        
+                        })        
                     }
                 })
             }  
@@ -485,14 +482,13 @@ export class DOM{
                 taskInfo.remove();
             }
         })
-}
+    }
 
 static checkboxHandler(project, checkbox){
         checkbox.addEventListener('click',()=>{
             let siblings = Array.from(checkbox.parentNode.childNodes).slice(0, -1);
             if(checkbox.value === "1") {
                 checkbox.value = "0";
-                
                 siblings.forEach((sibling)=>{
                     sibling.classList.remove('grey-out');
                 });
