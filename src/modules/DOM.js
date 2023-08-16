@@ -529,4 +529,3 @@ export function createDOM(){
     DOM.windowHandler();
     
 }
-
