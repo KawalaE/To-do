@@ -95,10 +95,6 @@ export class DOM{
         mainContent.appendChild(projectDialogElement);
         return projectDialogElement;
     }
-    static disableOrEnableButtons(state){
-        document.querySelector('.projects-button').disabled  = state;
-        document.querySelector('.task-button').disabled = state;
-    }
     static projectModalCloseBtn(modal){
         const closeBtn = document.createElement('img');
         closeBtn.classList.add('close-btn');
@@ -107,7 +103,6 @@ export class DOM{
         closeBtn.addEventListener('click', ()=>{
             modal.close();
             document.querySelector('#project-title').value = '';
-            this.disableOrEnableButtons(false);
         })
     }   
     static projectInputForm(){
@@ -158,7 +153,6 @@ export class DOM{
                 console.log("projectModalAddBtn: ", newProject);
                 this.addProject(project, newProject);
                 this.addSwitchListener(project);  
-                this.disableOrEnableButtons(false);
             }
         })
         document.addEventListener('keypress',(event)=>{
@@ -316,14 +310,6 @@ export class DOM{
                 
                 document.querySelector('.task-button').addEventListener('click', () =>{
                     document.querySelector('.task-modal').showModal();
-
-                    projectsDOM.forEach((element) => {
-                        element.disabled = true;
-                    })
-                    document.querySelectorAll('.remove-project').forEach((element)=>{
-                        element.disabled = true;
-                    })
-                    this.disableOrEnableButtons(true);
                 })
             })
                
@@ -339,7 +325,6 @@ export class DOM{
     static projectModalHandler(projectDialogElement, projectAddBtn){
         projectAddBtn.addEventListener('click', () =>{
             projectDialogElement.showModal();
-            this.disableOrEnableButtons(true);
         })
     }
     static hamburgerMenuHandler(){
@@ -375,16 +360,7 @@ export class DOM{
         closeTaskModal.src = myClose.src;
         dialogElement.appendChild(closeTaskModal);
 
-        closeTaskModal.addEventListener('click', () => {
-            dialogElement.close();
-            this.disableOrEnableButtons(false);
-            document.querySelectorAll('.remove-project').forEach((element)=>{
-                element.disabled = false;
-            })
-            document.querySelectorAll('.pro-instance').forEach((element) => {
-                element.disabled = false;
-            })
-        })
+        closeTaskModal.addEventListener('click', ()=>dialogElement.close())
     }
     static createTaskModalDescription(){
         const taskDesc = document.createElement('textarea');
@@ -440,15 +416,6 @@ export class DOM{
                 taskDueDate.value = '';
                 taskUrgnecy.value = '';
                 taskModal.close();
-
-                this.disableOrEnableButtons(false);
-                document.querySelectorAll('.remove-project').forEach((element)=>{
-                    element.disabled = false;
-                })
-                document.querySelectorAll('.pro-instance').forEach((element) => {
-                    element.disabled = false;
-                })
-                
             }
         })
     }
