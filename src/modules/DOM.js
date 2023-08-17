@@ -6,6 +6,10 @@ import Favicon from '/home/Edyta/Desktop/repos/To-do/src/assets/logo.svg';
 const myFavicon = new Image();
 myFavicon.src = Favicon;
 
+import Bookshelf from '/home/Edyta/Desktop/repos/To-do/src/assets/bookshelf.svg';
+const myBookshelf = new Image();
+myBookshelf.src = Bookshelf;
+
 import Hamburger from '/home/Edyta/Desktop/repos/To-do/src/assets/menu-icon.svg'
 const myHamburger = new Image();
 myHamburger.src = Hamburger;
@@ -52,12 +56,26 @@ export class DOM{
         upperNav.appendChild(hamburger);
         hamburgerImg.src = myHamburger.src;
     }
+     
     static projectsNavArea(mainContent){
         const projectsNav = document.createElement('div');
         projectsNav.classList.add('projects-nav');
         mainContent.appendChild(projectsNav);
         return projectsNav;
     } 
+    static allTasks(projectsNav){
+        const  allTasksDOM = document.createElement('div');
+        allTasksDOM.classList.add('all-tasks');
+        const bookshelfIcon = document.createElement('img');
+        bookshelfIcon.src = myBookshelf.src;
+        bookshelfIcon.classList.add('bookshelf-icon');
+        const allTasks = document.createElement('button');
+        allTasks.textContent = 'All tasks';
+        allTasks.classList.add('pro-instance');
+        allTasksDOM.appendChild(bookshelfIcon);
+        allTasksDOM.appendChild(allTasks);
+        projectsNav.appendChild(allTasksDOM);
+    }
     static mainContentArea(){
         const mainContent = document.createElement('div');
         mainContent.classList.add('main-content');
@@ -478,6 +496,7 @@ export function createDOM(){
     DOM.horizontalNav();
     const mainContent = DOM.mainContentArea();
     const projectNavigation = DOM.projectsNavArea(mainContent);
+    DOM.allTasks(projectNavigation);
     const projectsAddition = DOM.projectsAdditionSection(projectNavigation);
     DOM.sectionTitle(projectsAddition);
     const projectDialog = DOM.projectModal(mainContent);
