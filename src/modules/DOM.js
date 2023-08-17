@@ -315,7 +315,7 @@ export class DOM{
                 document.querySelector('.task-button').style.visibility= 'visible';
                 
                 document.querySelector('.task-button').addEventListener('click', () =>{
-                    document.querySelector('.task-modal').show();
+                    document.querySelector('.task-modal').showModal();
 
                     projectsDOM.forEach((element) => {
                         element.disabled = true;
@@ -338,7 +338,7 @@ export class DOM{
     }
     static projectModalHandler(projectDialogElement, projectAddBtn){
         projectAddBtn.addEventListener('click', () =>{
-            projectDialogElement.show();
+            projectDialogElement.showModal();
             this.disableOrEnableButtons(true);
         })
     }

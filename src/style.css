@@ -104,10 +104,6 @@ body{
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding:15px;
 }
-.main-content .task-display .task-modal::backdrop{
-    background: rgb(109, 109, 109);
-    opacity: .4;
-}
 input[type=text],.text-area{
     border: 1px solid rgb(109, 109, 109);
     font-size: 1.5em;
@@ -212,6 +208,9 @@ input[type=text]:focus, .text-area:focus {
 }
 .task-modal{
    max-height: 500px;
+}
+dialog::backdrop{
+    backdrop-filter: blur(3px);
 }
 .task-form{
     display: flex;
