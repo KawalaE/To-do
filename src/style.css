@@ -93,8 +93,7 @@ body{
     cursor: pointer;
 }
 .projects-button:active{
-    transform: scale(90%);
-    transition: 0.3s;
+
 }
 .projects-add-section{
     padding: 30px;
@@ -216,7 +215,7 @@ input[type=text]:focus, .text-area:focus {
     display: flex;
     align-items: center;
 }
-.project-active{
+.project-active, .tasks-active{
     color: #9DC6AF;
 }
 .task-modal{

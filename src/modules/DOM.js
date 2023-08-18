@@ -7,8 +7,8 @@ const myFavicon = new Image();
 myFavicon.src = Favicon;
 
 import CofeeMug from '/home/Edyta/Desktop/repos/To-do/src/assets/starbucks.svg';
-const myCofeeMug = new Image();
-myCofeeMug.src = CofeeMug;
+const myCoffeeMug = new Image();
+myCoffeeMug.src = CofeeMug;
 
 import Hamburger from '/home/Edyta/Desktop/repos/To-do/src/assets/menu-icon.svg'
 const myHamburger = new Image();
@@ -26,7 +26,7 @@ export class DOM{
         const head = document.querySelector('head');
         const favicon = document.createElement('link');
         favicon.setAttribute('rel', 'shortcut icon');
-        favicon.setAttribute('href', myFavicon.src);
+        favicon.setAttribute('href', myCoffeeMug.src);
         head.appendChild(favicon);
     }
     static horizontalNav(){
@@ -66,7 +66,7 @@ export class DOM{
         const  allTasksDOM = document.createElement('div');
         allTasksDOM.classList.add('all-tasks');
         const coffeeIcon = document.createElement('img');
-        coffeeIcon.src = myCofeeMug.src;
+        coffeeIcon.src = myCoffeeMug.src;
         coffeeIcon.classList.add('coffee-icon');
         const allTasks = document.createElement('button');
         allTasks.textContent = 'All tasks';
@@ -74,10 +74,13 @@ export class DOM{
         allTasksDOM.appendChild(coffeeIcon);
         allTasksDOM.appendChild(allTasks);
         projectsNav.appendChild(allTasksDOM);
+        this.addSwitchListener(allTasks); 
         allTasks.addEventListener('click', ()=>{
             document.querySelector('.task-button').style.visibility = 'hidden';
             document.querySelectorAll('.pro-instance').forEach((e)=>{
                 e.classList.remove('project-active');
+                allTasks.classList.add('tasks-active');
+                
             })
             this.taskDisplay(false);
         })
@@ -319,9 +322,9 @@ export class DOM{
     }
     static taskModalHandler(){
         const projectsDOM = document.querySelectorAll('.pro-instance');
-
         projectsDOM.forEach((project) => { 
             project.addEventListener('click', () =>{
+                document.querySelector('.all-tasks-btn').classList.remove('tasks-active');
                 projectsDOM.forEach((siblingProject)=>{
                     if(siblingProject !== project){
                         siblingProject.classList.remove('project-active');
@@ -360,7 +363,7 @@ export class DOM{
                 } else if(DOM.projectOpen === true){
                     this.switchingProjectTask('none', 'flex');
                     DOM.projectOpen = false;
-                }   
+                }
             })
     }
     static visibilityDueSizeHandler(){
@@ -382,7 +385,6 @@ export class DOM{
         closeTaskModal.classList.add('close-btn');
         closeTaskModal.src = myClose.src;
         dialogElement.appendChild(closeTaskModal);
-
         closeTaskModal.addEventListener('click', ()=>dialogElement.close())
     }
     static createTaskModalDescription(){
@@ -439,6 +441,7 @@ export class DOM{
                 taskDueDate.value = '';
                 taskUrgnecy.value = '';
                 taskModal.close();
+                this.taskDisplay(true);
             }
         })
     }
