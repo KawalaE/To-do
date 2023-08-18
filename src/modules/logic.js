@@ -3,21 +3,14 @@ import {DOM} from './DOM';
 import { Project } from './project';
 import { projects } from './project';
 import { Task } from './task';
-import Close from '/home/Edyta/Desktop/repos/To-do/src/assets/close.svg';
-const myClose = new Image();
-myClose.src = Close;
 
 export class Logic{
-    static removeProject(project){
-        console.log(project);
-        project.removeProject();
-        console.log(projects);
-        
+    static deleteProject(project){
+        project.removeProject(); 
     }
     static removeTask(project, taskName){
-         project.deleteTask(taskName);
+        project.deleteTask(taskName);
     }
-
     static createAndAddNewTask(description, date, priority, projectHTML){
         let newTask = new Task(description.value, date.value, priority.value, '0');
         projects.forEach((project) => {

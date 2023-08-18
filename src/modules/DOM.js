@@ -6,9 +6,9 @@ import Favicon from '/home/Edyta/Desktop/repos/To-do/src/assets/logo.svg';
 const myFavicon = new Image();
 myFavicon.src = Favicon;
 
-import Bookshelf from '/home/Edyta/Desktop/repos/To-do/src/assets/bookshelf.svg';
-const myBookshelf = new Image();
-myBookshelf.src = Bookshelf;
+import CofeeMug from '/home/Edyta/Desktop/repos/To-do/src/assets/starbucks.svg';
+const myCofeeMug = new Image();
+myCofeeMug.src = CofeeMug;
 
 import Hamburger from '/home/Edyta/Desktop/repos/To-do/src/assets/menu-icon.svg'
 const myHamburger = new Image();
@@ -56,7 +56,6 @@ export class DOM{
         upperNav.appendChild(hamburger);
         hamburgerImg.src = myHamburger.src;
     }
-     
     static projectsNavArea(mainContent){
         const projectsNav = document.createElement('div');
         projectsNav.classList.add('projects-nav');
@@ -66,15 +65,22 @@ export class DOM{
     static allTasks(projectsNav){
         const  allTasksDOM = document.createElement('div');
         allTasksDOM.classList.add('all-tasks');
-        const bookshelfIcon = document.createElement('img');
-        bookshelfIcon.src = myBookshelf.src;
-        bookshelfIcon.classList.add('bookshelf-icon');
+        const coffeeIcon = document.createElement('img');
+        coffeeIcon.src = myCofeeMug.src;
+        coffeeIcon.classList.add('coffee-icon');
         const allTasks = document.createElement('button');
         allTasks.textContent = 'All tasks';
-        allTasks.classList.add('pro-instance');
-        allTasksDOM.appendChild(bookshelfIcon);
+        allTasks.classList.add('all-tasks-btn');
+        allTasksDOM.appendChild(coffeeIcon);
         allTasksDOM.appendChild(allTasks);
         projectsNav.appendChild(allTasksDOM);
+        allTasks.addEventListener('click', ()=>{
+            document.querySelector('.task-button').style.visibility = 'hidden';
+            document.querySelectorAll('.pro-instance').forEach((e)=>{
+                e.classList.remove('project-active');
+            })
+            this.taskDisplay(false);
+        })
     }
     static mainContentArea(){
         const mainContent = document.createElement('div');
@@ -222,7 +228,7 @@ export class DOM{
                         })
                     }
                 })
-                Logic.removeProject(projectInstance);
+                Logic.deleteProject(projectInstance);
                 if(projectNumber === projects.length){
                     document.querySelector('.task-button').style.visibility= 'hidden';
                 }
@@ -234,7 +240,7 @@ export class DOM{
         taskDisplay.classList.add('task-display');
         mainContent.appendChild(taskDisplay);
     }
-    static taskDisplay(){
+    static taskDisplay(state){
         const taskDOM = document.createElement('div');
         while (taskDOM.firstChild){
             taskDOM.removeChild(taskDOM.lastChild);
@@ -243,9 +249,8 @@ export class DOM{
         previousTasks.forEach((previous) => {
             previous.remove();
         })
-    
         document.querySelectorAll('.pro-instance').forEach((element) => {
-            if(element.classList.contains('project-active')){
+            if(element.classList.contains('project-active') === state){
                 projects.forEach((project)=>{
                     if(project.getName() === element.innerHTML && projects.length !==0) {
                         project.tasks.forEach((task) => {
@@ -323,7 +328,7 @@ export class DOM{
                     }
                 })
                 project.classList.add('project-active');
-                this.taskDisplay();
+                this.taskDisplay(true);
                 document.querySelector('.task-button').style.visibility= 'visible';
                 
                 document.querySelector('.task-button').addEventListener('click', () =>{
