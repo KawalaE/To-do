@@ -6,6 +6,10 @@ import Favicon from '/home/Edyta/Desktop/repos/To-do/src/assets/logo.svg';
 const myFavicon = new Image();
 myFavicon.src = Favicon;
 
+import Calendar from '/home/Edyta/Desktop/repos/To-do/src/assets/calendar-card.svg';
+const myCalendar = new Image();
+myCalendar.src = Calendar;
+
 import CofeeMug from '/home/Edyta/Desktop/repos/To-do/src/assets/starbucks.svg';
 const myCoffeeMug = new Image();
 myCoffeeMug.src = CofeeMug;
@@ -63,7 +67,7 @@ export class DOM{
         return projectsNav;
     } 
     static allTasks(projectsNav){
-        const  allTasksDOM = document.createElement('div');
+        const allTasksDOM = document.createElement('div');
         allTasksDOM.classList.add('all-tasks');
         const coffeeIcon = document.createElement('img');
         coffeeIcon.src = myCoffeeMug.src;
@@ -84,6 +88,19 @@ export class DOM{
             })
             this.taskDisplay(false);
         })
+    }
+    static thisWeek(projectsNav){
+        const thisWeek = document.createElement('div');
+        thisWeek.classList.add('this-week');
+        const calendarCard = document.createElement('img');
+        calendarCard.src = myCalendar.src;
+        calendarCard.classList.add('calendar-card');
+        thisWeek.textContent = "This week";
+        const thisWeekDOM = document.createElement('div');
+        thisWeekDOM.classList.add('this-week-parent');
+        thisWeekDOM.appendChild(calendarCard);
+        thisWeekDOM.appendChild(thisWeek);
+        projectsNav.appendChild(thisWeekDOM);
     }
     static mainContentArea(){
         const mainContent = document.createElement('div');
@@ -390,7 +407,7 @@ export class DOM{
     static createTaskModalDescription(){
         const taskDesc = document.createElement('textarea');
         taskDesc.classList.add('text-area');
-        taskDesc.maxLength = "55";
+        taskDesc.maxLength = '40';
         taskDesc.placeholder = 'Task description';
         return taskDesc;
     } 
@@ -505,6 +522,7 @@ export function createDOM(){
     const mainContent = DOM.mainContentArea();
     const projectNavigation = DOM.projectsNavArea(mainContent);
     DOM.allTasks(projectNavigation);
+    DOM.thisWeek(projectNavigation);
     const projectsAddition = DOM.projectsAdditionSection(projectNavigation);
     DOM.sectionTitle(projectsAddition);
     const projectDialog = DOM.projectModal(mainContent);

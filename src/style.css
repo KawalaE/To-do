@@ -62,14 +62,14 @@ body{
     display: block;
     overflow: auto;
 }
-.all-tasks{
+.all-tasks, .this-week-parent{
     display:flex;
     align-items: center;
     margin: 50px 0 0 0;
     justify-content: center;
     gap: 20px;
 }
-.coffee-icon{
+.coffee-icon, .calendar-card{
     width: 40px;
     height: 40px;
 }
@@ -91,9 +91,6 @@ body{
 .projects-button:hover{
     background-color: #9DC6AF;
     cursor: pointer;
-}
-.projects-button:active{
-
 }
 .projects-add-section{
     padding: 30px;
@@ -175,20 +172,20 @@ input[type=text]:focus, .text-area:focus {
     flex-direction: column;
     gap: 30px;
 }
-.pro-instance, .all-tasks-btn{
+.pro-instance, .all-tasks-btn, .this-week{
     color: #4e4e4e;
     font-size: 1.8em;
     font-weight: bold;
     text-align: center;
     width: 12ch;
 }
-.pro-instance:hover, .all-tasks-btn:hover{
+.pro-instance:hover, .all-tasks-btn:hover, .this-week:hover{
     color: #9DC6AF;
     transform: scale(110%);
     transition: 0.3s;
     cursor: pointer;
 }
-.all-tasks-btn{
+.all-tasks-btn, .this-week{
     width:auto;
 }
 .remove-project, .remove-task{
@@ -285,7 +282,7 @@ input[type=checkbox]{
 .task-item{
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 50px;
     padding: 10px;
     align-items: center;
 }
@@ -296,7 +293,7 @@ input[type=checkbox]{
 .task-disp-desc{
     word-break: break-word;
     color: #3a927e;
-    min-width: 200px;
+    width: 200px;
 }
 .task-disp-date{
     width: 130px;
@@ -349,6 +346,9 @@ input[type=checkbox]{
         display: none;
         flex-grow: 1;
     }
+    .task-item{
+        gap: 30px;
+    }
 }
 @media all and (max-width: 712px){
     *{
@@ -359,6 +359,7 @@ input[type=checkbox]{
         border: 2px solid #9DC6AF;
         box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
         align-items: center;
+        gap: 25px;
     }
     .task-item div {
         text-align: center;
@@ -370,5 +371,13 @@ input[type=checkbox]{
     .hamburger{
         width: 60px;
         height: 50px;
+    }
+}
+@media all and (max-width: 305px){
+    .navigator-name{
+       display: none;
+    }
+    .logo{
+        margin-left: 20px;
     }
 }
