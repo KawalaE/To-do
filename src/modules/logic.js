@@ -2,7 +2,10 @@ import '/home/Edyta/Desktop/repos/To-do/src/style.css'
 import {DOM} from './DOM';
 import { Project } from './project';
 import { projects } from './project';
+import format from 'date-fns/format';
 import { Task } from './task';
+import { endOfWeek, startOfISOWeek, startOfWeek } from 'date-fns';
+import { endOfISOWeek } from 'date-fns/esm';
 
 export class Logic{
     static deleteProject(project){
@@ -29,15 +32,16 @@ export class Logic{
         }      
     }
     static createDefaultProject(){
+        const today = new Date();
         const home = new Project('Home');
         projects.push(home);
-        const taskHome = new Task("do the dishes", "2023-08-24", "medium", "0");
+        const taskHome = new Task("do the dishes", today, "medium", "0");
         home.tasks.push(taskHome);
         
         const garden = new Project('Garden');
         projects.push(garden);
-        const taskGarden = new Task("water the lawn", "2024-08-22", "high", "1");
-        garden.tasks.push(taskGarden);
+        const taskGarden = new Task("water the lawn", "2024-11-22", "high", "1");
+        garden.tasks.push(taskGarden);  
     }
 }
 

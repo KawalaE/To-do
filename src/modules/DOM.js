@@ -6,6 +6,10 @@ import Favicon from '/home/Edyta/Desktop/repos/To-do/src/assets/logo.svg';
 const myFavicon = new Image();
 myFavicon.src = Favicon;
 
+import Box from '/home/Edyta/Desktop/repos/To-do/src/assets/box.svg';
+const myBox = new Image();
+myBox.src = Box;
+
 import Calendar from '/home/Edyta/Desktop/repos/To-do/src/assets/calendar-card.svg';
 const myCalendar = new Image();
 myCalendar.src = Calendar;
@@ -51,6 +55,7 @@ export class DOM{
         logo.classList.add('logo');
         logo.src = myFavicon.src;
         leftNavSide.appendChild(logo);
+        logo.addEventListener('click', () => location.reload());
 
         const hamburger = document.createElement('button');
         const hamburgerImg = document.createElement('img');
@@ -65,6 +70,21 @@ export class DOM{
         projectsNav.classList.add('projects-nav');
         mainContent.appendChild(projectsNav);
         return projectsNav;
+    }
+    static menuButtonHandler(button, state, month = 0){
+        button.addEventListener('click', ()=>{
+            document.querySelector('.task-button').style.visibility = 'hidden';
+            document.querySelectorAll('.pro-instance').forEach((e)=>{
+                e.classList.remove('project-active');
+                
+            })
+            button.classList.add('tasks-active');  
+            document.querySelectorAll('.tasks-active').forEach((e) => {
+                e.classList.remove('tasks-active');
+            })
+            button.classList.add('tasks-active');
+            this.taskDisplay(state, month);
+        })
     } 
     static allTasks(projectsNav){
         const allTasksDOM = document.createElement('div');
@@ -79,28 +99,38 @@ export class DOM{
         allTasksDOM.appendChild(allTasks);
         projectsNav.appendChild(allTasksDOM);
         this.addSwitchListener(allTasks); 
-        allTasks.addEventListener('click', ()=>{
-            document.querySelector('.task-button').style.visibility = 'hidden';
-            document.querySelectorAll('.pro-instance').forEach((e)=>{
-                e.classList.remove('project-active');
-                allTasks.classList.add('tasks-active');
-                
-            })
-            this.taskDisplay(false);
-        })
+        this.menuButtonHandler(allTasks, false);
     }
+    
     static thisWeek(projectsNav){
-        const thisWeek = document.createElement('div');
-        thisWeek.classList.add('this-week');
+        const thisWeekBtn = document.createElement('div');
+        thisWeekBtn.classList.add('this-week');
         const calendarCard = document.createElement('img');
         calendarCard.src = myCalendar.src;
         calendarCard.classList.add('calendar-card');
-        thisWeek.textContent = "This week";
+        thisWeekBtn.textContent = "This week";
         const thisWeekDOM = document.createElement('div');
         thisWeekDOM.classList.add('this-week-parent');
         thisWeekDOM.appendChild(calendarCard);
-        thisWeekDOM.appendChild(thisWeek);
+        thisWeekDOM.appendChild(thisWeekBtn);
         projectsNav.appendChild(thisWeekDOM);
+        this.menuButtonHandler(thisWeekBtn, false, 2)
+    }
+    static thisMonth(projectsNav){
+        const thisMonthDOM = document.createElement('div');
+        thisMonthDOM.classList.add('this-month-dom');
+        projectsNav.appendChild(thisMonthDOM);
+        const thisMonthBtn = document.createElement('button');
+        thisMonthBtn.textContent = "This month";
+        thisMonthBtn.classList.add('this-month-btn');
+        const boxIcon = document.createElement('img');
+        boxIcon.src = myBox.src;
+        boxIcon.classList.add('box-icon');
+        thisMonthDOM.appendChild(boxIcon);
+        thisMonthDOM.appendChild(thisMonthBtn);
+        this.addSwitchListener(thisMonthBtn); 
+        this.menuButtonHandler(thisMonthBtn, false, 1);
+        
     }
     static mainContentArea(){
         const mainContent = document.createElement('div');
@@ -260,7 +290,7 @@ export class DOM{
         taskDisplay.classList.add('task-display');
         mainContent.appendChild(taskDisplay);
     }
-    static taskDisplay(state){
+    static taskDisplay(state, month = 0){
         const taskDOM = document.createElement('div');
         while (taskDOM.firstChild){
             taskDOM.removeChild(taskDOM.lastChild);
@@ -270,10 +300,17 @@ export class DOM{
             previous.remove();
         })
         document.querySelectorAll('.pro-instance').forEach((element) => {
+            console.log(projects)
             if(element.classList.contains('project-active') === state){
                 projects.forEach((project)=>{
+                    let currentTasks = project.getTasks();
                     if(project.getName() === element.innerHTML && projects.length !==0) {
-                        project.tasks.forEach((task) => {
+                        if(month === 1){
+                            currentTasks = project.getCurrentMonthTasks();
+                        } else if(month === 2){
+                            currentTasks = project.getCurrentWeekTasks();
+                        }
+                        currentTasks.forEach((task) => {
                             const taskDOM = document.createElement('div');
                             document.querySelector('.task-display').appendChild(taskDOM);
                             taskDOM.classList.add('task-item');
@@ -286,7 +323,7 @@ export class DOM{
     
                             let taskDate = document.createElement('div');
                             taskDate.classList.add('task-disp-date');
-                            let currentDate = task.getDueDate();
+                            let currentDate = task.getFormatedDueDate();
                             taskDate.innerHTML = currentDate;
                             taskDOM.appendChild(taskDate);
     
@@ -329,7 +366,6 @@ export class DOM{
                             deleteTaskBtn.innerHTML = 'x';
                             deleteTaskBtn.classList.add('remove-task');
                             this.deleteTaskHandler(deleteTaskBtn, taskDOM, taskDesc, project);
-                        
                         })        
                     }
                 })
@@ -523,6 +559,7 @@ export function createDOM(){
     const projectNavigation = DOM.projectsNavArea(mainContent);
     DOM.allTasks(projectNavigation);
     DOM.thisWeek(projectNavigation);
+    DOM.thisMonth(projectNavigation);
     const projectsAddition = DOM.projectsAdditionSection(projectNavigation);
     DOM.sectionTitle(projectsAddition);
     const projectDialog = DOM.projectModal(mainContent);

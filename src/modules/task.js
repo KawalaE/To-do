@@ -3,15 +3,24 @@ import format from 'date-fns/format';
 export class Task{
     constructor(description, dueDate, priority, status){
         this.description = description;
-        this.dueDate =  Date.parse(dueDate);
+        this.dueDate = Date.parse(dueDate);
         this.priority = priority;
         this.status = status;
     }
     getDescription(){
         return this.description;
     }
-    getDueDate(){
+    getFormatedDueDate(){
         return format(this.dueDate,'dd/MM/yyyy');
+    }
+    getDueDate(){
+        return this.dueDate;
+    }
+    getMonth(){
+        return Number(format(this.getDueDate(), 'MM'));
+    }
+    getDay(){
+        return Number(format(this.getDueDate(), 'dd'));
     }
     getPriority(){
         return this.priority;
