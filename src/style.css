@@ -49,10 +49,17 @@ body{
     width: 70px;
     height: 70px;
     cursor: pointer;
+    transition: 0.3s;
+}
+.logo:hover{
+    transform: scale(105%);
+}
+.logo:active{
+    transform: scale(90%);
 }
 .main-content{
     display: flex;
-    height: calc(100% - 100px);
+    height: calc(100% - 140px);
 }
 .projects-nav{
     width: 290px;
@@ -245,7 +252,7 @@ dialog::backdrop{
     gap: 30px;
     align-items: center;
     overflow: auto;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 .task-button{
     height: 50px;
@@ -335,6 +342,30 @@ input[type=checkbox]{
     display: flex;
     align-items: center;
     gap: 20px;
+}
+.footer{
+    height: 40px;
+    width: auto;
+    background-color: #87af98;
+    color: #FAFCFB;
+    font-weight: bolder;
+    display: flex;
+    gap:20px;
+    justify-content: center;
+    align-items: center;
+}
+.footer-img{
+    width: 26px;
+    height: 25px;
+    cursor: pointer;
+    transition:.5s ease-in-out;
+}
+.footer-img:hover{
+    transform: scale(1.1);
+    rotate: 1turn;
+}
+.footer-img:active{
+    transform: scale(0.9);
 }
 @media all and (max-width: 943px){
     .hamburger-img{

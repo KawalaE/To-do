@@ -6,6 +6,10 @@ import Favicon from '/home/Edyta/Desktop/repos/To-do/src/assets/logo.svg';
 const myFavicon = new Image();
 myFavicon.src = Favicon;
 
+import GithubIcon from '/home/Edyta/Desktop/repos/To-do/src/assets/github-mark-white.svg';
+const myGithubIcon = new Image();
+myGithubIcon.src = GithubIcon;
+
 import Box from '/home/Edyta/Desktop/repos/To-do/src/assets/box.svg';
 const myBox = new Image();
 myBox.src = Box;
@@ -114,6 +118,7 @@ export class DOM{
         thisWeekDOM.appendChild(calendarCard);
         thisWeekDOM.appendChild(thisWeekBtn);
         projectsNav.appendChild(thisWeekDOM);
+        this.addSwitchListener(thisWeekBtn);
         this.menuButtonHandler(thisWeekBtn, false, 2)
     }
     static thisMonth(projectsNav){
@@ -550,8 +555,23 @@ static checkboxHandler(project, checkbox){
             Logic.taskStatusHandler(project, currentTaskName, checkbox);
         })
     }
-
+    static createFooter(){
+        const footer = document.createElement('div');
+        footer.classList.add('footer');
+        document.querySelector('#page').appendChild(footer);
+        const footerInfo = document.createElement('div');
+        footerInfo.textContent = "Created by KawalaE";
+        footer.appendChild(footerInfo);
+        const githubIcon = document.createElement('img');
+        githubIcon.src = myGithubIcon.src;
+        githubIcon.classList.add('footer-img');
+        footer.appendChild(githubIcon);
+        githubIcon.addEventListener('click', ()=>{
+            window.location.href="https://github.com/KawalaE/To-do";
+        })
+    }
 }
+
 export function createDOM(){
     DOM.setFavicon();
     DOM.horizontalNav();
@@ -576,5 +596,5 @@ export function createDOM(){
     document.querySelector('.project-div').firstChild.click();
     DOM.hamburgerMenuHandler();
     DOM.windowHandler();
-    
+    DOM.createFooter();
 }
