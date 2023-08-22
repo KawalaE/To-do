@@ -60,6 +60,7 @@ body{
 .main-content{
     display: flex;
     height: calc(100% - 140px);
+    background-color: #FAFCFB;
 }
 .projects-nav{
     width: 290px;

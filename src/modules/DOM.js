@@ -77,7 +77,8 @@ export class DOM{
     }
     static menuButtonHandler(button, state, month = 0){
         button.addEventListener('click', ()=>{
-            document.querySelector('.task-button').style.visibility = 'hidden';
+            document.querySelector('.task-display').style.margin = "30px 0 0 0";
+            document.querySelector('.task-button').style.display = 'none';
             document.querySelectorAll('.pro-instance').forEach((e)=>{
                 e.classList.remove('project-active');
                 
@@ -235,7 +236,7 @@ export class DOM{
             }
         })
         document.addEventListener('keypress',(event)=>{
-            if(event.key === "Enter"){
+            if(event.key === "Enter" && document.querySelector('#project-modal').open){
                 projectAddButton.click();
             }
         })
@@ -285,7 +286,7 @@ export class DOM{
                 })
                 Logic.deleteProject(projectInstance);
                 if(projectNumber === projects.length){
-                    document.querySelector('.task-button').style.visibility= 'hidden';
+                    document.querySelector('.task-button').style.display = block;
                 }
             }
         })
@@ -383,6 +384,9 @@ export class DOM{
         projectsDOM.forEach((project) => { 
             project.addEventListener('click', () =>{
                 document.querySelector('.all-tasks-btn').classList.remove('tasks-active');
+                document.querySelector('.this-week').classList.remove('tasks-active');
+                document.querySelector('.this-month-btn').classList.remove('tasks-active');
+                document.querySelector('.task-display').style.margin = " 0 0 0 0 "
                 projectsDOM.forEach((siblingProject)=>{
                     if(siblingProject !== project){
                         siblingProject.classList.remove('project-active');
@@ -390,10 +394,15 @@ export class DOM{
                 })
                 project.classList.add('project-active');
                 this.taskDisplay(true);
-                document.querySelector('.task-button').style.visibility= 'visible';
+                document.querySelector('.task-button').style.display= 'block';
                 
                 document.querySelector('.task-button').addEventListener('click', () =>{
                     document.querySelector('.task-modal').showModal();
+                })
+                document.addEventListener('keypress',(event)=>{
+                    if(event.key === "Enter" && document.querySelector('.task-modal').open){
+                        document.querySelector('.submit-task').click();
+                    }
                 })
             })
                
@@ -404,7 +413,7 @@ export class DOM{
         document.querySelector('.task-display').appendChild(taskButton);
         taskButton.innerHTML = 'Add tasks';
         taskButton.classList.add('task-button');
-        taskButton.style.visibility ='hidden';
+        taskButton.style.display ='block';
     }
     static projectModalHandler(projectDialogElement, projectAddBtn){
         projectAddBtn.addEventListener('click', () =>{
