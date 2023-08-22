@@ -38,9 +38,11 @@ export class Logic{
         const taskHome = new Task("do the dishes", today, "medium", "0");
         home.tasks.push(taskHome);
         
+        const date = new Date();
+        date.setDate(date.getDate()+7);
         const garden = new Project('Garden');
         projects.push(garden);
-        const taskGarden = new Task("water the lawn", "2024-11-22", "high", "1");
+        const taskGarden = new Task("water the lawn", date, "high", "1");
         garden.tasks.push(taskGarden);  
     }
 }

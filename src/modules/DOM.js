@@ -593,7 +593,8 @@ export function createDOM(){
     DOM.addTaskButton();
     DOM.createTaskModal();
     DOM.displayInitialProjects();
-    document.querySelector('.project-div').firstChild.click();
+    console.log(document.querySelector('.projects-nav').firstChild)
+    document.querySelector('.projects-nav').firstChild.lastChild.click();
     DOM.hamburgerMenuHandler();
     DOM.windowHandler();
     DOM.createFooter();

@@ -187,10 +187,11 @@ input[type=text]:focus, .text-area:focus {
 }
 .pro-instance, .all-tasks-btn, .this-week, .this-month-btn{
     color: #4e4e4e;
-    font-size: 1.8em;
+    font-size: 1.45em;
     font-weight: bold;
     text-align: center;
     width: 100px;
+    word-break: normal;
 }
 .pro-instance:hover, .all-tasks-btn:hover, .this-week:hover, .this-month-btn:hover{
     color: #87af98;
@@ -226,7 +227,7 @@ input[type=text]:focus, .text-area:focus {
 .project-div{
     display: flex;
     align-items: center;
-    gap:20px;
+    gap:35px;
 }
 .project-active, .tasks-active{
     color: #9DC6AF;
