@@ -1,7 +1,7 @@
 import { endOfISOWeek, endOfISOWeekYear, startOfISOWeek } from "date-fns";
 import { Task } from "./task";
 import format from 'date-fns/format';
-export const projects = [];
+export const projects =   [];
 
 export class Project{
     constructor(name){

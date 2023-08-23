@@ -20,7 +20,11 @@ export class Logic{
             if(project.getName() === projectHTML){
                 project.tasks.push(newTask);
                 DOM.taskDisplay()
+                localStorage.setItem("projects", JSON.stringify(projects));
+                console.log(`Local storage: ${localStorage.getItem("projects")}`)
+                
             }
+            console.log(projects)
         });
     }
     static taskStatusHandler(project, taskName, checkbox){
@@ -30,20 +34,6 @@ export class Logic{
         }else if(checkbox.value ==='0'){
             task.setStatus('0');
         }      
-    }
-    static createDefaultProject(){
-        const today = new Date();
-        const home = new Project('Home');
-        projects.push(home);
-        const taskHome = new Task("do the dishes", today, "medium", "0");
-        home.tasks.push(taskHome);
-        
-        const date = new Date();
-        date.setDate(date.getDate()+7);
-        const garden = new Project('Garden');
-        projects.push(garden);
-        const taskGarden = new Task("water the lawn", date, "high", "1");
-        garden.tasks.push(taskGarden);  
     }
 }
 

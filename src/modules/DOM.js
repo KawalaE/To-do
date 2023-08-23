@@ -39,40 +39,40 @@ export class DOM{
         const favicon = document.createElement('link');
         favicon.setAttribute('rel', 'shortcut icon');
         favicon.setAttribute('href', myCoffeeMug.src);
-        head.appendChild(favicon);
+        head.append(favicon);
     }
     static horizontalNav(){
         const upperNav = document.createElement('div');
         upperNav.classList.add('upper-nav');
-        page.appendChild(upperNav);
+        page.append(upperNav);
 
         const leftNavSide = document.createElement('div');
         leftNavSide.classList.add('left-side')
-        upperNav.appendChild(leftNavSide);
+        upperNav.append(leftNavSide);
 
         const navigatorName = document.createElement('p');
         navigatorName.classList.add('navigator-name');
         navigatorName.textContent = 'To do';
-        leftNavSide.appendChild(navigatorName);
+        leftNavSide.append(navigatorName);
 
         const logo = document.createElement('img');
         logo.classList.add('logo');
         logo.src = myFavicon.src;
-        leftNavSide.appendChild(logo);
+        leftNavSide.append(logo);
         logo.addEventListener('click', () => location.reload());
 
         const hamburger = document.createElement('button');
         const hamburgerImg = document.createElement('img');
         hamburgerImg.classList.add('hamburger-img');
-        hamburger.appendChild(hamburgerImg);
+        hamburger.append(hamburgerImg);
         hamburgerImg.classList.add('hamburger');
-        upperNav.appendChild(hamburger);
+        upperNav.append(hamburger);
         hamburgerImg.src = myHamburger.src;
     }
     static projectsNavArea(mainContent){
         const projectsNav = document.createElement('div');
         projectsNav.classList.add('projects-nav');
-        mainContent.appendChild(projectsNav);
+        mainContent.append(projectsNav);
         return projectsNav;
     }
     static menuButtonHandler(button, state, month = 0){
@@ -100,9 +100,8 @@ export class DOM{
         const allTasks = document.createElement('button');
         allTasks.textContent = 'All tasks';
         allTasks.classList.add('all-tasks-btn');
-        allTasksDOM.appendChild(coffeeIcon);
-        allTasksDOM.appendChild(allTasks);
-        projectsNav.appendChild(allTasksDOM);
+        allTasksDOM.append(coffeeIcon, allTasks);
+        projectsNav.append(allTasksDOM);
         this.addSwitchListener(allTasks); 
         this.menuButtonHandler(allTasks, false);
     }
@@ -116,9 +115,8 @@ export class DOM{
         thisWeekBtn.textContent = "This week";
         const thisWeekDOM = document.createElement('div');
         thisWeekDOM.classList.add('this-week-parent');
-        thisWeekDOM.appendChild(calendarCard);
-        thisWeekDOM.appendChild(thisWeekBtn);
-        projectsNav.appendChild(thisWeekDOM);
+        thisWeekDOM.append(calendarCard, thisWeekBtn);
+        projectsNav.append(thisWeekDOM);
         this.addSwitchListener(thisWeekBtn);
         this.menuButtonHandler(thisWeekBtn, false, 2)
     }
@@ -132,8 +130,7 @@ export class DOM{
         const boxIcon = document.createElement('img');
         boxIcon.src = myBox.src;
         boxIcon.classList.add('box-icon');
-        thisMonthDOM.appendChild(boxIcon);
-        thisMonthDOM.appendChild(thisMonthBtn);
+        thisMonthDOM.append(boxIcon, thisMonthBtn);
         this.addSwitchListener(thisMonthBtn); 
         this.menuButtonHandler(thisMonthBtn, false, 1);
         
@@ -141,45 +138,45 @@ export class DOM{
     static mainContentArea(){
         const mainContent = document.createElement('div');
         mainContent.classList.add('main-content');
-        page.appendChild(mainContent);
+        page.append(mainContent);
         return mainContent;
     }
     static displayCurrentProjects(projectsNav){
         const projectsDisplay = document.createElement('div');
         projectsDisplay.classList.add('projects-display')
-        projectsNav.appendChild(projectsDisplay);
+        projectsNav.append(projectsDisplay);
         return projectsDisplay;
     }
     static projectsAdditionSection(projectsNav){
         const projectsAdditionSection = document.createElement('div');
         projectsAdditionSection.classList.add('projects-add-section');
-        projectsNav.appendChild(projectsAdditionSection)
+        projectsNav.append(projectsAdditionSection)
         return projectsAdditionSection;
     }
     static sectionTitle(projectsAdditionSection){
         const projectSectionTitle = document.createElement('div');
         projectSectionTitle.textContent = 'Projects';
         projectSectionTitle.classList.add('projects-title');
-        projectsAdditionSection.appendChild(projectSectionTitle);
+        projectsAdditionSection.append(projectSectionTitle);
     }
     static projectAddBtn(projectsAdditionSection){
         const projectAddBtn = document.createElement('button');
         projectAddBtn.classList.add('projects-button');
         projectAddBtn.innerHTML = '+';
-        projectsAdditionSection.appendChild(projectAddBtn);
+        projectsAdditionSection.append(projectAddBtn);
         return projectAddBtn;
     }
     static projectModal(mainContent){
         const projectDialogElement = document.createElement('dialog');
         projectDialogElement.id = 'project-modal';
-        mainContent.appendChild(projectDialogElement);
+        mainContent.append(projectDialogElement);
         return projectDialogElement;
     }
     static projectModalCloseBtn(modal){
         const closeBtn = document.createElement('img');
         closeBtn.classList.add('close-btn');
         closeBtn.src = myClose.src;
-        modal.appendChild(closeBtn);
+        modal.append(closeBtn);
         closeBtn.addEventListener('click', ()=>{
             modal.close();
             document.querySelector('#project-title').value = '';
@@ -195,10 +192,9 @@ export class DOM{
         projectName.id = 'project-title';
         projectName.type = 'text';
         projectName.placeholder = 'Project title'
-        projectForm.appendChild(projectName);
-        document.querySelector('#project-modal').appendChild(projectModalContent);
-        document.querySelector('#project-modal').appendChild(projectForm);
-        document.querySelector('.modal-content').appendChild(projectForm);
+        projectForm.append(projectName);
+        document.querySelector('#project-modal').append(projectModalContent, projectForm);
+        document.querySelector('.modal-content').append(projectForm);
     }
     static switchingProjectTask(projectDisplay, taskDisplay){
         document.querySelector('.projects-nav').style.display = projectDisplay;
@@ -217,14 +213,14 @@ export class DOM{
         const projectAddButton = document.createElement('button');
         projectAddButton.classList.add('project-add-btn');
         projectAddButton.innerHTML = 'Add project';
-        Logic.createDefaultProject();
-        document.querySelector('#project-modal').appendChild(projectAddButton);
+        document.querySelector('#project-modal').append(projectAddButton);
         projectAddButton.addEventListener('click', ()=>{
             const newProject = new Project(inputField.value);
             if(!inputField.value){
                 alert('Project name cannot be empty!');
             }else{
                 projects.push(newProject);
+                localStorage.setItem("projects", JSON.stringify(projects));
                 let project = document.createElement('div');
                 project.classList.add('pro-instance');
                 project.innerHTML = newProject.getName();
@@ -240,7 +236,7 @@ export class DOM{
                 projectAddButton.click();
             }
         })
-        document.querySelector('.modal-content').appendChild(projectAddButton);
+        document.querySelector('.modal-content').append(projectAddButton);
 
     }
     static addProject(project, projectInstance){
@@ -251,9 +247,8 @@ export class DOM{
         console.log("addProject: ", projectInstance);
         this.removeProjectButtonHandler(removeProject, projectInstance);
         projectDiv.classList.add('project-div');
-        document.querySelector('.projects-display').appendChild(projectDiv);
-        projectDiv.appendChild(project);
-        projectDiv.appendChild(removeProject);
+        document.querySelector('.projects-display').append(projectDiv);
+        projectDiv.append(project, removeProject);
         this.taskModalHandler();
     }
     static displayInitialProjects(){
@@ -286,15 +281,17 @@ export class DOM{
                 })
                 Logic.deleteProject(projectInstance);
                 if(projectNumber === projects.length){
-                    document.querySelector('.task-button').style.display = block;
+                    document.querySelector('.task-button').style.display = 'block';
                 }
+                localStorage.setItem("projects", JSON.stringify(projects));
+                console.log(`Local storage: ${localStorage.getItem("projects")}`);
             }
         })
     }
     static taskDisplayArea(mainContent){
         const taskDisplay = document.createElement('div');
         taskDisplay.classList.add('task-display');
-        mainContent.appendChild(taskDisplay);
+        mainContent.append(taskDisplay);
     }
     static taskDisplay(state, month = 0){
         const taskDOM = document.createElement('div');
@@ -318,21 +315,18 @@ export class DOM{
                         }
                         currentTasks.forEach((task) => {
                             const taskDOM = document.createElement('div');
-                            document.querySelector('.task-display').appendChild(taskDOM);
+                            document.querySelector('.task-display').append(taskDOM);
                             taskDOM.classList.add('task-item');
                             console.log(project.tasks);
     
                             let taskDesc = document.createElement('div');
                             taskDesc.classList.add('task-disp-desc');
                             taskDesc.innerHTML = task.getDescription();
-                            taskDOM.appendChild(taskDesc)
     
                             let taskDate = document.createElement('div');
                             taskDate.classList.add('task-disp-date');
                             let currentDate = task.getFormatedDueDate();
                             taskDate.innerHTML = currentDate;
-                            taskDOM.appendChild(taskDate);
-    
                             
                             let taskPriotity = document.createElement('div');
                             taskPriotity.innerHTML = task.getPriority();
@@ -344,12 +338,9 @@ export class DOM{
                                 taskPriotity.classList.add('task-disp-priority-high');
                             }
     
-                            taskDOM.appendChild(taskPriotity);
-    
                             let taskState = document.createElement('input');
                             taskState.type = 'checkbox';
                             taskState.classList.add('task-state');
-                            taskDOM.appendChild(taskState);
                             console.log(project);
                             this.checkboxHandler(project, taskState);
                         
@@ -368,7 +359,7 @@ export class DOM{
                             }
                             
                             const deleteTaskBtn = document.createElement('button');
-                            taskDOM.appendChild(deleteTaskBtn);
+                            taskDOM.append(taskDesc, taskDate, taskPriotity, taskState, deleteTaskBtn);
                             deleteTaskBtn.innerHTML = 'x';
                             deleteTaskBtn.classList.add('remove-task');
                             this.deleteTaskHandler(deleteTaskBtn, taskDOM, taskDesc, project);
@@ -410,7 +401,7 @@ export class DOM{
     }
     static addTaskButton(){
         const taskButton = document.createElement('button');
-        document.querySelector('.task-display').appendChild(taskButton);
+        document.querySelector('.task-display').append(taskButton);
         taskButton.innerHTML = 'Add tasks';
         taskButton.classList.add('task-button');
         taskButton.style.display ='block';
@@ -451,7 +442,7 @@ export class DOM{
         const closeTaskModal = document.createElement('img');
         closeTaskModal.classList.add('close-btn');
         closeTaskModal.src = myClose.src;
-        dialogElement.appendChild(closeTaskModal);
+        dialogElement.append(closeTaskModal);
         closeTaskModal.addEventListener('click', ()=>dialogElement.close())
     }
     static createTaskModalDescription(){
@@ -475,19 +466,16 @@ export class DOM{
         selectPlaceholder.disabled = true;
         selectPlaceholder.selected = true;
         selectPlaceholder.innerHTML = 'Select priority';
-        taskPriority.appendChild(selectPlaceholder);
         let lowOption = document.createElement('option');
         lowOption.value = 'low';
         lowOption.innerHTML = 'low';
-        taskPriority.appendChild(lowOption);
         let medOption = document.createElement('option');
         medOption.value = 'medium';
         medOption.innerHTML = 'medium';
-        taskPriority.appendChild(medOption);
         let highOption = document.createElement('option');
         highOption.value = 'high';
         highOption.innerHTML = 'high';
-        taskPriority.appendChild(highOption);
+        taskPriority.append(selectPlaceholder,lowOption, medOption, highOption);
         return taskPriority;
     }
     static createSubmitTaskModalBtn(){
@@ -515,7 +503,7 @@ export class DOM{
     static createTaskModal(){
         const taskModal = document.createElement('dialog');
         taskModal.classList.add('task-modal');
-        document.querySelector('.task-display').appendChild(taskModal);
+        document.querySelector('.task-display').append(taskModal);
         const taskForm = document.createElement('form');
         taskForm.classList.add('task-form');
 
@@ -527,12 +515,8 @@ export class DOM{
         const submitTaskBtn = this.createSubmitTaskModalBtn();
         
         this.submitTask(submitTaskBtn, taskDescription, taskDueDate, taskUrgnecy, taskModal);
-
-        taskForm.appendChild(taskDescription);
-        taskForm.appendChild(taskDueDate);
-        taskForm.appendChild(taskUrgnecy);
-        taskForm.appendChild(submitTaskBtn);
-        taskModal.appendChild(taskForm);
+        taskForm.append(taskDescription, taskDueDate, taskUrgnecy, submitTaskBtn);
+        taskModal.append(taskForm);
     }
     static deleteTaskHandler(deleteButton, taskInfo, taskName, project){
         deleteButton.addEventListener('click', (e) =>{
@@ -540,6 +524,8 @@ export class DOM{
                 const currentTask = taskName.innerHTML;
                 Logic.removeTask(project, currentTask);
                 taskInfo.remove();
+                localStorage.setItem("projects", JSON.stringify(projects));
+                console.log(`Local storage: ${localStorage.getItem("projects")}`);
             }
         })
     }
@@ -567,14 +553,13 @@ static checkboxHandler(project, checkbox){
     static createFooter(){
         const footer = document.createElement('div');
         footer.classList.add('footer');
-        document.querySelector('#page').appendChild(footer);
+        document.querySelector('#page').append(footer);
         const footerInfo = document.createElement('div');
         footerInfo.textContent = "Created by KawalaE";
-        footer.appendChild(footerInfo);
         const githubIcon = document.createElement('img');
         githubIcon.src = myGithubIcon.src;
         githubIcon.classList.add('footer-img');
-        footer.appendChild(githubIcon);
+        footer.append(footerInfo, githubIcon);
         githubIcon.addEventListener('click', ()=>{
             window.location.href="https://github.com/KawalaE/To-do";
         })
@@ -591,17 +576,17 @@ export function createDOM(){
     DOM.thisMonth(projectNavigation);
     const projectsAddition = DOM.projectsAdditionSection(projectNavigation);
     DOM.sectionTitle(projectsAddition);
+    DOM.displayCurrentProjects(projectNavigation);
     const projectDialog = DOM.projectModal(mainContent);
     DOM.projectModalCloseBtn(projectDialog);
     DOM.projectInputForm();
-    DOM.projectModalAddBtn();  
+    DOM.projectModalAddBtn();
     DOM.taskDisplayArea(mainContent);
     const projectButton = DOM.projectAddBtn(projectsAddition);
     DOM.projectModalHandler(projectDialog, projectButton);
-    DOM.displayCurrentProjects(projectNavigation);
     DOM.addTaskButton();
     DOM.createTaskModal();
-    DOM.displayInitialProjects();
+    //DOM.displayInitialProjects();
     console.log(document.querySelector('.projects-nav').firstChild)
     document.querySelector('.projects-nav').firstChild.lastChild.click();
     DOM.hamburgerMenuHandler();
