@@ -1,10 +1,10 @@
 import { DOM } from './DOM';
 import { Project } from './project';
 import { Task } from './task';
+import { Logic } from './logic';
 
 export class Storage{
     static saveProjectsList(data){
-        localStorage.removeItem("projects");
         localStorage.setItem("projects", JSON.stringify(data));
     }
     static getProjectsList(){

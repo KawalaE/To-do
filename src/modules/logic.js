@@ -1,6 +1,7 @@
 import '/home/Edyta/Desktop/repos/To-do/src/style.css'
 import { Storage } from './storage';
 import {DOM} from './DOM';
+import { Project } from './project';
 import { projects } from './project';
 import format from 'date-fns/format';
 import { Task } from './task';
@@ -34,6 +35,5 @@ export class Logic{
             task.setStatus('0');
         }      
     }
-
 }
 

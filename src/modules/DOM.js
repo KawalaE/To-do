@@ -547,6 +547,7 @@ static checkboxHandler(project, checkbox){
             }
             let currentTaskName = checkbox.parentNode.firstChild.innerHTML;
             Logic.taskStatusHandler(project, currentTaskName, checkbox);
+            Storage.saveProjectsList(projects);
         })
     }
     static createFooter(){
