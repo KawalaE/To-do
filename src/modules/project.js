@@ -1,7 +1,6 @@
 import { endOfISOWeek, endOfISOWeekYear, startOfISOWeek } from "date-fns";
-import { Task } from "./task";
 import format from 'date-fns/format';
-export const projects =   [];
+export let projects = [];
 
 export class Project{
     constructor(name){
@@ -28,7 +27,7 @@ export class Project{
         return currentMonthTasks.filter((task) => task.getDay() >= Number(start) && task.getDay() <= Number(end));
     }
     removeProject(){
-        projects.splice(projects.indexOf(this.getName()),1);
+        projects = projects.filter((project) => project.getName() !== this.getName());
     }
     getTask(taskName){
         return this.tasks.find((task) => task.getDescription() === taskName);

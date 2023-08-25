@@ -1,5 +1,7 @@
 import '/home/Edyta/Desktop/repos/To-do/src/style.css'
+import { Storage } from './storage';
 import { projects } from './project';
+
 import { Project } from './project';
 import {Logic} from './logic';
 import Favicon from '/home/Edyta/Desktop/repos/To-do/src/assets/logo.svg';
@@ -143,7 +145,7 @@ export class DOM{
     }
     static displayCurrentProjects(projectsNav){
         const projectsDisplay = document.createElement('div');
-        projectsDisplay.classList.add('projects-display')
+        projectsDisplay.classList.add('projects-display');
         projectsNav.append(projectsDisplay);
         return projectsDisplay;
     }
@@ -208,6 +210,12 @@ export class DOM{
             }
         })  
     }
+    static projectInstanceDOM(instance){
+        let project = document.createElement('div');
+        project.classList.add('pro-instance');
+        project.innerHTML = instance.getName();
+        return project;
+    }
     static projectModalAddBtn(){
         const inputField = document.querySelector('#project-title');
         const projectAddButton = document.createElement('button');
@@ -220,10 +228,9 @@ export class DOM{
                 alert('Project name cannot be empty!');
             }else{
                 projects.push(newProject);
-                localStorage.setItem("projects", JSON.stringify(projects));
-                let project = document.createElement('div');
-                project.classList.add('pro-instance');
-                project.innerHTML = newProject.getName();
+                console.log(projects)
+                Storage.saveProjectsList(projects);
+                const project = this.projectInstanceDOM(newProject);
                 inputField.value = '';
                 document.querySelector('#project-modal').close();
                 console.log("projectModalAddBtn: ", newProject);
@@ -239,6 +246,7 @@ export class DOM{
         document.querySelector('.modal-content').append(projectAddButton);
 
     }
+    
     static addProject(project, projectInstance){
         const projectDiv = document.createElement('div');
         const removeProject = document.createElement('button');
@@ -250,15 +258,6 @@ export class DOM{
         document.querySelector('.projects-display').append(projectDiv);
         projectDiv.append(project, removeProject);
         this.taskModalHandler();
-    }
-    static displayInitialProjects(){
-        projects.forEach((project) => {
-            let projectBtn = document.createElement('button');
-            projectBtn.classList.add('pro-instance');
-            projectBtn.innerHTML = project.getName();
-            this.addProject(projectBtn);  
-            this.addSwitchListener(projectBtn);
-        })     
     }
     static removeProjectButtonHandler(button, projectInstance){
         console.log("Before button.addEvent", projectInstance);
@@ -283,8 +282,7 @@ export class DOM{
                 if(projectNumber === projects.length){
                     document.querySelector('.task-button').style.display = 'block';
                 }
-                localStorage.setItem("projects", JSON.stringify(projects));
-                console.log(`Local storage: ${localStorage.getItem("projects")}`);
+                Storage.saveProjectsList(projects);
             }
         })
     }
@@ -456,6 +454,7 @@ export class DOM{
         const taskDate = document.createElement('input');
         taskDate.type = 'date';
         taskDate.classList.add('task-date');
+        console.log(taskDate);
         return taskDate;
     }
     static createTaskModalPriority(){
@@ -497,6 +496,7 @@ export class DOM{
                 taskUrgnecy.value = '';
                 taskModal.close();
                 this.taskDisplay(true);
+                Storage.saveProjectsList(projects);
             }
         })
     }
@@ -524,8 +524,7 @@ export class DOM{
                 const currentTask = taskName.innerHTML;
                 Logic.removeTask(project, currentTask);
                 taskInfo.remove();
-                localStorage.setItem("projects", JSON.stringify(projects));
-                console.log(`Local storage: ${localStorage.getItem("projects")}`);
+                Storage.saveProjectsList(projects);
             }
         })
     }
@@ -586,10 +585,10 @@ export function createDOM(){
     DOM.projectModalHandler(projectDialog, projectButton);
     DOM.addTaskButton();
     DOM.createTaskModal();
-    //DOM.displayInitialProjects();
     console.log(document.querySelector('.projects-nav').firstChild)
     document.querySelector('.projects-nav').firstChild.lastChild.click();
     DOM.hamburgerMenuHandler();
     DOM.windowHandler();
     DOM.createFooter();
+    projects = Storage.getProjectsList();
 }

@@ -3,7 +3,7 @@ import format from 'date-fns/format';
 export class Task{
     constructor(description, dueDate, priority, status){
         this.description = description;
-        this.dueDate = Date.parse(dueDate);
+        this.dueDate = typeof(dueDate) === 'string' ?  Date.parse(dueDate) : dueDate;
         this.priority = priority;
         this.status = status;
     }
