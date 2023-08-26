@@ -1,4 +1,4 @@
-import { endOfISOWeek, endOfISOWeekYear, startOfISOWeek } from "date-fns";
+import { endOfISOWeek, startOfISOWeek } from "date-fns";
 import format from 'date-fns/format';
 export let projects = [];
 

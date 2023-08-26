@@ -3,10 +3,8 @@ import { Storage } from './storage';
 import {DOM} from './DOM';
 import { Project } from './project';
 import { projects } from './project';
-import format from 'date-fns/format';
 import { Task } from './task';
-import { endOfWeek, startOfISOWeek, startOfWeek } from 'date-fns';
-import { endOfISOWeek } from 'date-fns/esm';
+
 
 export class Logic{
     static deleteProject(project){
@@ -34,6 +32,32 @@ export class Logic{
         }else if(checkbox.value ==='0'){
             task.setStatus('0');
         }      
+    }
+    static createDefaultProject(){
+        const today = new Date();
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate()+1);
+        const home = new Project('Home');
+        const firstHomeTask = new Task("do the dishes", today, "medium", "1");
+        const secondHomeTask = new Task("water the plants", tomorrow, "high", "0");
+        home.tasks.push(firstHomeTask);
+        home.tasks.push(secondHomeTask);
+        projects.push(home);
+        const homeDOM = DOM.projectInstanceDOM(home);
+        DOM.addProject(homeDOM, home);
+        DOM.addSwitchListener(homeDOM); 
+        
+        
+        const date = new Date();
+        date.setDate(date.getDate()+8);
+        const garden = new Project('Garden');
+        const taskGarden = new Task("water the lawn", date, "high", "1");
+        garden.tasks.push(taskGarden);
+        projects.push(garden);
+        const gardenDOM = DOM.projectInstanceDOM(garden);
+        DOM.addProject(gardenDOM, garden);
+        DOM.addSwitchListener(gardenDOM);
+        return projects;
     }
 }
 

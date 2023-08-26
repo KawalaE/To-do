@@ -83,9 +83,7 @@ export class DOM{
             document.querySelector('.task-button').style.display = 'none';
             document.querySelectorAll('.pro-instance').forEach((e)=>{
                 e.classList.remove('project-active');
-                
             })
-            button.classList.add('tasks-active');  
             document.querySelectorAll('.tasks-active').forEach((e) => {
                 e.classList.remove('tasks-active');
             })
@@ -135,7 +133,6 @@ export class DOM{
         thisMonthDOM.append(boxIcon, thisMonthBtn);
         this.addSwitchListener(thisMonthBtn); 
         this.menuButtonHandler(thisMonthBtn, false, 1);
-        
     }
     static mainContentArea(){
         const mainContent = document.createElement('div');
@@ -228,12 +225,10 @@ export class DOM{
                 alert('Project name cannot be empty!');
             }else{
                 projects.push(newProject);
-                console.log(projects)
                 Storage.saveProjectsList(projects);
                 const project = this.projectInstanceDOM(newProject);
                 inputField.value = '';
                 document.querySelector('#project-modal').close();
-                console.log("projectModalAddBtn: ", newProject);
                 this.addProject(project, newProject);
                 this.addSwitchListener(project);  
             }
@@ -591,5 +586,6 @@ export function createDOM(){
     DOM.hamburgerMenuHandler();
     DOM.windowHandler();
     DOM.createFooter();
-    projects = Storage.getProjectsList();
+    projects = Storage.getProjectsList() || Logic.createDefaultProject();
+    document.querySelector('.all-tasks-btn').click();
 }
