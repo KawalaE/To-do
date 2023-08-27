@@ -36,6 +36,10 @@ export default class Project {
     );
   }
 
+  addTask(taskInstance) {
+    this.tasks.push(taskInstance);
+  }
+
   removeProject() {
     projects = projects.filter(
       (project) => project.getName() !== this.getName(),

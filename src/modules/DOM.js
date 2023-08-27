@@ -278,23 +278,16 @@ export default class DOM {
   static removeProjectButtonHandler(button, projectInstance) {
     button.addEventListener("click", (e) => {
       if (confirm("Do you want to remove this project?")) {
-        let projectNumber = 0;
         const parent = e.target.parentNode;
-        parent.remove();
-        const allProjects = document.querySelectorAll(".pro-instance");
         const allTasks = document.querySelectorAll(".task-item");
-        allProjects.forEach((element) => {
-          if (!element.classList.contains("project-active")) {
-            projectNumber += 1;
-            allTasks.forEach((task) => {
-              task.remove();
-            });
-          }
-        });
-        Logic.deleteProject(projectInstance);
-        if (projectNumber === projects.length) {
-          document.querySelector(".task-button").style.display = "block";
+        if (parent.firstChild.classList.contains("project-active")) {
+          allTasks.forEach((task) => {
+            task.remove();
+            document.querySelector(".task-button").style.display = "none";
+          });
         }
+        parent.remove();
+        Logic.deleteProject(projectInstance);
         Storage.saveProjectsList(projects);
       }
     });
@@ -519,11 +512,8 @@ export default class DOM {
   }
 
   static submitTask(submitBtn, taskDesc, taskDueDate, taskUrgnecy, taskModal) {
-    const subTaskDesc = taskDesc;
-    const subTaskDate = taskDueDate;
-    const subTaskUrgency = taskUrgnecy;
     submitBtn.addEventListener("click", () => {
-      if (!subTaskDesc.value) {
+      if (!taskDesc.value) {
         alert("Please, fill task description");
       }
       if (!taskDueDate.value) {
@@ -535,14 +525,14 @@ export default class DOM {
         const currentProject =
           document.querySelector(".project-active").innerHTML;
         Logic.createAndAddNewTask(
-          subTaskDesc,
+          taskDesc,
           taskDueDate,
           taskUrgnecy,
           currentProject,
         );
-        subTaskDesc.value = "";
-        subTaskDate.value = "";
-        subTaskUrgency.value = "";
+        taskDesc.value = "";
+        taskDueDate.value = "";
+        taskUrgnecy.value = "";
         taskModal.close();
         this.taskDisplay(true);
         Storage.saveProjectsList(projects);

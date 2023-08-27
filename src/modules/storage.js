@@ -20,7 +20,7 @@ export default class Storage {
             task.priority,
             task.status,
           );
-          projectStorage.tasks.push(taskStorage);
+          projectStorage.addTask(taskStorage);
         });
         const projectDOM = DOM.projectInstanceDOM(projectStorage);
         DOM.addProject(projectDOM, projectStorage);

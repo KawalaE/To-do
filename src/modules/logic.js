@@ -1,7 +1,7 @@
 import "../style.css";
 import Storage from "./storage";
 import DOM from "./DOM";
-import { projects, default as Project } from "./project";
+import Project, { projects } from "./project";
 import Task from "./task";
 
 export default class Logic {
@@ -22,7 +22,7 @@ export default class Logic {
     );
     projects.forEach((project) => {
       if (project.getName() === projectHTML) {
-        project.tasks.push(newTask);
+        project.addTask(newTask);
         DOM.taskDisplay();
         Storage.saveProjectsList(projects);
       }
@@ -45,8 +45,8 @@ export default class Logic {
     const home = new Project("Home");
     const firstHomeTask = new Task("do the dishes", today, "medium", "1");
     const secondHomeTask = new Task("water the plants", tomorrow, "high", "0");
-    home.tasks.push(firstHomeTask);
-    home.tasks.push(secondHomeTask);
+    home.addTask(firstHomeTask);
+    home.addTask(secondHomeTask);
     projects.push(home);
     const homeDOM = DOM.projectInstanceDOM(home);
     DOM.addProject(homeDOM, home);
@@ -56,7 +56,7 @@ export default class Logic {
     date.setDate(date.getDate() + 8);
     const garden = new Project("Garden");
     const taskGarden = new Task("water the lawn", date, "high", "1");
-    garden.tasks.push(taskGarden);
+    garden.addTask(taskGarden);
     projects.push(garden);
     const gardenDOM = DOM.projectInstanceDOM(garden);
     DOM.addProject(gardenDOM, garden);

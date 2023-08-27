@@ -17,6 +17,7 @@
         "import/no-mutable-exports": "off",
         "consistent-return": "off",
         "import/no-cycle": "off",
-        "no-import-assign": "off"
+        "no-import-assign": "off",
+        "no-param-reassign": "off"
     }
 }
