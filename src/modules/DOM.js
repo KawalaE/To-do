@@ -34,7 +34,7 @@ myClose.src = Close;
 
 export class DOM{
     static projectOpen = false; 
-    static minWindowWidth = 943;
+    static minWindowWidth = 1000;
 
     static setFavicon(){
         const head = document.querySelector('head');
@@ -79,7 +79,7 @@ export class DOM{
     }
     static menuButtonHandler(button, state, month = 0){
         button.addEventListener('click', ()=>{
-            document.querySelector('.task-display').style.margin = "30px 0 0 0";
+            document.querySelector('.task-display').style.margin = "20px 0 20px 0";
             document.querySelector('.task-button').style.display = 'none';
             document.querySelectorAll('.pro-instance').forEach((e)=>{
                 e.classList.remove('project-active');

@@ -1,3 +1,14 @@
+:root{
+    --primary-pastel-green: #87af98;
+    --secondary-pastel-green: #9DC6AF;
+    --primary-white: #FAFCFB;
+    --primary-grey: #424242;
+    --secondary-grey: rgb(175, 175, 175);
+    --light-grey: rgb(236, 236, 236);
+    --bright-red: rgb(236, 77, 77);
+    --bright-orange: rgb(177, 130, 0);
+    --bright-green: rgb(0, 182, 55);
+}
 *{
     padding: 0;
     margin: 0;
@@ -31,7 +42,7 @@ body{
           url('./assets/fonts/Quicksand-Light.woff') format('woff');
 }
 .upper-nav{
-    background-color:#87af98;
+    background-color: var(--primary-pastel-green);
     height: 100px;
     display: flex;
     justify-content: space-between;
@@ -40,7 +51,7 @@ body{
 }
 
 .navigator-name{
-    color:rgb(49, 49, 49);
+    color:var(--primary-grey);
     font-size: 2.8em;
     margin-left: 20px;
     font-weight: bolder;
@@ -60,11 +71,11 @@ body{
 .main-content{
     display: flex;
     height: calc(100% - 140px);
-    background-color: #FAFCFB;
+    background-color: var(--primary-white);
 }
 .projects-nav{
     width: 290px;
-    background-color: rgb(233, 233, 233);
+    background-color: var(--light-grey);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -84,7 +95,7 @@ body{
     height: 38px;
 }
 .projects-title{
-    color: rgb(49, 49, 49);
+    color: var(--primary-grey);
     font-size: 2em;
     font-weight: bold;
 }
@@ -111,47 +122,47 @@ body{
 }
 #project-modal, .task-modal{
     position: absolute;
-    background-color: white;
+    background-color: var(--primary-white);
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     max-height: 200px;
     max-width: 350px;
-    border: 2px solid #9DC6AF;
+    border: 2px solid var(--secondary-pastel-green);
     border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: var(--primary-grey) 0px 3px 8px;
     padding:15px;
 }
 input[type=text],.text-area{
-    border: 1px solid rgb(109, 109, 109);
+    border: 1px solid var(--secondary-grey);
     font-size: 1.5em;
     border-radius: 6px;
     width: 200px;
     text-align: center;
 }
 input[type=text]:focus, .text-area:focus {
-    outline:1px solid #9DC6AF;
+    outline:1px solid var(--secondary-pastel-green);
 }
 .project-add-btn, .task-button, .submit-task{
     font-size: 1em;
     padding: 5px;
     font-weight: bold;
-    border: 2px solid #9DC6AF;
-    color:#9DC6AF;
+    border: 2px solid var(--secondary-pastel-green);
+    color:var(--secondary-pastel-green);
     background-color: transparent;
     border-radius: 7px;
     width: 120px;
     text-align: center;
 }
 .project-add-btn:hover, .task-button:hover, .submit-task:hover{
-    background-color: #87af98;
-    color: white;
+    background-color: var(--primary-pastel-green);
+    color: var(--primary-white);
     transition: 0.3s;
     cursor: pointer;
 }
 .project-add-btn:active, .task-button:active, .submit-task:active{
-    background-color: #9DC6AF;
-    color: white;
+    background-color: var(--secondary-pastel-green);
+    color: var(--primary-white);
     transform: scale(95%);
     cursor: pointer;
 }
@@ -178,7 +189,7 @@ input[type=text]:focus, .text-area:focus {
     margin-top: 20px;
     margin-bottom: 20px;
     flex-direction: column;
-    gap:25px;
+    gap: 25px;
     align-items: center;
 }
 .projects-display{
@@ -187,7 +198,7 @@ input[type=text]:focus, .text-area:focus {
     gap: 20px;
 }
 .pro-instance, .all-tasks-btn, .this-week, .this-month-btn{
-    color: #4e4e4e;
+    color: var(--primary-grey);
     font-size: 1.45em;
     font-weight: bold;
     text-align: center;
@@ -195,7 +206,7 @@ input[type=text]:focus, .text-area:focus {
     word-break: normal;
 }
 .pro-instance:hover, .all-tasks-btn:hover, .this-week:hover, .this-month-btn:hover{
-    color: #87af98;
+    color:  var(--primary-pastel-green);
     transform: scale(110%);
     transition: 0.3s;
     cursor: pointer;
@@ -231,7 +242,7 @@ input[type=text]:focus, .text-area:focus {
     gap:35px;
 }
 .project-active, .tasks-active{
-    color: #9DC6AF;
+    color: var(--secondary-pastel-green);
 }
 .task-modal{
    max-height: 500px;
@@ -248,7 +259,7 @@ dialog::backdrop{
 }
 .task-display{
     flex-grow:1;
-    background-color:#FAFCFB;
+    background-color: var(--primary-white);
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -273,11 +284,11 @@ dialog::backdrop{
 }
 .task-priority{
     font-size: 1.2em;
-    background-color: #9DC6AF;
-    color: white;
+    background-color: var(--secondary-pastel-green);
+    color: var(--primary-white);
     padding: 2px;
     font-weight: bolder;
-    border: 1px solid  #9DC6AF;
+    border: 1px solid var(--secondary-pastel-green);
     border-radius: 8px;
     cursor: pointer;
 }
@@ -292,7 +303,7 @@ option{
     align-items: center;
 }
 input[type=checkbox]{
-    accent-color: #5f5f5f;
+    accent-color: var(--primary-grey);
     margin: 4px 0 0;
     line-height: normal;
     width: 20px;
@@ -319,19 +330,19 @@ input[type=checkbox]{
     width: 130px;
 }
 .task-disp-priority-low{
-    color: rgb(0, 182, 55);
+    color: var(--bright-green);
     width: 100px;
 }
 .task-disp-priority-medium{
-    color: rgb(177, 130, 0);
+    color: var(--bright-orange);
     width: 100px;
 }
 .task-disp-priority-high{
-    color: rgb(236, 77, 77);
+    color: var(--bright-red);
     width: 100px;
 }
 .grey-out{
-    color: rgb(175, 175, 175);
+    color: var(--secondary-grey);
     text-decoration: line-through
 }
 .hamburger{
@@ -348,8 +359,8 @@ input[type=checkbox]{
 .footer{
     height: 40px;
     width: auto;
-    background-color: #87af98;
-    color: #FAFCFB;
+    background-color: var(--primary-pastel-green);
+    color: var(--primary-white);
     font-weight: bolder;
     display: flex;
     gap:20px;
@@ -369,7 +380,7 @@ input[type=checkbox]{
 .footer-img:active{
     transform: scale(0.9);
 }
-@media all and (max-width: 943px){
+@media all and (max-width: 1000px){
     .hamburger-img{
         width:60px;
         height: 60px;
@@ -400,9 +411,9 @@ input[type=checkbox]{
     }
     .task-item{
         flex-direction: column;
-        border: 2px solid #9DC6AF;
+        border: 2px solid var(--secondary-pastel-green);
         border-radius: 8px;
-        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+        box-shadow: var(--primary-grey) 0px 1px 2px 0px, var(--primary-grey) 0px 1px 3px 1px;
         align-items: center;
         gap: 25px;
     }
