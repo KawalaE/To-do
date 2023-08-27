@@ -1,3 +1,3 @@
-import { createDOM } from './modules/DOM';
-createDOM();
+import { createDOM } from "./modules/DOM";
 
+createDOM();
