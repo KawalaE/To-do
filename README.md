@@ -1,7 +1,7 @@
 <h2><strong>Project description</strong></h2>
 To-do is my personal coding project of a to-do list application using JavaScript, HTML, and CSS. I'm integrating Webpack for module management and bundling. Additionally, I'm utilizing local storage to ensure tasks are stored persistently. To maintain code quality and consistency, I've implemented ESLint for code linting and Prettier for code formatting. The app offers users the ability to add, edit, and delete tasks, categorize tasks into projects, sets priorities and due dates, and conveniently filter tasks by time periods like "This Week" and "This Month." Users also can mark tasks as complete.
 
-<h2><a href="https://kawalae.github.io/To-do/)https://kawalae.github.io/To-do/">Click here to view!</a></h2>
+<h2><a href="https://kawalae.github.io/To-do/">Click here to view!</a></h2>
 
 <h2><strong>Technologies used</strong></h2>
 
