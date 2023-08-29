@@ -71,6 +71,31 @@ body{
     height: calc(100% - 140px);
     background-color: var(--primary-white);
 }
+.theme-switch{
+    background-color: #313131;
+    border: solid 4px #ebebeb;
+    border-radius: 50px;
+    cursor: pointer;
+    height: 35px;
+    outline-width: 5px;
+    position: relative;
+    width: 80px;
+}
+.theme-switch-icon{
+    background-color: rgb(93, 142, 250);
+    border-radius: 100%;
+    content: "";
+    display: block;
+    height: 21px;
+    margin: 0px 45px;
+    position: relative;
+    width: 21px;
+}
+.right-nav-side{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
 .projects-nav{
     width: 290px;
     background-color: var(--light-grey);
@@ -98,6 +123,7 @@ body{
     font-weight: bold;
 }
 .projects-button{
+    color: #424242;
     width:60px;
     height: 60px;
     font-size: 3em;
@@ -137,6 +163,7 @@ input[type=text],.text-area{
     border-radius: 6px;
     width: 200px;
     text-align: center;
+    color: var(--primary-grey);
 }
 input[type=text]:focus, .text-area:focus {
     outline:1px solid var(--secondary-pastel-green);
@@ -224,6 +251,7 @@ input[type=text]:focus, .text-area:focus {
     transition: 0.3s;
     font-weight: bolder;
     background-color: transparent;
+    color: #424242;
 }
 .remove-project:hover, .remove-task:hover{
     transform: scale(140%);
@@ -279,6 +307,7 @@ dialog::backdrop{
 .task-date{
     font-size: 1.2em;
     cursor:pointer;
+    color: var(--primary-grey);
 }
 .task-priority{
     font-size: 1.2em;
@@ -292,6 +321,9 @@ dialog::backdrop{
 }
 option{
     font-weight: 600;
+}
+input#project-title{
+    color:var(--primary-grey);
 }
 .status-info-label{
     display: flex;
@@ -321,11 +353,12 @@ input[type=checkbox]{
 }
 .task-disp-desc{
     word-break: break-word;
-    color: #5f9476;
+    color: var(--primary-pastel-green);
     width: 200px;
 }
 .task-disp-date{
     width: 130px;
+    color: var(--primary-grey);
 }
 .task-disp-priority-low{
     color: var(--bright-green);
@@ -434,4 +467,66 @@ input[type=checkbox]{
     .logo{
         margin-left: 20px;
     }
+}
+/*Dark mode*/
+body.dark .upper-nav, .footer, #project-modal, .task-modal{
+    background-color: #486f5f;
+    border-color: white;
+}
+body.dark .projects-nav{
+    background-color: #313131;
+}
+body.dark .projects-button, .remove-project{
+    color: #c7c7c7
+}
+body.dark .task-display, body.dark .main-content{
+    background-color: #3f4140;
+}
+body.dark .task-disp-desc, .task-disp-date, input[type=checkbox], .navigator-name, .projects-title, .pro-instance, .all-tasks-btn, .this-week, .this-month-btn, .task-date, .submit-task{
+    color: var(--primary-white);
+    accent-color: var(--primary-white);
+    border: white;
+    font-size: bolder;
+}
+body.dark .task-disp-priority-high{
+    color: rgb(255 62 62);
+}
+body.dark .task-disp-priority-medium{
+    color: rgb(255 198 39);
+} 
+body.dark .task-disp-priority-low{
+    color: rgb(57 255 117);
+}
+body.dark .grey-out{
+    color: rgb(175, 175, 175);
+}
+body.dark .task-priority{
+    background-color: #4b4b4b;
+    border-color: white;
+}
+body.dark input#project-title, .project-add-btn, .text-area{
+    color: white;
+    font-weight: bolder;
+}
+body.dark .submit-task{
+    border: 1px solid white;
+    font-weight: bolder;
+}
+body.dark  .text-area:focus{
+    outline-color: white;
+}
+body.dark{
+    ::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+    }
+}
+body.dark .theme-switch-icon{
+    background-color: #f3d333;
+    border-radius: 100%;
+    content: "";
+    display: block;
+    height: 21px;
+    margin: 0px 6px;
+    position: relative;
+    width: 21px;
 }

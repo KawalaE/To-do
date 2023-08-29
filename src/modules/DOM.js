@@ -64,6 +64,15 @@ export default class DOM {
     leftNavSide.append(logo);
     logo.addEventListener("click", () => window.location.reload());
 
+    const rightNavSide = document.createElement("div");
+    rightNavSide.classList.add("right-nav-side");
+
+    const themeSwitch = document.createElement("button");
+    const switchIcon = document.createElement("div");
+    switchIcon.classList.add("theme-switch-icon");
+    themeSwitch.appendChild(switchIcon);
+    themeSwitch.classList.add("theme-switch");
+
     const hamburger = document.createElement("button");
     const hamburgerImg = document.createElement("img");
     hamburgerImg.classList.add("hamburger-img");
@@ -71,6 +80,16 @@ export default class DOM {
     hamburgerImg.classList.add("hamburger");
     upperNav.append(hamburger);
     hamburgerImg.src = myHamburger.src;
+
+    rightNavSide.append(themeSwitch, hamburger);
+    upperNav.append(rightNavSide);
+  }
+
+  static switchThemeBtnHandler() {
+    const switchBtn = document.querySelector(".theme-switch");
+    switchBtn.addEventListener("click", () => {
+      document.querySelector("body").classList.toggle("dark");
+    });
   }
 
   static projectsNavArea(mainContent) {
@@ -621,6 +640,7 @@ export function createDOM() {
   DOM.horizontalNav();
   const mainContent = DOM.mainContentArea();
   const projectNavigation = DOM.projectsNavArea(mainContent);
+  DOM.switchThemeBtnHandler();
   DOM.allTasks(projectNavigation);
   DOM.thisWeek(projectNavigation);
   DOM.thisMonth(projectNavigation);
