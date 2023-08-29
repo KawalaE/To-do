@@ -82,15 +82,17 @@ body{
     width: 80px;
 }
 .theme-switch-icon{
-    background-color: rgb(93, 142, 250);
+    background-color: rgb(250, 247, 93);
     border-radius: 100%;
     content: "";
     display: block;
     height: 21px;
-    margin: 0px 45px;
+    margin: 0px 6px;
     position: relative;
     width: 21px;
+    transition: background-color 0.3s, transform 0.3s;
 }
+
 .right-nav-side{
     display: flex;
     align-items: center;
@@ -521,12 +523,17 @@ body.dark{
     }
 }
 body.dark .theme-switch-icon{
-    background-color: #f3d333;
+    background-color: #33aad8;
+    transform: translateX(40px);
+}
+body.dark .theme-switch-icon::after{
+    background-color: #313131;
     border-radius: 100%;
     content: "";
     display: block;
-    height: 21px;
-    margin: 0px 6px;
-    position: relative;
-    width: 21px;
+    position: absolute;
+    height: 18px;
+    width: 15.5px;
+    top: 1.5px;
+    left: -3px;
 }
