@@ -87,8 +87,19 @@ export default class DOM {
 
   static switchThemeBtnHandler() {
     const switchBtn = document.querySelector(".theme-switch");
+    let theme = localStorage.getItem("theme") || "light";
+    if (theme === "dark") {
+      document.querySelector("body").classList.add(theme);
+    }
     switchBtn.addEventListener("click", () => {
-      document.querySelector("body").classList.toggle("dark");
+      if (theme === "dark") {
+        document.querySelector("body").classList.remove("dark");
+        theme = "light";
+      } else {
+        document.querySelector("body").classList.add("dark");
+        theme = "dark";
+      }
+      localStorage.setItem("theme", theme);
     });
   }
 
@@ -339,7 +350,7 @@ export default class DOM {
               currentTasks = project.getCurrentMonthTasks();
             } else if (month === 2) {
               currentTasks = project.getCurrentWeekTasks();
-              console.log(currentTasks)
+              console.log(currentTasks);
             }
             currentTasks.forEach((task) => {
               const taskDOM = document.createElement("div");
