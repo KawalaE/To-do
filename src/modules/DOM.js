@@ -284,9 +284,9 @@ export default class DOM {
 
   static addProject(project, projectInstance) {
     const projectDiv = document.createElement("div");
-    const removeProject = document.createElement("button");
+    const removeProject = document.createElement("img");
     removeProject.classList.add("remove-project");
-    removeProject.innerHTML = "x";
+    removeProject.src = myClose.src;
     this.removeProjectButtonHandler(removeProject, projectInstance);
     projectDiv.classList.add("project-div");
     document.querySelector(".projects-display").append(projectDiv);
@@ -339,6 +339,7 @@ export default class DOM {
               currentTasks = project.getCurrentMonthTasks();
             } else if (month === 2) {
               currentTasks = project.getCurrentWeekTasks();
+              console.log(currentTasks)
             }
             currentTasks.forEach((task) => {
               const taskDOM = document.createElement("div");
@@ -383,7 +384,7 @@ export default class DOM {
                 taskState.checked = false;
               }
 
-              const deleteTaskBtn = document.createElement("button");
+              const deleteTaskBtn = document.createElement("img");
               taskDOM.append(
                 taskDesc,
                 taskDate,
@@ -391,7 +392,8 @@ export default class DOM {
                 taskState,
                 deleteTaskBtn,
               );
-              deleteTaskBtn.innerHTML = "x";
+
+              deleteTaskBtn.src = myClose.src;
               deleteTaskBtn.classList.add("remove-task");
               this.deleteTaskHandler(deleteTaskBtn, taskDOM, taskDesc, project);
             });

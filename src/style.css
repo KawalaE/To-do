@@ -243,8 +243,8 @@ input[type=text]:focus, .text-area:focus {
     font-size: 1.4em;
 }
 .remove-project, .remove-task{
-    width: 45px;
-    height: 45px;
+    width: 48px;
+    height: 48px;
     font-size: 1.2em;
     border-radius: 50%;
     text-align: center;
@@ -348,6 +348,8 @@ input[type=checkbox]{
     gap: 50px;
     padding: 10px;
     align-items: center;
+    border: 2.5px solid grey;
+    border-radius: 5px;
 }
 .task-item div{
     font-size:  1.3em;
@@ -444,9 +446,6 @@ input[type=checkbox]{
     }
     .task-item{
         flex-direction: column;
-        border: 2px solid var(--secondary-pastel-green);
-        border-radius: 8px;
-        box-shadow: var(--primary-grey) 0px 1px 2px 0px, var(--primary-grey) 0px 1px 3px 1px;
         align-items: center;
         gap: 25px;
     }
@@ -462,7 +461,7 @@ input[type=checkbox]{
         height: 50px;
     }
 }
-@media all and (max-width: 305px){
+@media all and (max-width: 550px){
     .navigator-name{
        display: none;
     }
@@ -471,20 +470,20 @@ input[type=checkbox]{
     }
 }
 /*Dark mode*/
-body.dark .upper-nav, .footer, #project-modal, .task-modal{
+body.dark .upper-nav, body.dark  .footer, body.dark  #project-modal, body.dark .task-modal{
     background-color: #486f5f;
     border-color: white;
 }
 body.dark .projects-nav{
     background-color: #313131;
 }
-body.dark .projects-button, .remove-project{
+body.dark .projects-button, body.dark  .remove-project{
     color: #c7c7c7
 }
 body.dark .task-display, body.dark .main-content{
     background-color: #3f4140;
 }
-body.dark .task-disp-desc, .task-disp-date, input[type=checkbox], .navigator-name, .projects-title, .pro-instance, .all-tasks-btn, .this-week, .this-month-btn, .task-date, .submit-task{
+body.dark .task-disp-desc, body.dark .task-disp-date, body.dark input[type=checkbox], body.dark .navigator-name, body.dark .projects-title, body.dark .pro-instance, body.dark .all-tasks-btn, body.dark .this-week, body.dark .this-month-btn, body.dark .task-date, body.dark .submit-task{
     color: var(--primary-white);
     accent-color: var(--primary-white);
     border: white;
@@ -506,7 +505,7 @@ body.dark .task-priority{
     background-color: #4b4b4b;
     border-color: white;
 }
-body.dark input#project-title, .project-add-btn, .text-area{
+body.dark input#project-title, body.dark .project-add-btn, body.dark .text-area{
     color: white;
     font-weight: bolder;
 }
@@ -536,4 +535,14 @@ body.dark .theme-switch-icon::after{
     width: 15.5px;
     top: 1.5px;
     left: -3px;
+}
+body.dark .close-btn, body.dark .remove-project, body.dark .remove-task{
+    filter: brightness(0) invert(1);
+}
+body.dark textarea::placeholder, body.dark #project-title::placeholder{
+    color:white;
+    opacity: 0.7;
+}
+body.dark .task-item{
+    border-color: rgb(142 244 173);
 }
