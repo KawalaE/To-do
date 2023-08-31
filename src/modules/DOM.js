@@ -87,16 +87,39 @@ export default class DOM {
 
   static switchThemeBtnHandler() {
     const switchBtn = document.querySelector(".theme-switch");
-    let theme = localStorage.getItem("theme") || "light";
-    if (theme === "dark") {
-      document.querySelector("body").classList.add(theme);
+    const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
+    let theme = localStorage.getItem("theme");
+
+    if (theme === null) {
+      if (darkThemeMq.matches) {
+        document.querySelector("body").classList.add("dark");
+        document.querySelector("body").classList.remove("light");
+        theme = "dark";
+      } else {
+        document.querySelector("body").classList.remove("dark");
+        document.querySelector("body").classList.add("light");
+        theme = "light";
+      }
+      localStorage.setItem("theme", theme);
+    } else {
+      if (theme === "dark") {
+        document.querySelector("body").classList.add("dark");
+        document.querySelector("body").classList.remove("light");
+      } else if (theme === "light") {
+        document.querySelector("body").classList.remove("dark");
+        document.querySelector("body").classList.add("light");
+      }
+      localStorage.setItem("theme", theme);
     }
+
     switchBtn.addEventListener("click", () => {
       if (theme === "dark") {
         document.querySelector("body").classList.remove("dark");
+        document.querySelector("body").classList.add("light");
         theme = "light";
       } else {
         document.querySelector("body").classList.add("dark");
+        document.querySelector("body").classList.remove("light");
         theme = "dark";
       }
       localStorage.setItem("theme", theme);

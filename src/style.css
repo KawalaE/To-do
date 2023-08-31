@@ -415,59 +415,79 @@ input[type=checkbox]{
 .footer-img:active{
     transform: scale(0.9);
 }
-@media all and (max-width: 1000px){
-    .hamburger-img{
-        width:60px;
-        height: 60px;
-    }
-    .hamburger{
-        visibility: visible;
-    }
-    .hamburger:hover{
-        transform: scale(110%);
-        transition: 0.3s;
-        cursor: pointer;
-    }
-    .hamburger:active{
-        transform: scale(90%);
-        transition: 0.3;
-    }
-    .projects-nav{
-        display: none;
-        flex-grow: 1;
-    }
-    .task-item{
-        gap: 30px;
+/*Light mode*/
+body.light .upper-nav, body.light  .footer{
+    background-color: var(--primary-pastel-green);
+    border-color: var(--secondary-pastel-green);
+}
+body.light  #project-modal, body.light  .task-modal{
+    background-color: whitesmoke;
+    border-color: var(--secondary-pastel-green);
+}
+body.light  .projects-nav{
+    background-color: var(--light-grey);
+}
+body.light  .projects-button, body.light  .remove-project{
+    color: #424242;
+}
+body.light  .task-display, body.light  .main-content{
+    background-color: var(--primary-white);
+}
+body.light  .task-disp-desc, body.light  .task-disp-date, body.light  input[type=checkbox], body.light  .navigator-name, body.light  .projects-title, body.light  .pro-instance, body.light  .all-tasks-btn, body.light  .this-week, body.light  .this-month-btn, body.light  .task-date, body.light  .submit-task{
+    color: var(--primary-grey);
+    accent-color: var(--primary-grey);;
+    border: var(--secondary-pastel-green);
+    font-size: bolder;
+}
+body.light  .task-disp-priority-high{
+    color: var(--bright-red);
+}
+body.light  .task-disp-priority-medium{
+    color: var(--bright-orange);
+} 
+body.light  .task-disp-priority-low{
+    color: var(--bright-green);
+}
+body.light  .grey-out{
+    color: var(--secondary-grey);
+}
+body.light  .task-priority{
+    background-color: var(--secondary-pastel-green);
+    border-color: var(--secondary-pastel-green);
+}
+body.light  input#project-title, body.light .project-add-btn, body.light .text-area{
+    color: var(--primary-grey);
+    font-weight: bolder;
+}
+body.light  .submit-task{
+    border: 2px solid var(--secondary-pastel-green);
+    font-weight: bolder;
+    color: var(--secondary-pastel-green);
+}
+body.light   .text-area:focus{
+    outline-color: var(--secondary-pastel-green);
+}
+body.light {
+    ::-webkit-calendar-picker-indicator {
+        filter: invert(0);
     }
 }
-@media all and (max-width: 712px){
-    *{
-        font-size: 14px;
-    }
-    .task-item{
-        flex-direction: column;
-        align-items: center;
-        gap: 25px;
-    }
-    .task-item div {
-        text-align: center;
-    }
-    .logo{
-        width: 50px;
-        height: 50px;
-    }
-    .hamburger{
-        width: 60px;
-        height: 50px;
-    }
+body.light  .theme-switch-icon{
+    background-color: rgb(250, 247, 93);
+    transform: translate(0);
 }
-@media all and (max-width: 550px){
-    .navigator-name{
-       display: none;
-    }
-    .logo{
-        margin-left: 20px;
-    }
+body.light  .theme-switch-icon::after{
+    content:none;
+}
+body.light  .close-btn, body.light  .remove-project, body.light  .remove-task{
+    filter: brightness(0) invert(0);
+}
+body.light  textarea::placeholder, body.light  #project-title::placeholder{
+    color:var(--primary-grey);
+    opacity: 0.7;
+}
+body.light  .task-item{
+    border-color: grey;;
 }
 /*Dark mode*/
 body.dark .upper-nav, body.dark  .footer, body.dark  #project-modal, body.dark .task-modal{
@@ -545,4 +565,213 @@ body.dark textarea::placeholder, body.dark #project-title::placeholder{
 }
 body.dark .task-item{
     border-color: rgb(142 244 173);
+}
+@media all and (max-width: 1000px){
+    .hamburger-img{
+        width:60px;
+        height: 60px;
+    }
+    .hamburger{
+        visibility: visible;
+    }
+    .hamburger:hover{
+        transform: scale(110%);
+        transition: 0.3s;
+        cursor: pointer;
+    }
+    .hamburger:active{
+        transform: scale(90%);
+        transition: 0.3;
+    }
+    .projects-nav{
+        display: none;
+        flex-grow: 1;
+    }
+    .task-item{
+        gap: 30px;
+    }
+}
+@media all and (max-width: 712px){
+    *{
+        font-size: 14px;
+    }
+    .task-item{
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+    .task-item div {
+        text-align: center;
+    }
+    .logo{
+        width: 50px;
+        height: 50px;
+    }
+    .hamburger{
+        width: 60px;
+        height: 50px;
+    }
+}
+@media all and (max-width: 550px){
+    .navigator-name{
+       display: none;
+    }
+    .logo{
+        margin-left: 20px;
+    }
+}
+
+@media (prefers-color-scheme: dark){
+    body .upper-nav, body  .footer, body #project-modal, body .task-modal{
+        background-color: #486f5f;
+        border-color: white;
+    }
+    body .projects-nav{
+        background-color: #313131;
+    }
+    body .projects-button, body .remove-project{
+        color: #c7c7c7
+    }
+    body .task-display, body .main-content{
+        background-color: #3f4140;
+    }
+    body .task-disp-desc,body .this-month-btn, body .task-disp-date, body input[type=checkbox], body .navigator-name, body .projects-title, body .pro-instance, body .all-tasks-btn, body .this-week, body.dark .this-month-btn, body .task-date, body .submit-task{
+        color: var(--primary-white);
+        accent-color: var(--primary-white);
+        border: white;
+    }
+    body .task-disp-priority-high{
+        color: rgb(255 62 62);
+    }
+    body .task-disp-priority-medium{
+        color: rgb(255 198 39);
+    } 
+    body .task-disp-priority-low{
+        color: rgb(57 255 117);
+    }
+    body .grey-out{
+        color: rgb(175, 175, 175);
+    }
+    body .task-priority{
+        background-color: #4b4b4b;
+        border-color: white;
+    }
+    body input#project-title, body .project-add-btn, body .text-area{
+        color: white;
+        font-weight: bolder;
+    }
+    body .submit-task{
+        border: 1px solid white;
+        font-weight: bolder;
+    }
+    body  .text-area:focus{
+        outline-color: white;
+    }
+    body{
+        ::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+        }
+    }
+    body .theme-switch-icon{
+        background-color: #33aad8;
+        transform: translateX(40px);
+    }
+    body .theme-switch-icon::after{
+        background-color: #313131;
+        border-radius: 100%;
+        content: "";
+        display: block;
+        position: absolute;
+        height: 18px;
+        width: 15.5px;
+        top: 1.5px;
+        left: -3px;
+    }
+    body .close-btn, body .remove-project, body .remove-task{
+        filter: brightness(0) invert(1);
+    }
+    body textarea::placeholder, body #project-title::placeholder{
+        color:white;
+        opacity: 0.7;
+    }
+    body .task-item{
+        border-color: rgb(142 244 173);
+    }
+}
+@media (prefers-color-scheme: dark){
+    body .upper-nav, body  .footer, body #project-modal, body .task-modal{
+        background-color: #486f5f;
+        border-color: white;
+    }
+    body .projects-nav{
+        background-color: #313131;
+    }
+    body .projects-button, body .remove-project{
+        color: #c7c7c7
+    }
+    body .task-display, body .main-content{
+        background-color: #3f4140;
+    }
+    body .task-disp-desc,body .this-month-btn, body .task-disp-date, body input[type=checkbox], body .navigator-name, body .projects-title, body .pro-instance, body .all-tasks-btn, body .this-week, body.dark .this-month-btn, body .task-date, body .submit-task{
+        color: var(--primary-white);
+        accent-color: var(--primary-white);
+        border: white;
+    }
+    body .task-disp-priority-high{
+        color: rgb(255 62 62);
+    }
+    body .task-disp-priority-medium{
+        color: rgb(255 198 39);
+    } 
+    body .task-disp-priority-low{
+        color: rgb(57 255 117);
+    }
+    body .grey-out{
+        color: rgb(175, 175, 175);
+    }
+    body .task-priority{
+        background-color: #4b4b4b;
+        border-color: white;
+    }
+    body input#project-title, body .project-add-btn, body .text-area{
+        color: white;
+        font-weight: bolder;
+    }
+    body .submit-task{
+        border: 1px solid white;
+        font-weight: bolder;
+    }
+    body  .text-area:focus{
+        outline-color: white;
+    }
+    body{
+        ::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+        }
+    }
+    body .theme-switch-icon{
+        background-color: #33aad8;
+        transform: translateX(40px);
+    }
+    body .theme-switch-icon::after{
+        background-color: #313131;
+        border-radius: 100%;
+        content: "";
+        display: block;
+        position: absolute;
+        height: 18px;
+        width: 15.5px;
+        top: 1.5px;
+        left: -3px;
+    }
+    body .close-btn, body .remove-project, body .remove-task{
+        filter: brightness(0) invert(1);
+    }
+    body textarea::placeholder, body #project-title::placeholder{
+        color:white;
+        opacity: 0.7;
+    }
+    body .task-item{
+        border-color: rgb(142 244 173);
+    }
 }
