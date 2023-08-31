@@ -1,5 +1,5 @@
 <h2><strong>Project description</strong></h2>
-To-do is my personal coding project of a to-do list application using JavaScript, HTML, and CSS. I'm integrating Webpack for module management and bundling. Additionally, I'm utilizing local storage to ensure tasks are stored persistently. To maintain code quality and consistency, I've implemented ESLint for code linting and Prettier for code formatting. The app offers users the ability to add, edit, and delete tasks, categorize tasks into projects, sets priorities and due dates, and conveniently filter tasks by time periods like "This Week" and "This Month." Users also can mark tasks as complete.
+To-do is my personal coding project of a to-do list application using <b>JavaScript</b>, <b>HTML</b>, and <b>CSS</b>. I'm integrating <b>Webpack</b> for module management and bundling. Additionally, I'm utilizing local storage to ensure tasks are stored persistently. To maintain code quality and consistency, I've implemented <b>ESLint</b> for code linting and <b>Prettier</b> for code formatting. The app offers users the ability to add, edit, and delete tasks, categorize tasks into projects, sets priorities and due dates, and conveniently filter tasks by time periods like "This Week" and "This Month." Users also can mark tasks as complete. To-do is designed to align with users system color theme settings. Users have the power to switch between light and dark color theme. The app remembers users chosen color theme settings via local storage, ensuring their preferred theme is applied consistently.
 
 <h2><a href="https://kawalae.github.io/To-do/">Click here to view!</a></h2>
 
@@ -18,9 +18,14 @@ To-do is my personal coding project of a to-do list application using JavaScript
 <br>
 <h2><strong>Project:</strong></h2>
 <br>
-<div align ="center"><img src="src/assets/page-screen1.png"></img></div>
-<div align ="center"><img src="src/assets/page-screen2.png"></img></div>
-<div align ="center"><img src="src/assets/mobile-screen.png"></img></div>
+<div align ="center"><img src="src/assets/screen1.png"></img></div>
+<div align ="center"><img src="src/assets/screen2.png"></img></div>
+
+
+<div align ="center"><img  src="src/assets/mobile-screen-1.png"></img></div>
+<div align ="center"><img  src="src/assets/mobile-screen-2.png"></img></div>
+
+
 
 <h2><strong>Acknowledgements</strong></h2>
 
