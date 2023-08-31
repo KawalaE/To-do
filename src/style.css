@@ -489,6 +489,9 @@ body.light  textarea::placeholder, body.light  #project-title::placeholder{
 body.light  .task-item{
     border-color: grey;;
 }
+body.light .tasks-active, body.light .project-active{
+    color: var(--secondary-pastel-green);
+}
 /*Dark mode*/
 body.dark .upper-nav, body.dark  .footer, body.dark  #project-modal, body.dark .task-modal{
     background-color: #486f5f;
@@ -540,6 +543,9 @@ body.dark{
     ::-webkit-calendar-picker-indicator {
         filter: invert(1);
     }
+}
+body.dark .tasks-active, body.dark .project-active{
+    color:  #9fe69f;
 }
 body.dark .theme-switch-icon{
     background-color: #33aad8;
@@ -676,82 +682,8 @@ body.dark .task-item{
         background-color: #33aad8;
         transform: translateX(40px);
     }
-    body .theme-switch-icon::after{
-        background-color: #313131;
-        border-radius: 100%;
-        content: "";
-        display: block;
-        position: absolute;
-        height: 18px;
-        width: 15.5px;
-        top: 1.5px;
-        left: -3px;
-    }
-    body .close-btn, body .remove-project, body .remove-task{
-        filter: brightness(0) invert(1);
-    }
-    body textarea::placeholder, body #project-title::placeholder{
-        color:white;
-        opacity: 0.7;
-    }
-    body .task-item{
-        border-color: rgb(142 244 173);
-    }
-}
-@media (prefers-color-scheme: dark){
-    body .upper-nav, body  .footer, body #project-modal, body .task-modal{
-        background-color: #486f5f;
-        border-color: white;
-    }
-    body .projects-nav{
-        background-color: #313131;
-    }
-    body .projects-button, body .remove-project{
-        color: #c7c7c7
-    }
-    body .task-display, body .main-content{
-        background-color: #3f4140;
-    }
-    body .task-disp-desc,body .this-month-btn, body .task-disp-date, body input[type=checkbox], body .navigator-name, body .projects-title, body .pro-instance, body .all-tasks-btn, body .this-week, body.dark .this-month-btn, body .task-date, body .submit-task{
-        color: var(--primary-white);
-        accent-color: var(--primary-white);
-        border: white;
-    }
-    body .task-disp-priority-high{
-        color: rgb(255 62 62);
-    }
-    body .task-disp-priority-medium{
-        color: rgb(255 198 39);
-    } 
-    body .task-disp-priority-low{
-        color: rgb(57 255 117);
-    }
-    body .grey-out{
-        color: rgb(175, 175, 175);
-    }
-    body .task-priority{
-        background-color: #4b4b4b;
-        border-color: white;
-    }
-    body input#project-title, body .project-add-btn, body .text-area{
-        color: white;
-        font-weight: bolder;
-    }
-    body .submit-task{
-        border: 1px solid white;
-        font-weight: bolder;
-    }
-    body  .text-area:focus{
-        outline-color: white;
-    }
-    body{
-        ::-webkit-calendar-picker-indicator {
-            filter: invert(1);
-        }
-    }
-    body .theme-switch-icon{
-        background-color: #33aad8;
-        transform: translateX(40px);
+    body .tasks-active, body .project-active{
+        color:  #9fe69f;
     }
     body .theme-switch-icon::after{
         background-color: #313131;
