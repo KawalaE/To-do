@@ -3,8 +3,15 @@ To-do is my personal coding project of a to-do list application using <b>JavaScr
 
 <h2><a href="https://kawalae.github.io/To-do/">Click here to view!</a></h2>
 
-<h2><strong>Technologies used</strong></h2>
-
+<h3>Tech Stack</h3>
+<ul>
+<li><b>Front-end</b>: JavaScript, HTML, CSS,</li>
+<li><b>Module Bundling</b>: Webpack,</li>
+<li><b>Code Quality</b>: ESLint,</li>
+<li><b>Code Formatting</b>: Prettier,</li>
+<li><b>Data Storage</b>: Browser's Local Storage,</li>
+<li><b>Code Structure</b>: Class oriented structure,</li>
+</ul>
 <div style="display:flex;">
 <img src="src/assets/js.svg"></img>
 <img src="src/assets/css.svg"></img>
@@ -13,6 +20,7 @@ To-do is my personal coding project of a to-do list application using <b>JavaScr
 <img src="src/assets/webpack.svg"></img>
 <img style="width:50px" src="src/assets/localstorage.svg"></img>
 </div>
+
 
 
 <br>
