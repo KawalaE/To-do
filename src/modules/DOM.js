@@ -371,6 +371,7 @@ export default class DOM {
           ) {
             if (month === 1) {
               currentTasks = project.getCurrentMonthTasks();
+              console.log(currentTasks);
             } else if (month === 2) {
               currentTasks = project.getCurrentWeekTasks();
               console.log(currentTasks);

@@ -506,6 +506,9 @@ body.dark .projects-button, body.dark  .remove-project{
 body.dark .task-display, body.dark .main-content{
     background-color: #3f4140;
 }
+body.dark .tasks-active, body.dark .project-active{
+    color: #9fe69f;
+}
 body.dark .task-disp-desc, body.dark .task-disp-date, body.dark input[type=checkbox], body.dark .navigator-name, body.dark .projects-title, body.dark .pro-instance, body.dark .all-tasks-btn, body.dark .this-week, body.dark .this-month-btn, body.dark .task-date, body.dark .submit-task{
     color: var(--primary-white);
     accent-color: var(--primary-white);
@@ -544,9 +547,6 @@ body.dark{
         filter: invert(1);
     }
 }
-body.dark .tasks-active, body.dark .project-active{
-    color:  #9fe69f;
-}
 body.dark .theme-switch-icon{
     background-color: #33aad8;
     transform: translateX(40px);
@@ -571,6 +571,9 @@ body.dark textarea::placeholder, body.dark #project-title::placeholder{
 }
 body.dark .task-item{
     border-color: rgb(142 244 173);
+}
+body.dark .tasks-active, body.dark .project-active{
+    color: #9fe69f;
 }
 @media all and (max-width: 1000px){
     .hamburger-img{
@@ -641,11 +644,6 @@ body.dark .task-item{
     body .task-display, body .main-content{
         background-color: #3f4140;
     }
-    body .task-disp-desc,body .this-month-btn, body .task-disp-date, body input[type=checkbox], body .navigator-name, body .projects-title, body .pro-instance, body .all-tasks-btn, body .this-week, body.dark .this-month-btn, body .task-date, body .submit-task{
-        color: var(--primary-white);
-        accent-color: var(--primary-white);
-        border: white;
-    }
     body .task-disp-priority-high{
         color: rgb(255 62 62);
     }
@@ -682,9 +680,6 @@ body.dark .task-item{
         background-color: #33aad8;
         transform: translateX(40px);
     }
-    body .tasks-active, body .project-active{
-        color:  #9fe69f;
-    }
     body .theme-switch-icon::after{
         background-color: #313131;
         border-radius: 100%;
@@ -705,5 +700,8 @@ body.dark .task-item{
     }
     body .task-item{
         border-color: rgb(142 244 173);
+    }
+    body .tasks-active, body .project-active{
+        color:  #9fe69f;
     }
 }

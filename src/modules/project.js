@@ -32,7 +32,7 @@ export default class Project {
       (task) => task.getMonth() === month,
     );
     return currentMonthTasks.filter(
-      (task) => task.getDay() >= Number(start) && task.getDay() <= Number(end),
+      (task) => task.getDay() >= Number(start) || task.getDay() <= Number(end),
     );
   }
 
